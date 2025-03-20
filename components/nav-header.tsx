@@ -17,7 +17,7 @@ function NavHeader() {
             />
           </div>
         </div>
-        <div className="flex justify-center pt-2 pr-30 col-span-4   space-x-10 ">
+        <div className="flex justify-center pt-2 pr-30 col-span-4 space-x-10 ">
           <div>
             <Link className="  hover:text-amber-400" href={"/home"}>
               Home

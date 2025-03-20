@@ -17,7 +17,7 @@ export default function ImageSlider() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, []);
+  }, [currentIndex]);
 
   const startAutoSlide = () => {
     if (timerRef.current) clearInterval(timerRef.current);
