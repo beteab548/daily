@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import ThemeSwitcher from "./themeSwitcher";
+import ThemeSwitcher from "../themeSwitcher";
 
 function NavHeader() {
   return (
@@ -10,7 +10,7 @@ function NavHeader() {
           <div className="relative top-0">
             <Image
               src="/cropped daily logo.jpg"
-              width={100}
+              width={80}
               height={80}
               alt="logo"
               unoptimized
