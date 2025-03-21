@@ -4,14 +4,15 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 const imageData = [
-  { src: "/image1.jpg", label: "Fresh Fruits" },
-  { src: "/slider1.webp", label: "Organic Vegetables" },
-  { src: "/slider2.webp", label: "Dairy Products" },
-  { src: "/slider3.webp", label: "Baked Goods" },
-  { src: "/image1.jpg", label: "Healthy Snacks" },
-  { src: "/slider1.webp", label: "Fresh Meat" },
-  { src: "/slider2.webp", label: "Seafood" },
-  { src: "/slider2.webp", label: "Seafood" },
+  { src: "/food-slide-show/fresh-fruits.jpg", label: "Fresh Fruits" },
+  {
+    src: "/food-slide-show/organic-vegetables.jpg",
+    label: "Organic Vegetables",
+  },
+  { src: "/food-slide-show/dairy-products.jpg", label: "Dairy Products" },
+  { src: "/food-slide-show/baked-goods.jpg", label: "Baked Goods" },
+  { src: "/food-slide-show/fresh-meat.jpg", label: "Fresh Meat" },
+  { src: "/food-slide-show/sea-food.jpg", label: "Seafood" },
   { src: "/slider3.webp", label: "Beverages" },
 ];
 
@@ -61,7 +62,7 @@ export default function CategoryImages() {
   };
 
   return (
-    <div className="flex flex-col m-18 bg-gray-50">
+    <div className="flex flex-col m-18 bg-gray-50/50">
       <div className="flex justify-center mt-10 mb-6">
         <h1 className="font-serif text-4xl">Shop By Category</h1>
       </div>
