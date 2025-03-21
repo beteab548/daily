@@ -1,6 +1,6 @@
-import IconButton from "./links";
-import OrderImageContainer from "./order-image";
-import Typewriter from "./text";
+import IconButton from "./sub-components/links";
+import OrderImageContainer from "./sub-components/order-image";
+import Typewriter from "./sub-components/text";
 
 function OrderImages({ image }: { image: string }) {
   return (

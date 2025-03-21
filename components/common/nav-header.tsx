@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname
-import ThemeSwitcher from "../themeSwitcher";
+import ThemeSwitcher from "../sub-components/themeSwitcher";
 
 function NavHeader() {
   const pathname = usePathname(); // Get current path
