@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function ImageContainers() {
   return (
@@ -22,9 +23,11 @@ function ImageContainers() {
         </div>
 
         <div className="absolute top-38">
-          <button className="bg-amber-400 rounded-2xl w-22 h-8">
-            Shop Now
-          </button>
+          <Link href={"/products"}>
+            <button className="bg-amber-400 rounded-2xl w-28 h-9 hover:bg-amber-300  ">
+              view products
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -47,9 +50,11 @@ function ImageContainers() {
         </div>
 
         <div className="absolute top-38">
-          <button className="bg-amber-400 rounded-2xl w-22 h-8">
-            Shop Now
-          </button>
+          <Link href={"/products"}>
+            <button className="bg-amber-400 rounded-2xl w-28 h-9 hover:bg-amber-300 ">
+              view products
+            </button>
+          </Link>
         </div>
       </div>
     </div>

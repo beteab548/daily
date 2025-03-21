@@ -10,7 +10,8 @@ function RootPage() {
       <ImageSlider />
       <ImageContainers />
       <CatagoryImages />
-      <OrderImages />
+      <OrderImages image="download-app" />
+      <OrderImages image="market" />
       <ReviewCarousel />
     </>
   );
