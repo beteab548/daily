@@ -13,7 +13,7 @@ const imageData = [
   { src: "/food-slide-show/baked-goods.jpg", label: "Baked Goods" },
   { src: "/food-slide-show/fresh-meat.jpg", label: "Fresh Meat" },
   { src: "/food-slide-show/sea-food.jpg", label: "Seafood" },
-  { src: "/slider3.webp", label: "Beverages" },
+  { src: "/food-slide-show/beaverage.jpg", label: "Beverages" },
 ];
 
 export default function CategoryImages() {

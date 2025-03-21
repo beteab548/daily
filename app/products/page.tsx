@@ -1,4 +1,5 @@
+import ProductTabs from "@/components/our-products";
 function Products() {
-  return <h2>this is the prodcusts page</h2>;
+  return <ProductTabs />;
 }
 export default Products;

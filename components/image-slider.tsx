@@ -53,27 +53,34 @@ export default function ImageSlider() {
     const handleTransitionEnd = () => {
       if (currentIndex === extendedImages.length - 1) {
         setIsAnimating(false);
-        setCurrentIndex(1); // Jump to first real image (skip cloned last image)
-        sliderRef.current!.style.transition = "none"; // Remove transition for instant jump
-        setTimeout(() => {
-          sliderRef.current!.style.transition = "transform 0.8s ease-in-out"; // Restore transition
-        }, 50);
+        setCurrentIndex(1);
+        if (sliderRef.current) {
+          sliderRef.current.style.transition = "none";
+          setTimeout(() => {
+            if (sliderRef.current) {
+              sliderRef.current.style.transition = "transform 0.8s ease-in-out";
+            }
+          }, 50);
+        }
       } else if (currentIndex === 0) {
         setIsAnimating(false);
-        setCurrentIndex(extendedImages.length - 2); // Jump to last real image (skip cloned first image)
-        sliderRef.current!.style.transition = "none"; // Remove transition for instant jump
-        setTimeout(() => {
-          sliderRef.current!.style.transition = "transform 0.8s ease-in-out"; // Restore transition
-        }, 50);
+        setCurrentIndex(extendedImages.length - 2);
+        if (sliderRef.current) {
+          sliderRef.current.style.transition = "none";
+          setTimeout(() => {
+            if (sliderRef.current) {
+              sliderRef.current.style.transition = "transform 0.8s ease-in-out";
+            }
+          }, 50);
+        }
       }
     };
 
-    sliderRef.current.addEventListener("transitionend", handleTransitionEnd);
+    const sliderElement = sliderRef.current;
+    sliderElement?.addEventListener("transitionend", handleTransitionEnd);
+
     return () => {
-      sliderRef.current!.removeEventListener(
-        "transitionend",
-        handleTransitionEnd
-      );
+      sliderElement?.removeEventListener("transitionend", handleTransitionEnd);
     };
   }, [currentIndex]);
 
@@ -89,7 +96,7 @@ export default function ImageSlider() {
             <img
               key={index}
               src={img}
-              alt="Slide Image"
+              alt={`Slide ${index}`}
               className="w-full h-full object-cover flex-shrink-0"
             />
           ))}
