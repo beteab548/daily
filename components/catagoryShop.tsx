@@ -63,13 +63,15 @@ export default function CategoryImages() {
   return (
     <div className="flex flex-col m-18 bg-gray-50">
       <div className="flex justify-center mt-10 mb-6">
-        <h1 className="text-xl font-semibold">Shop By Category</h1>
+        <h1 className="font-serif text-4xl">Shop By Category</h1>
       </div>
       <div className="relative w-full h-80 overflow-hidden bg-gray-50 flex items-center justify-center">
         <div
           ref={sliderRef}
           className="flex items-center transition-transform duration-700 ease-in-out"
-          onMouseEnter={() => timerRef.current && clearInterval(timerRef.current)}
+          onMouseEnter={() =>
+            timerRef.current && clearInterval(timerRef.current)
+          }
           onMouseLeave={() => startAutoSlide()}
         >
           {imageList.map((item, index) => (
@@ -84,7 +86,7 @@ export default function CategoryImages() {
                 fill
                 className="object-cover"
               />
-              
+
               {/* Overlay & Text */}
               <div className="absolute inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-80 transition-opacity duration-300">
                 <p className="text-white text-sm font-semibold">{item.label}</p>
