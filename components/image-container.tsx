@@ -11,11 +11,11 @@ function ImageContainers() {
         </div>
 
         <div className="pl-1 w-74 overflow-hidden">
-          <div className="transition-transform duration-300 group-hover:scale-110">
+          <div className="transition-transform duration-300 group-hover:scale-110 ml-6 mb-8">
             <Image
               src="/food-slide-show/fresh-fruits.jpg"
-              width={400}
-              height={200}
+              width={230}
+              height={150}
               unoptimized
               alt="daily image"
             />

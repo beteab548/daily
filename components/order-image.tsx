@@ -17,14 +17,14 @@ const OrderImageContainer: React.FC<ImageContainerProps> = ({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } =
       e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - left) / width - 0.5) * 20; // Rotate on X-axis
-    const y = ((e.clientY - top) / height - 0.5) * -20; // Rotate on Y-axis (inverse)
+    const x = ((e.clientX - left) / width - 0.5) * 20; // Rotate on X-axis (based on mouse position)
+    const y = ((e.clientY - top) / height - 0.5) * -20; // Rotate on Y-axis (inverse for a more natural feel)
 
     setRotation({ x, y });
   };
 
   const handleMouseLeave = () => {
-    setRotation({ x: 0, y: 0 });
+    setRotation({ x: 0, y: 0 }); // Reset rotation on mouse leave
   };
 
   return (
@@ -32,6 +32,7 @@ const OrderImageContainer: React.FC<ImageContainerProps> = ({
       className={`relative w-74 h-84 overflow-hidden rounded-xl shadow-lg transition-transform duration-150 ${className}`}
       style={{
         transform: `rotateX(${rotation.y}deg) rotateY(${rotation.x}deg)`,
+        transformStyle: "preserve-3d", // Necessary for 3D transformations to work
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
