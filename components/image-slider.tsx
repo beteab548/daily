@@ -100,7 +100,7 @@ export default function ImageSlider() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      <div className="relative w-full h-full flex items-center justify-center">
+      <div className="relative w-full h-126 flex items-center justify-center">
         <div
           ref={sliderRef}
           className="flex w-full h-full transition-transform duration-700 ease-in-out"
