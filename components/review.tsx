@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 // ReviewCard Component
@@ -54,7 +53,7 @@ const Home = () => {
       icon: "/path/to/icon3.jpg",
       comment:
         "The app is very user-friendly and easy to navigate! Highly recommend!",
-      lastName: "Seare",
+      lastName: "Yonhannes",
       rating: 3.5,
     },
     {

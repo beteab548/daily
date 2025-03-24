@@ -14,6 +14,11 @@ const imageData = [
   { src: "/food-slide-show/fresh-meat.jpg", label: "Fresh Meat" },
   { src: "/food-slide-show/sea-food.jpg", label: "Seafood" },
   { src: "/food-slide-show/beaverage.jpg", label: "Beverages" },
+  { src: "/food-slide-show/snacks.jpg", label: "snacks" },
+  {
+    src: "/food-slide-show/spices.jpg",
+    label: "Spices & Seasonings",
+  },
 ];
 
 export default function CategoryImages() {
@@ -41,23 +46,36 @@ export default function CategoryImages() {
     setIsAnimating(true);
 
     if (sliderRef.current) {
+      // Move images left with smooth transition
       sliderRef.current.style.transition = "transform 0.7s ease-in-out";
-      sliderRef.current.style.transform = "translateX(-140px)"; // Move images left
+      sliderRef.current.style.transform = "translateX(-140px)";
     }
 
     setTimeout(() => {
+      // Update the image list by moving the first image to the end
       setImageList((prevImages) => {
         const [first, ...rest] = prevImages;
-        return [...rest, first]; // Move first image to the back
+        return [...rest, first];
       });
 
-      // Instantly reset position for smooth looping
+      // Instantly reset the slider position without animation
       if (sliderRef.current) {
         sliderRef.current.style.transition = "none";
         sliderRef.current.style.transform = "translateX(0)";
       }
 
-      setIsAnimating(false);
+      // Force a reflow to apply the reset instantly
+      void sliderRef.current?.offsetWidth;
+
+      // Re-enable transition for the next slide
+      if (sliderRef.current) {
+        sliderRef.current.style.transition = "transform 0.7s ease-in-out";
+      }
+
+      // Add a slight delay before allowing the next animation
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 50); // Small delay to ensure smooth transition
     }, 700); // Matches transition duration
   };
 
@@ -66,7 +84,7 @@ export default function CategoryImages() {
       <div className="flex justify-center mt-10 mb-6">
         <h1 className="font-serif text-4xl">Shop By Category</h1>
       </div>
-      <div className="relative w-full h-80 overflow-hidden bg-gray-50 flex items-center justify-center">
+      <div className="relative w-full h-80 overflow-hidden  flex items-center justify-center">
         <div
           ref={sliderRef}
           className="flex items-center transition-transform duration-700 ease-in-out"

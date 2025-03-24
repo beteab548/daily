@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="  mt-12 py-6 w-full text-center bg-[var(--primary-color)] text-[var(--secondary-color)]">
+    <footer className="  mt-12 py-6 w-full text-center border-t-gray-400 border-t-1">
       <div className="container mx-auto flex flex-col items-center">
         <h2 className="text-lg font-semibold">Contact Us</h2>
         <div className="flex space-x-4 mt-3">
@@ -19,9 +19,14 @@ const Footer = () => {
           <p className="flex items-center">
             <FaEnvelope className="mr-2" /> daily mini market
           </p>
-          <p className="flex items-center">
-            <FaMapMarkerAlt className="mr-2" /> abig building , Kazanchis
-          </p>
+          <div className="felx flex-col">
+            <p className="flex  items-center">
+              <FaMapMarkerAlt className="mr-2" /> abig building , Kazanchis
+            </p>
+            <p className="flex  items-center">
+              <FaMapMarkerAlt className="mr-2" /> abig building , Kazanchis
+            </p>
+          </div>
         </div>
         <div className="flex space-x-4 mt-4">
           {/* for dark theme */}
@@ -47,7 +52,7 @@ const Footer = () => {
           </a>
         </div>
         <p className="mt-4 text-sm">
-          © 2025 Company Name. All rights reserved.
+          © 2025 Daily mini market. All rights reserved.
         </p>
       </div>
     </footer>
