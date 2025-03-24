@@ -6,15 +6,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import ThemeSwitcher from "../sub-components/themeSwitcher";
+import { useTheme } from "next-themes";
 
 function NavHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { theme } = useTheme();
+  console.log(theme);
   return (
     <>
-      <div className="flex justify-between items-center px-4 py-4 sticky top-0 bg-white/30 backdrop-blur-md z-10 shadow-md">
-        {/* Logo */}
+      <div
+        suppressHydrationWarning
+        className={` flex justify-between items-center px-4 py-4 sticky top-0  backdrop-blur-md z-10 shadow-md ${
+          theme === "dark" ? " bg-gray-800 text-white" : "bg-white/30 "
+        }`}
+      >
         <div>
           <Image
             src="/cropped daily logo.jpg"
@@ -24,9 +30,8 @@ function NavHeader() {
             unoptimized
           />
         </div>
-
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-10">
+        <div className={`hidden md:flex space-x-10  `}>
           <NavLink href="/" currentPath={pathname}>
             Home
           </NavLink>
@@ -56,7 +61,7 @@ function NavHeader() {
           className="fixed inset-0 bg-black/50 z-20"
           onClick={() => setMenuOpen(false)}
         >
-          <div className="fixed left-0 top-0 w-64 h-full bg-white shadow-md p-6 flex flex-col space-y-6">
+          <div className="fixed left-0 top-0 w-64 h-full bg-white shadow-md p-6 flex flex-col space-y-6  ">
             <button className="self-end" onClick={() => setMenuOpen(false)}>
               <X size={30} />
             </button>

@@ -1,24 +1,37 @@
 "use client";
-// pages/index.tsx
-// pages/index.tsx
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 // ReviewCard Component
 const ReviewCard = ({
-  icon,
   comment,
   lastName,
+  rating,
 }: {
-  icon: string;
   comment: string;
   lastName: string;
+  rating: number;
 }) => {
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<FaStar key={i} className="text-yellow-500" />);
+      } else if (i - 0.5 === rating) {
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-500" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-gray-400" />);
+      }
+    }
+    return stars;
+  };
+
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md w-92 m-8">
-      <div className="mt-2 text-gray-600">{comment}</div>
-      <div className="flex items-center space-x-3">
-        <p className="text-lg font-semibold">{lastName}</p>
-      </div>
+    <div className="bg-white p-6 rounded-lg shadow-2xl w-full sm:w-80 m-4 flex flex-col items-center ">
+      <div className="flex">{renderStars(rating)}</div>
+      <p className="mt-2 text-gray-600 text-center ">"{comment}"</p>
+      <p className="mt-3 text-lg font-semibold">- {lastName}</p>
     </div>
   );
 };
@@ -27,23 +40,28 @@ const Home = () => {
   const reviews = [
     {
       icon: "/path/to/icon1.jpg",
-      comment: "This is a great product!",
-      lastName: "Doe",
+      comment: "simple and easy to use app!",
+      lastName: "Daniel",
+      rating: 5,
     },
     {
       icon: "/path/to/icon2.jpg",
-      comment: "Loved it, would buy again!",
-      lastName: "Smith",
+      comment: "Loved shopping at the store! Amazing selection of products",
+      lastName: "Melat",
+      rating: 4.5,
     },
     {
       icon: "/path/to/icon3.jpg",
-      comment: "Not bad, could be improved.",
-      lastName: "Brown",
+      comment:
+        "The app is very user-friendly and easy to navigate! Highly recommend!",
+      lastName: "Seare",
+      rating: 3.5,
     },
     {
       icon: "/path/to/icon4.jpg",
-      comment: "Excellent quality!",
-      lastName: "Johnson",
+      comment: "The in-store experience was fantastic, great customer service!",
+      lastName: "Endalkachew",
+      rating: 5,
     },
   ];
 
@@ -51,37 +69,27 @@ const Home = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 2) % reviews.length); // Increment by 2 to show two cards
+      setCurrentIndex((prevIndex) => (prevIndex + 2) % reviews.length);
     }, 5000);
-
-    return () => clearInterval(interval); // Clear interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="flex justify-center items-center  flex-col bg-gray-50 h-80">
-      <h1 className=" font-serif text-4xl mb-10">Customer Reviews</h1>
-
-      <div className="flex space-x-6">
-        <div
-          key={reviews[currentIndex].lastName}
-          className="transition-opacity duration-1000 ease-in-out opacity-100"
-        >
-          <ReviewCard
-            icon={reviews[currentIndex].icon}
-            comment={reviews[currentIndex].comment}
-            lastName={reviews[currentIndex].lastName}
-          />
-        </div>
-        <div
-          key={reviews[(currentIndex + 1) % reviews.length].lastName}
-          className="transition-opacity duration-1000 ease-in-out opacity-100"
-        >
-          <ReviewCard
-            icon={reviews[(currentIndex + 1) % reviews.length].icon}
-            comment={reviews[(currentIndex + 1) % reviews.length].comment}
-            lastName={reviews[(currentIndex + 1) % reviews.length].lastName}
-          />
-        </div>
+    <div className="flex flex-col items-center bg-gray-50 py-12 px-4">
+      <h1 className="font-serif text-4xl mb-10 text-center">
+        Customer Reviews
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <ReviewCard
+          comment={reviews[currentIndex].comment}
+          lastName={reviews[currentIndex].lastName}
+          rating={reviews[currentIndex].rating}
+        />
+        <ReviewCard
+          comment={reviews[(currentIndex + 1) % reviews.length].comment}
+          lastName={reviews[(currentIndex + 1) % reviews.length].lastName}
+          rating={reviews[(currentIndex + 1) % reviews.length].rating}
+        />
       </div>
     </div>
   );

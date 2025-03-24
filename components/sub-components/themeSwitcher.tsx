@@ -1,37 +1,34 @@
 "use client";
 
+import { FiSun, FiMoon } from "react-icons/fi";
 import { useState, useEffect } from "react";
-import { Moon, Sun } from "lucide-react"; // Import theme icons
+import { useTheme } from "next-themes";
+import Image from "next/image";
 
-const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<string>("light");
+export default function ThemeSwitch() {
+  const [mounted, setMounted] = useState(false);
+  const { setTheme, resolvedTheme } = useTheme();
 
-  useEffect(() => {
-    // This will only run on the client after the component has mounted
-    const savedTheme = window.localStorage.getItem("theme");
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  useEffect(() => {
-    // Sync theme with the document and localStorage
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
+  if (!mounted)
+    return (
+      <Image
+        src="data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNGRkZGRkYiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMCIgdmlld0JveD0iMCAwIDI0IDI0IiBoZWlnaHQ9IjIwMHB4IiB3aWR0aD0iMjAwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSIyIj48L3JlY3Q+PC9zdmc+Cg=="
+        width={36}
+        height={36}
+        sizes="36x36"
+        alt="Loading Light/Dark Toggle"
+        priority={false}
+        title="Loading Light/Dark Toggle"
+      />
+    );
 
-  return (
-    <button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="p-2 rounded-full bg-gray-200 dark:bg-gray-300 transition-all"
-    >
-      {theme === "light" ? <Moon size={24} className="text-gray-800" /> : <Sun size={24} className="text-yellow-400" />}
-    </button>
-  );
-};
+  if (resolvedTheme === "dark") {
+    return <FiSun onClick={() => setTheme("light")} />;
+  }
 
-export default ThemeSwitcher;
+  if (resolvedTheme === "light") {
+    return <FiMoon onClick={() => setTheme("dark")} />;
+  }
+}
