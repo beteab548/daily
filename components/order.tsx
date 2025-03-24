@@ -29,7 +29,7 @@ function OrderImages({ image }: { image: string }) {
   return (
     <div
       ref={sectionRef}
-      className="flex flex-col items-center justify-center text-center gap-8 mb-28 px-4 md:px-12"
+      className="flex flex-col items-center justify-center text-center gap-8 mb-28 px-4 md:px-12 "
     >
       {image == "market" ? (
         <>

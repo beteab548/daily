@@ -45,7 +45,6 @@ function NavHeader() {
 
         {/* Theme Toggle & Mobile Menu Button */}
         <div className="flex items-center space-x-4">
-          <ThemeSwitcher />
           <button
             className="md:hidden text-gray-800"
             onClick={() => setMenuOpen(!menuOpen)}

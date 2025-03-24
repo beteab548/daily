@@ -1,2 +1,21 @@
 @import "tailwindcss";
 
+/* Define custom theme colors */
+:root {
+  --primary-light: #ff6347; /* Light theme primary color */
+  --secondary-light: #f0e68c; /* Light theme secondary color */
+  --primary-dark: #fff; /* Dark theme primary color */
+  --secondary-dark: #444; /* Dark theme secondary color */
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --primary-color: var(--primary-light);
+  --secondary-color: var(--secondary-light);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --primary-color: var(--primary-dark);
+  --secondary-color: var(--secondary-dark);
+}
