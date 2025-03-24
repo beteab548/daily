@@ -4,20 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { useTheme } from "next-themes";
 
 function NavHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { theme } = useTheme();
-  console.log(theme);
   return (
     <>
       <div
         suppressHydrationWarning
-        className={` flex justify-between items-center px-4 py-4 sticky top-0  backdrop-blur-md z-10 shadow-md ${
-          theme === "dark" ? " bg-gray-800 text-white" : "bg-white/30 "
-        }`}
+        className={` flex justify-between items-center px-4 py-4 sticky top-0  backdrop-blur-md z-10 shadow-md text-white`}
       >
         <div>
           <Link href={"/"}>

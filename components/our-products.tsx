@@ -1,5 +1,4 @@
 "use client";
-import { useTheme } from "next-themes";
 import { useState } from "react";
 
 interface Product {
@@ -119,7 +118,6 @@ const products: Record<ProductCategories, Product[]> = {
 export default function ProductTabs() {
   const [activeTab, setActiveTab] = useState<ProductCategories>("special");
   const [likedItems, setLikedItems] = useState<Set<number>>(new Set());
-  const { theme } = useTheme();
   const toggleLike = (id: number) => {
     setLikedItems((prev) => {
       const newLikes = new Set(prev);
@@ -133,7 +131,7 @@ export default function ProductTabs() {
   };
 
   return (
-    <div suppressHydrationWarning className={`${theme === "dark" ? "bg-gray-700" : ""}`}>
+    <div >
       <div className="w-full max-w-5xl mx-auto p-4 mb-6 ">
         <div className="flex justify-center font-serif text-4xl m-8">
           <h1>Our products</h1>
