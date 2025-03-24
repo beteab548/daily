@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const images: string[] = ["/slider3.webp", "/slider2.webp", "/slider1.jpg"];
+const images: string[] = ["/slider1.jpg", "/slider2.webp", "/slider3.webp"];
 
 export default function ImageSlider() {
   const [currentIndex, setCurrentIndex] = useState<number>(1); // Start at 1 to account for cloned slides

@@ -1,11 +1,9 @@
 "use client";
-
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import ThemeSwitcher from "../sub-components/themeSwitcher";
 import { useTheme } from "next-themes";
 
 function NavHeader() {
@@ -22,13 +20,15 @@ function NavHeader() {
         }`}
       >
         <div>
-          <Image
-            src="/cropped daily logo.jpg"
-            width={80}
-            height={80}
-            alt="logo"
-            unoptimized
-          />
+          <Link href={"/"}>
+            <Image
+              src="/cropped daily logo.jpg"
+              width={80}
+              height={80}
+              alt="logo"
+              unoptimized
+            />
+          </Link>
         </div>
         {/* Desktop Navigation */}
         <div className={`hidden md:flex space-x-10  `}>
@@ -42,7 +42,6 @@ function NavHeader() {
             About Us
           </NavLink>
         </div>
-
         {/* Theme Toggle & Mobile Menu Button */}
         <div className="flex items-center space-x-4">
           <button
@@ -53,7 +52,6 @@ function NavHeader() {
           </button>
         </div>
       </div>
-
       {/* Mobile Sidebar */}
       {menuOpen && (
         <div
