@@ -29,7 +29,7 @@ const OrderImageContainer: React.FC<ImageContainerProps> = ({
 
   return (
     <div
-      className={`relative w-74 h-84 overflow-hidden rounded-xl shadow-lg transition-transform duration-150 ${className}`}
+      className={`relative w-78 h-84 overflow-hidden rounded-xl shadow-lg transition-transform duration-150 ${className}`}
       style={{
         transform: `rotateX(${rotation.y}deg) rotateY(${rotation.x}deg)`,
         transformStyle: "preserve-3d", // Necessary for 3D transformations to work

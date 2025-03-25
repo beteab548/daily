@@ -13,7 +13,7 @@ function OrderImages({ image }: { image: string }) {
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); 
+          observer.disconnect();
         }
       },
       { threshold: 0.3 }
@@ -29,11 +29,11 @@ function OrderImages({ image }: { image: string }) {
   return (
     <div
       ref={sectionRef}
-      className="flex flex-col items-center justify-center text-center gap-8 mb-28 px-4 md:px-12 "
+      className="flex flex-col items-center justify-center text-center gap-8 mb-28 px-4 md:px-12 mt-15 "
     >
       {image == "market" ? (
         <>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 ">
             <OrderImageContainer
               src={
                 image == "market" ? "daily-mart-image.jpg" : "order-image.jpg"
@@ -42,7 +42,7 @@ function OrderImages({ image }: { image: string }) {
               className="w-full md:w-auto"
             />
             <p className="font-serif text-2xl md:text-4xl mt-4 md:mt-0">
-              Visit Our Market
+              Or Visit Our Market
             </p>
           </div>
         </>
