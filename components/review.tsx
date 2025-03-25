@@ -76,7 +76,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center bg-gray-50 py-12 px-4">
       <h1 className="font-serif text-4xl mb-10 text-center">
-        Customer Reviews
+        What Our Customers Say
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <ReviewCard
