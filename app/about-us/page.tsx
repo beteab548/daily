@@ -1,5 +1,6 @@
 // components/AboutMiniMarket.tsx
 import Image from "next/image";
+import GoogleMapEmbed from "./googlemap";
 
 const AboutMiniMarket = () => {
   return (
@@ -27,6 +28,7 @@ const AboutMiniMarket = () => {
             have you covered. Visit us today and discover great deals and a wide
             selection of products!
           </p>
+        {/* <GoogleMapEmbed /> */}
         </div>
       </div>
     </section>
