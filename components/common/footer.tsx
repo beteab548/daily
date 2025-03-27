@@ -1,10 +1,8 @@
 import {
   FaFacebook,
-  FaInstagram,
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaTelegram,
 } from "react-icons/fa";
 
 const Footer = () => {
@@ -23,36 +21,18 @@ const Footer = () => {
             <p className="flex  items-center">
               <FaMapMarkerAlt className="mr-2" /> abig building , Kazanchis
             </p>
-            <p className="flex  items-center">
-              <FaMapMarkerAlt className="mr-2" /> abig building , Kazanchis
-            </p>
           </div>
         </div>
         <div className="flex space-x-4 mt-4">
-          {/* for dark theme */}
-
-          {/* <a href="#" className="text-white hover:text-gray-400">
+          <a
+            href="https://web.facebook.com/Dailyminimart0/?_rdc=1&_rdr#"
+            className="text-black hover:text-gray-600"
+          >
             <FaFacebook size={24} />
-          </a>
-          <a href="#" className="text-white hover:text-gray-400">
-            <FaTwitter size={24} />
-          </a>
-          <a href="#" className="text-white hover:text-gray-400">
-            <FaInstagram size={24} />
-          </a>  */}
-
-          <a href="#" className="text-black hover:text-gray-600">
-            <FaFacebook size={24} />
-          </a>
-          <a href="#" className="text-black hover:text-gray-600">
-            <FaTelegram size={24} />
-          </a>
-          <a href="#" className="text-black hover:text-gray-600">
-            <FaInstagram size={24} />
           </a>
         </div>
         <p className="mt-4 text-sm">
-          © 2025 Daily mini market. All rights reserved.
+          &copy; 2025 Daily mini mart.All rights reserved.
         </p>
       </div>
     </footer>

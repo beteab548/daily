@@ -7,12 +7,12 @@ function ImageContainers() {
       {/* Image Card 1 */}
       <div className="flex flex-col md:flex-row relative shadow-2xl items-center p-4  group lg:w-150 w-full  ">
         <div className="flex flex-col">
-          <h1 className="text-center md:text-left w-full">
+          <h1 className="text-center font-serif md:text-left w-full">
             Fresh fruit on our product
           </h1>
           <div className="mt-4">
             <Link href="/products">
-              <button className="bg-amber-400 rounded-2xl w-28 h-9 hover:bg-amber-300">
+              <button className="bg-amber-400  rounded-2xl w-28 h-9 hover:bg-amber-300 mb-5 hover:cursor-pointer">
                 View Products
               </button>
             </Link>
@@ -31,16 +31,15 @@ function ImageContainers() {
           </div>
         </div>
       </div>
-
       {/* Image Card 2 */}
       <div className="flex flex-col md:flex-row relative shadow-2xl items-center p-4 bg-white group w-full  lg:w-150">
         <div className="flex flex-col">
-          <h1 className="text-center md:text-left w-full">
+          <h1 className="text-center font-serif md:text-left w-full">
             Fresh vegetables on our product
           </h1>
           <div className="mt-4">
             <Link href="/products">
-              <button className="bg-amber-400 rounded-2xl w-28 h-9 hover:bg-amber-300">
+              <button className="bg-amber-400 rounded-2xl w-28 h-9 hover:bg-amber-300 hover:cursor-pointer">
                 View Products
               </button>
             </Link>
