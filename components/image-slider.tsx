@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
-
-const images: string[] = ["/slider-image-2.jpg", "/slider2-.webp", "/slider3.webp"];
-
+const images: string[] = [
+  "/slider-image-2.jpg",
+  "/slider2-.webp",
+  "/slider3.webp",
+];
 export default function ImageSlider() {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
@@ -97,15 +99,13 @@ export default function ImageSlider() {
       return newIndex;
     });
   };
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
   return (
-    <div className="relative w-full h-screen overflow-hidden pb-30">
+    <div className="relative sm:-m-0  sm:w-full h-screen overflow-hidden pb-30  top-0">
       {/* Image Slider - Responsive Height */}
-      <div className="relative w-full h-48  md:h-full flex items-center justify-center">
+      <div className="relative w-full h-150  md:h-full flex items-center justify-center">
         <div
           ref={sliderRef}
           className="flex w-full h-170 transition-transform duration-700 ease-in-out"
@@ -115,11 +115,14 @@ export default function ImageSlider() {
           }}
         >
           {extendedImages.map((img, index) => (
-            <div key={index} className="w-full h-full flex-shrink-0 relative z-2">
+            <div
+              key={index}
+              className="w-full h-full flex-shrink-0 relative z-2"
+            >
               <img
                 src={img}
                 alt={`Slide ${index}`}
-                className="w-full h-full object-contain"
+                className="w-full  h-full object-contain"
                 loading="lazy"
                 onError={(e) => {
                   e.currentTarget.src = "fallback-image.jpg";
