@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import {
   meatProducts,
   fruitProducts,
@@ -76,9 +77,11 @@ export default function ProductTabs() {
             onClick={() => toggleLike(product.name)}
           >
             <div className="relative w-full h-45 p-1">
-              <img
-                src={product.image}
+              <Image
+                src={`/${product.image.trimEnd()}`}
                 alt={product.name}
+                width={250}
+                height={250}
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
