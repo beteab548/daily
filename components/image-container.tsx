@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function ImageContainers() {
   return (
-    <div className="flex sm:-mt-0 -mt-80 mb-12 flex-wrap gap-8 mx-auto justify-center  ">
+    <div className="flex sm:-mt-0 -mt-105 mb-12 flex-wrap gap-8 mx-auto justify-center  ">
       {/* Image Card 1 */}
       <div className=" sm:m-0 m-6 flex flex-col md:flex-row relative shadow-2xl items-center group  p-4 lg:w-150 w-full  ">
         <div className="flex flex-col">

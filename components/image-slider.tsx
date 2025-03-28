@@ -105,10 +105,10 @@ export default function ImageSlider() {
   return (
     <div className="relative w-full h-screen overflow-hidden pb-30">
       {/* Image Slider - Responsive Height */}
-      <div className="relative w-full h-48 bg-amber-400 md:h-full flex items-center justify-center">
+      <div className="relative w-full h-48  md:h-full flex items-center justify-center">
         <div
           ref={sliderRef}
-          className="flex w-full h-160 transition-transform duration-700 ease-in-out"
+          className="flex w-full h-170 transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
             transition: isAnimating ? "transform 700ms ease-in-out" : "none",
