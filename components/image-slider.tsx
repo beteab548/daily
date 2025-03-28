@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
 
-const images: string[] = ["/slider1.jpg", "/slider2.webp", "/slider3.webp"];
+const images: string[] = ["/slider-image-2.jpg", "/slider2-.webp", "/slider3.webp"];
 
 export default function ImageSlider() {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
@@ -103,9 +103,9 @@ export default function ImageSlider() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden pb-30">
       {/* Image Slider - Responsive Height */}
-      <div className="relative w-full h-[30vh]  md:h-full flex items-center justify-center">
+      <div className="relative w-full h-48 bg-amber-400 md:h-full flex items-center justify-center">
         <div
           ref={sliderRef}
           className="flex w-full h-160 transition-transform duration-700 ease-in-out"
@@ -115,11 +115,11 @@ export default function ImageSlider() {
           }}
         >
           {extendedImages.map((img, index) => (
-            <div key={index} className="w-full h-full flex-shrink-0 relative">
+            <div key={index} className="w-full h-full flex-shrink-0 relative z-2">
               <img
                 src={img}
                 alt={`Slide ${index}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 loading="lazy"
                 onError={(e) => {
                   e.currentTarget.src = "fallback-image.jpg";
@@ -128,33 +128,27 @@ export default function ImageSlider() {
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Navigation Buttons - Smaller on Mobile */}
-      <button
-        onClick={() => handleSlide(prevSlide)}
-        disabled={isAnimating}
-        aria-label="Previous slide"
-        className={`absolute left-2 md:left-5 top-1/2 transform -translate-y-1/2 bg-amber-300 text-white p-2 md:p-3 rounded-full ${
-          isAnimating
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-amber-400 hover:cursor-pointer"
-        }`}
-      >
-        <ChevronLeft size={isMobile ? 20 : 30} />
-      </button>
-      <button
-        onClick={() => handleSlide(nextSlide)}
-        disabled={isAnimating}
-        aria-label="Next slide"
-        className={`absolute right-2 md:right-5 top-1/2 transform -translate-y-1/2 bg-amber-300 text-white p-2 md:p-3 rounded-full ${
-          isAnimating
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-amber-400 hover:cursor-pointer"
-        }`}
-      >
-        <ChevronRight size={isMobile ? 20 : 30} />
-      </button>
+        {/* Navigation Buttons - Positioned Inside the Image Container */}
+        <div className="absolute inset-0 flex items-center justify-between px-4">
+          <button
+            onClick={() => handleSlide(prevSlide)}
+            disabled={isAnimating}
+            aria-label="Previous slide"
+            className="bg-amber-300 text-white p-2 md:p-3 rounded-full z-3"
+          >
+            <ChevronLeft size={isMobile ? 20 : 30} />
+          </button>
+          <button
+            onClick={() => handleSlide(nextSlide)}
+            disabled={isAnimating}
+            aria-label="Next slide"
+            className="bg-amber-300 text-white p-2 md:p-3 rounded-full z-10"
+          >
+            <ChevronRight size={isMobile ? 20 : 30} />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

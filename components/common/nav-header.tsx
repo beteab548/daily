@@ -12,7 +12,7 @@ function NavHeader() {
     <>
       <div
         suppressHydrationWarning
-        className={` flex justify-between items-center px-4 py-4 sticky top-0  backdrop-blur-md z-10 shadow-md text-white`}
+        className={` flex justify-between items-center px-4 py-4 sticky top-0  backdrop-blur-md z-40 shadow-md text-white`}
       >
         <div>
           <Link href={"/"}>

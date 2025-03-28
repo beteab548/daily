@@ -3,16 +3,16 @@ import Link from "next/link";
 
 function ImageContainers() {
   return (
-    <div className="flex flex-wrap gap-8 mx-auto justify-center p-4">
+    <div className="flex bg-amber-400 mb-12 flex-wrap gap-8 mx-auto justify-center ">
       {/* Image Card 1 */}
-      <div className="flex flex-col md:flex-row relative shadow-2xl items-center p-4  group lg:w-150 w-full  ">
+      <div className="flex flex-col md:flex-row relative shadow-2xl items-center group  p-4 lg:w-150 w-full  ">
         <div className="flex flex-col">
           <h1 className="text-center font-serif md:text-left w-full">
             Fresh fruit on our product
           </h1>
           <div className="mt-4">
             <Link href="/products">
-              <button className="bg-amber-400  rounded-2xl w-28 h-9 hover:bg-amber-300 mb-5 hover:cursor-pointer">
+              <button className="bg-amber-400  rounded-2xl w-28 h-9 hover:bg-amber-300 mb-5 sm:mb-0 hover:cursor-pointer">
                 View Products
               </button>
             </Link>

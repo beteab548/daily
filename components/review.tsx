@@ -27,7 +27,7 @@ const ReviewCard = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-2xl w-full sm:w-80 m-4 flex flex-col items-center ">
+    <div className="bg-white p-6 rounded-lg shadow-2xl w-full sm:w-80 mr-8 flex flex-col items-center ">
       <div className="flex">{renderStars(rating)}</div>
       <p className="mt-2 text-gray-600 text-center ">"{comment}"</p>
       <p className="mt-3 text-lg font-semibold">- {lastName}</p>

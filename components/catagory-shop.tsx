@@ -10,14 +10,20 @@ interface ImageData {
 
 const imageData: ImageData[] = [
   { src: "/food-slide-show/fresh-fruits.jpg", label: "Fresh Fruits" },
-  { src: "/food-slide-show/organic-vegetables.jpg", label: "Organic Vegetables" },
+  {
+    src: "/food-slide-show/organic-vegetables.jpg",
+    label: "Organic Vegetables",
+  },
   { src: "/food-slide-show/dairy-products.jpg", label: "Dairy Products" },
   { src: "/food-slide-show/baked-goods.jpg", label: "Baked Goods" },
   { src: "/food-slide-show/fresh-meat.jpg", label: "Fresh Meat" },
   { src: "/food-slide-show/sea-food.jpg", label: "Seafood" },
   { src: "/food-slide-show/beaverage.jpg", label: "Beverages" },
-  { src: "/food-slide-show/snacks.jpg", label: "Snacks" },
-  { src: "/food-slide-show/spices.jpg", label: "Spices & Seasonings" },
+  { src: "/food-slide-show/snacks.jpeg", label: "Snacks" },
+  {
+    src: "/food-slide-show/ethiopian-spices.jpg",
+    label: "Spices & Seasonings",
+  },
 ];
 
 export default function CategoryImages() {
@@ -74,7 +80,9 @@ export default function CategoryImages() {
         <div
           ref={sliderRef}
           className="flex flex-wrap md:flex-nowrap items-center transition-transform duration-700 ease-in-out"
-          onMouseEnter={() => timerRef.current && clearInterval(timerRef.current)}
+          onMouseEnter={() =>
+            timerRef.current && clearInterval(timerRef.current)
+          }
           onMouseLeave={() => startAutoSlide()}
         >
           {imageList.map((item, index) => (
@@ -82,9 +90,16 @@ export default function CategoryImages() {
               key={index}
               className="relative w-[100px] sm:w-[120px] md:w-[140px] h-[100px] sm:h-[120px] md:h-[140px] rounded-full overflow-hidden flex-shrink-0 mx-2 sm:mx-3 md:mx-4 transition-all duration-700 ease-in-out group"
             >
-              <Image src={item.src} alt={item.label} fill className="object-cover" />
+              <Image
+                src={item.src}
+                alt={item.label}
+                fill
+                className="object-cover"
+              />
               <div className="absolute inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-80 transition-opacity duration-300">
-                <p className="text-white text-xs sm:text-sm font-semibold">{item.label}</p>
+                <p className="text-white text-xs sm:text-sm font-semibold">
+                  {item.label}
+                </p>
               </div>
             </div>
           ))}

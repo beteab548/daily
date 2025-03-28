@@ -32,6 +32,8 @@ const products: Record<ProductCategories, Product[]> = {
       name: "Royal Tonic Drink",
     },
     { id: 4, image: "special-products/natura milk.jpg", name: "Natura Milk" },
+    { id: 5, image: "special-products/astu enjera.png", name: "Astu Enjera" },
+    { id: 6, image: "special-products/enjera.png", name: " white teff Enjera" },
   ],
   vegetable: [
     { id: 1, image: "vegetables-image/potato.jpg", name: "Potato" },
