@@ -13,7 +13,7 @@ export default function ImageSlider() {
   const timerRef = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
 
-  // Clone images for seamless looping
+  // Clone images for seamless lFooping
   const extendedImages = [images[images.length - 1], ...images, images[0]];
 
   // Check for mobile viewport

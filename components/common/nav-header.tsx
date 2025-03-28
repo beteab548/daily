@@ -50,7 +50,7 @@ function NavHeader() {
       {/* Mobile Sidebar */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-20"
+          className="fixed inset-0 bg-black/50 z-50"
           onClick={() => setMenuOpen(false)}
         >
           <div className="fixed left-0 top-0 w-64 h-full bg-white shadow-md p-6 flex flex-col space-y-6  ">

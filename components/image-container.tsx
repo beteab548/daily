@@ -3,9 +3,9 @@ import Link from "next/link";
 
 function ImageContainers() {
   return (
-    <div className="flex bg-amber-400 mb-12 flex-wrap gap-8 mx-auto justify-center ">
+    <div className="flex sm:-mt-0 -mt-80 mb-12 flex-wrap gap-8 mx-auto justify-center  ">
       {/* Image Card 1 */}
-      <div className="flex flex-col md:flex-row relative shadow-2xl items-center group  p-4 lg:w-150 w-full  ">
+      <div className=" sm:m-0 m-6 flex flex-col md:flex-row relative shadow-2xl items-center group  p-4 lg:w-150 w-full  ">
         <div className="flex flex-col">
           <h1 className="text-center font-serif md:text-left w-full">
             Fresh fruit on our product
@@ -49,7 +49,7 @@ function ImageContainers() {
           <div className="transition-transform duration-300 group-hover:scale-110">
             <Image
               src="/food-slide-show/organic-vegetables.jpg"
-              width={400}
+              width={230}
               height={200}
               className="w-full "
               unoptimized
