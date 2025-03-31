@@ -28,7 +28,6 @@ export default function ProductTabs() {
   const [activeTab, setActiveTab] = useState<ProductCategories>("Our Products");
   const [likedItems, setLikedItems] = useState<Set<string>>(new Set());
 
-  // Define products as an object mapping categories to product arrays
   const products: Record<ProductCategories, Product[]> = {
     "Our Products": ourProduct,
     Vegetable: vegetable,
@@ -52,24 +51,25 @@ export default function ProductTabs() {
         <h1>Our Products</h1>
       </div>
 
-      {/* Tabs */}
-      <div className="flex justify-center mb-4 space-x-2 ">
-        {Object.keys(products).map((key) => (
-          <button
-            key={key}
-            className={`px-4 py-2 border-b-2 hover:cursor-pointer ${
-              activeTab === key
-                ? "border-black font-semibold"
-                : "border-transparent"
-            }`}
-            onClick={() => setActiveTab(key as ProductCategories)}
-          >
-            {key}
-          </button>
-        ))}
+      {/* Scrollable Tabs */}
+      <div className="w-full overflow-x-auto">
+        <div className="flex space-x-4 flex-nowrap w-max px-4">
+          {Object.entries(products).map(([key, _]) => (
+            <button
+              key={key}
+              className={`px-4 py-2 border-b-2 hover:cursor-pointer whitespace-nowrap ${
+                activeTab === key ? "border-black font-semibold" : "border-transparent"
+              }`}
+              onClick={() => setActiveTab(key as ProductCategories)}
+            >
+              {key}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:justify-start justify-center">
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:justify-start justify-center mt-4">
         {products[activeTab].map((product) => (
           <div
             key={product.id}

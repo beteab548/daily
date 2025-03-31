@@ -103,7 +103,7 @@ export default function ImageSlider() {
     setIsSidebarOpen(!isSidebarOpen);
   };
   return (
-    <div className="relative sm:-m-0  sm:w-full h-screen overflow-hidden pb-30  top-0">
+    <div className="relative   sm:-mt-0 -mt-55 sm:w-full h-screen overflow-hidden pb-30  top-0">
       {/* Image Slider - Responsive Height */}
       <div className="relative w-full h-150  md:h-full flex items-center justify-center">
         <div
