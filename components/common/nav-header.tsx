@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-
 function NavHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,8 +19,9 @@ function NavHeader() {
               src="/cropped daily logo.jpg"
               width={80}
               height={80}
-              alt="logo"
+              alt="daily logo"
               unoptimized
+              priority
             />
           </Link>
         </div>

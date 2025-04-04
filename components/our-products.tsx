@@ -53,12 +53,14 @@ export default function ProductTabs() {
 
       {/* Scrollable Tabs */}
       <div className="w-full overflow-x-auto">
-        <div className="flex space-x-4 flex-nowrap w-max px-4">
+        <div className="flex space-x-4 flex-nowrap w-full justify-center">  {/* Full-width container and centered content */}
           {Object.entries(products).map(([key, _]) => (
             <button
               key={key}
               className={`px-4 py-2 border-b-2 hover:cursor-pointer whitespace-nowrap ${
-                activeTab === key ? "border-black font-semibold" : "border-transparent"
+                activeTab === key
+                  ? "border-black font-semibold"
+                  : "border-transparent"
               }`}
               onClick={() => setActiveTab(key as ProductCategories)}
             >

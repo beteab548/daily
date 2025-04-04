@@ -3,6 +3,7 @@ import {
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
+  FaHome
 } from "react-icons/fa";
 
 const Footer = () => {
@@ -12,10 +13,10 @@ const Footer = () => {
         <h2 className="text-lg font-semibold">Contact Us</h2>
         <div className="flex space-x-4 mt-3">
           <p className="flex items-center">
-            <FaPhone className="mr-2" /> +1 234 567 890
+            <FaPhone className="mr-2" /> +251 934 567 890
           </p>
           <p className="flex items-center">
-            <FaEnvelope className="mr-2" /> daily mini market
+            <FaHome className="mr-2" /> daily mini market
           </p>
           <div className="felx flex-col">
             <p className="flex  items-center">
@@ -27,6 +28,7 @@ const Footer = () => {
           <a
             href="https://web.facebook.com/Dailyminimart0/?_rdc=1&_rdr#"
             className="text-black hover:text-gray-600"
+            target="_blank"
           >
             <FaFacebook size={24} />
           </a>

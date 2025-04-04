@@ -30,6 +30,9 @@ const AboutMiniMarket = () => {
         </div>
       </div>
       <div className="mt-10">
+        <div className="mt-10 flex justify-center">
+          <h1 className="text-blue-950 mb-4 text-center text-xl font-semibold">Our Locations</h1>
+        </div>
         <Image
           src={"/location map.png"}
           width={700}

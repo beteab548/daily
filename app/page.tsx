@@ -7,8 +7,8 @@ import ReviewCarousel from "@/components/review";
 function RootPage() {
   return (
     <>
-      <ImageSlider />
-      <ImageContainers />
+        <ImageSlider />
+        <ImageContainers />
       <CatagoryImages />
       <OrderImages image="download-app" />
       <OrderImages image="market" />
