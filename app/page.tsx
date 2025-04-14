@@ -11,11 +11,12 @@ function RootPage() {
     <>
       <ImageSlider />
       <ImageContainers />
-      <CatagoryImages />
       <Gallery />
       <AboutUS/>
+      <ImageContainers />
       <OrderImages image="download-app" />
       <OrderImages image="market" />
+      <CatagoryImages />
       {/* <ReviewCarousel /> */}
     </>
   );

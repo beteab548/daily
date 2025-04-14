@@ -54,7 +54,7 @@ export default function CategoryImages() {
   return (
     <div className="flex flex-col bg-gray-50/50 p-4 md:p-10 overflow-hidden mt-20">
       <div className="flex justify-center mt-6 md:mt-10 mb-4 md:mb-6">
-        <h1 className="font-serif text-2xl md:text-4xl">Shop By Category</h1>
+        <h1 className="font-serif text-2xl md:text-4xl text-lime-600 mb-8">Shop By Category</h1>
       </div>
       <div
         ref={scrollRef}
@@ -66,7 +66,7 @@ export default function CategoryImages() {
           {fullList.map((item, index) => (
             <div
               key={index}
-              className="relative w-[100px] sm:w-[120px] md:w-[160px] h-[100px] sm:h-[120px] md:h-[140px] rounded-full overflow-hidden mx-2 sm:mx-3 md:mx-4 group flex-shrink-0"
+              className="relative w-[100px] sm:w-[120px] md:w-[151px] h-[100px] sm:h-[120px] md:h-[140px] rounded-full overflow-hidden mx-2 sm:mx-3 md:mx-4 group flex-shrink-0"
             >
               <Image
                 src={item.src}

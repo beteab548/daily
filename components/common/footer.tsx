@@ -4,11 +4,13 @@ import {
   FaPhone,
   FaMapMarkerAlt,
   FaHome,
+  
 } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-white mt-12 py-8 border-t border-gray-300">
+    <footer className="w-full h-72  bg-gradient-to-r from-lime-300 to-white  mt-12 py-8 border-t border-gray-300">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4 text-left">
         {/* Column 1: Lorem */}
         <div>
@@ -19,7 +21,6 @@ const Footer = () => {
             pulvinar sem tincidunt at.
           </p>
         </div>
-
         {/* Column 2: Contact Info */}
         <div>
           <h2 className="text-lg font-semibold mb-2">Contact Us</h2>
@@ -28,10 +29,12 @@ const Footer = () => {
               <FaPhone className="mr-2" /> +251 934 567 890
             </li>
             <li className="flex items-center">
+              <MdEmail className="mr-2" /> dailyminimart@gamil.com
+            </li>
+            <li className="flex items-center">
               <FaHome className="mr-2" /> Daily Mini Market
             </li>
           </ul>
-
           <div className="flex mt-4 space-x-4">
             <a
               href="https://web.facebook.com/Dailyminimart0/?_rdc=1&_rdr#"
@@ -39,17 +42,16 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook size={24} />
+              <FaFacebook size={24} /> 
             </a>
           </div>
         </div>
-
         {/* Column 3: Empty for now */}
         <div>
           <h2 className="text-lg font-semibold mb-2">Explore</h2>
           <ul>
             <li className="flex items-center">
-              <Link href={"/home"}>Home</Link>
+              <Link href={"/"}>Home</Link>
             </li>
             <li className="flex items-center">
               <Link href={"/products"}>Products</Link>

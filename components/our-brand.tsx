@@ -22,6 +22,10 @@ const images = [
     src: 'special-products/astu enjera.png',
     label: 'Astu Enjera',
   },
+  {
+    src: 'special-products/royal.jpg',
+    label: 'Royal',
+  },
 ];
 
 const Gallery = () => {
@@ -29,9 +33,10 @@ const Gallery = () => {
   const [photoIndex, setPhotoIndex] = useState(0);
 
   return (
-    <div className="bg-gray-100 rounded-2xl py-16 px-4 sm:px-6 lg:px-8 m-4" suppressHydrationWarning>
+    
+    <div className="bg-lime-100 bg-center bg-cover rounded-2xl py-16 px-4 sm:px-6 lg:px-8 m-4" suppressHydrationWarning>
       <div className="max-w-3xl mx-auto text-center mb-12">
-        <h2 className="text-3xl font-semibold font-serif text-gray-900">Our Brands</h2>
+        <h2 className="text-3xl font-semibold font-serif text-gray-800">Our Own Brands</h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 max-w-3xl mx-auto">
@@ -62,3 +67,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+

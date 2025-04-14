@@ -3,7 +3,7 @@ import GoogleMapEmbed from "./googlemap";
 
 const AboutMiniMarket = () => {
   return (
-    <section className="flex flex-col items-center py-12 px-4 ">
+    <section className="flex  flex-col items-center py-12 px-4 ">
       <h2 className="text-3xl font-semibold mb-10 text-gray-700">
         About Our Mini Market
       </h2>

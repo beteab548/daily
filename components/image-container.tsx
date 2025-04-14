@@ -47,14 +47,14 @@ function ImageContainers() {
 
       {/* Text Section */}
       <div
-        className={`bg-amber-100 p-6 flex flex-col items-start mt-4 w-full lg:w-1/2 transform transition-all duration-1000 ease-out delay-200 ${
+        className={`bg-lime-200 p-6 flex flex-col items-start mt-4 w-full lg:w-1/2 transform transition-all duration-1000 ease-out delay-200 ${
           isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
         }`}
       >
         <div>
           <h2 className="text-2xl font-semibold mb-2">Our Best Services</h2>
           <p className="text-gray-600 font-serif leading-relaxed">
-            At <strong>Your Market</strong>, we are dedicated to providing the freshest
+            At <strong>Daily mart</strong>, we are dedicated to providing the freshest
             produce, high-quality products, and exceptional value—every single
             day. Whether you're planning your weekly grocery run, grabbing a
             quick bite, or searching for trusted local favorites, everything you
