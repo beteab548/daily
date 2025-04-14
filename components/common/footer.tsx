@@ -1,43 +1,71 @@
+import Link from "next/link";
 import {
   FaFacebook,
   FaPhone,
-  FaEnvelope,
   FaMapMarkerAlt,
-  FaHome
+  FaHome,
 } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="  mt-12 py-6 w-full text-center border-t-gray-400 border-t-1">
-      <div className="container mx-auto flex flex-col items-center">
-        <h2 className="text-lg font-semibold">Contact Us</h2>
-        <div className="flex space-x-4 mt-3">
-          <p className="flex items-center">
-            <FaPhone className="mr-2" /> +251 934 567 890
+    <footer className="w-full bg-white mt-12 py-8 border-t border-gray-300">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4 text-left">
+        {/* Column 1: Lorem */}
+        <div>
+          <h2 className="text-lg font-semibold mb-2">About Us</h2>
+          <p className="text-sm text-gray-600">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+            facilisi. Fusce vel sapien elit. In malesuada semper mi, nec
+            pulvinar sem tincidunt at.
           </p>
-          <p className="flex items-center">
-            <FaHome className="mr-2" /> daily mini market
-          </p>
-          <div className="felx flex-col">
-            <p className="flex  items-center">
-              <FaMapMarkerAlt className="mr-2" /> abig building , Kazanchis
-            </p>
+        </div>
+
+        {/* Column 2: Contact Info */}
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Contact Us</h2>
+          <ul className="space-y-2 text-sm text-gray-700">
+            <li className="flex items-center">
+              <FaPhone className="mr-2" /> +251 934 567 890
+            </li>
+            <li className="flex items-center">
+              <FaHome className="mr-2" /> Daily Mini Market
+            </li>
+          </ul>
+
+          <div className="flex mt-4 space-x-4">
+            <a
+              href="https://web.facebook.com/Dailyminimart0/?_rdc=1&_rdr#"
+              className="text-black hover:text-gray-600"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebook size={24} />
+            </a>
           </div>
         </div>
-        <div className="flex space-x-4 mt-4">
-          <a
-            href="https://web.facebook.com/Dailyminimart0/?_rdc=1&_rdr#"
-            className="text-black hover:text-gray-600"
-            target="_blank"
-          >
-            <FaFacebook size={24} />
-          </a>
+
+        {/* Column 3: Empty for now */}
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Explore</h2>
+          <ul>
+            <li className="flex items-center">
+              <Link href={"/home"}>Home</Link>
+            </li>
+            <li className="flex items-center">
+              <Link href={"/products"}>Products</Link>
+            </li>
+            <li className="flex items-center">
+              <Link href={"/about-us"}>About us</Link>
+            </li>
+          </ul>
         </div>
-        <p className="mt-4 text-sm">
-          &copy; 2025 Daily Mini Mart.All rights reserved.
-        </p>
       </div>
+
+      <p className="text-center text-xs text-gray-500 mt-6">
+        &copy; 2025 Daily Mini Mart. All rights reserved.
+      </p>
     </footer>
   );
 };
+
 export default Footer;

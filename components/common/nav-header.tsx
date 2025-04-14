@@ -16,7 +16,7 @@ function NavHeader() {
         <div>
           <Link href={"/"}>
             <Image
-              src="/cropped daily logo.jpg"
+              src="/daily-logo.png"
               width={80}
               height={80}
               alt="daily logo"
