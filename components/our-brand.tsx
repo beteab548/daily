@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const images = [
   {
     src: 'special-products/dukemiye-01.jpg',
-    label: 'Dukemiye',
+    label: 'Dukemiye food oil',
   },
   {
     src: 'special-products/natura milk.jpg',
@@ -12,11 +12,11 @@ const images = [
   },
   {
     src: 'special-products/royal.jpg',
-    label: 'Royal',
+    label: 'Royal tonic drink',
   },
   {
     src: 'special-products/aqua 1L.jpg',
-    label: 'Aqua 1L',
+    label: 'Aqua 1L water bottle',
   },
   {
     src: 'special-products/astu enjera.png',
@@ -34,7 +34,7 @@ const Gallery = () => {
 
   return (
     
-    <div className="bg-lime-100 bg-center bg-cover rounded-2xl py-16 px-4 sm:px-6 lg:px-8 m-4" suppressHydrationWarning>
+    <div className="bg-[url('/white1.avif')]  bg-center bg-cover rounded-2xl py-16 px-4 sm:px-6 lg:px-8 m-4" suppressHydrationWarning>
       <div className="max-w-3xl mx-auto text-center mb-12">
         <h2 className="text-3xl font-semibold font-serif text-gray-800">Our Own Brands</h2>
       </div>
@@ -52,7 +52,7 @@ const Gallery = () => {
             <img
               src={img.src}
               alt={`Gallery ${index + 1}`}
-              className="w-98 h-106 object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-86 h-76 object-cover transition-transform duration-300 group-hover:scale-105"
             />
 
             {/* Sliding overlay */}

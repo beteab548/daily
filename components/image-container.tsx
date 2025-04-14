@@ -47,13 +47,13 @@ function ImageContainers() {
 
       {/* Text Section */}
       <div
-        className={`bg-lime-200 p-6 flex flex-col items-start mt-4 w-full lg:w-1/2 transform transition-all duration-1000 ease-out delay-200 ${
+        className={`bg-[url('/white1.avif')] p-6 flex flex-col items-start mt-4 w-full lg:w-1/2 transform transition-all duration-1000 ease-out delay-200 ${
           isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
         }`}
       >
         <div>
           <h2 className="text-2xl font-semibold mb-2">Our Best Services</h2>
-          <p className="text-gray-600 font-serif leading-relaxed">
+          <p className="text-gray-600 font-serif leading-relaxed text-justify">
             At <strong>Daily mart</strong>, we are dedicated to providing the freshest
             produce, high-quality products, and exceptional value—every single
             day. Whether you're planning your weekly grocery run, grabbing a
@@ -63,7 +63,7 @@ function ImageContainers() {
           </p>
         </div>
         <div className="flex justify-center">
-          <button className="bg-transparent mt-8 text-orange border border-amber-600 px-6 py-4 rounded-lg hover:bg-amber-600 hover:text-white transition">
+          <button className="bg-transparent mt-8 text-orange border hover:cursor-pointer border-amber-600 px-6 py-4 rounded-lg hover:bg-amber-600 hover:text-white transition">
             Products
           </button>
         </div>

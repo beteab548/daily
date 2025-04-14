@@ -79,6 +79,16 @@ export const ourProduct = [
   { id: 4, image: "special-products/natura milk.jpg", name: "Natura Milk" },
   { id: 5, image: "special-products/astu enjera.png", name: "Astu Enjera" },
   { id: 6, image: "special-products/enjera.png", name: " white teff Enjera" },
+  {
+    id: 7,
+    image: "special-products/natura milk.jpg",
+    name: "Natura yoghurt Milk",
+  },
+  {
+    id: 8,
+    image: "special-products/royal.jpg ",
+    name: "Royal orange Tonic Drink",
+  },
 ];
 export const Beverages = [
   {
@@ -105,6 +115,22 @@ export const Beverages = [
     id: 5,
     image: "beverages-images/ambo.png",
     name: "Ambo",
+  },
+
+  {
+    id: 6,
+    image: "beverages-images/energy drinks.jpg",
+    name: "Energy Drinks",
+  },
+  {
+    id: 7,
+    image: "beverages-images/fruit juice.jpg",
+    name: "fruit juicee",
+  },
+  {
+    id: 8,
+    image: "beverages-images/favored yoghurt.jpg",
+    name: "favored yoghurt",
   },
 ];
 export const others = [
@@ -162,5 +188,10 @@ export const others = [
     id: 11,
     image: "others/selam baltna.png",
     name: "selam spice and seasoning",
+  },
+  {
+    id: 12,
+    image: "others/vinegar sauce.jpg",
+    name: "vinegar sauce",
   },
 ];

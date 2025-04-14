@@ -46,7 +46,7 @@ export default function ProductTabs() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 mb-6">
+    <div className="w-full max-w-5xl mx-auto p-4 mb-6 ">
       <div className="flex justify-center font-serif text-4xl m-8">
         <h1>Our Products</h1>
       </div>

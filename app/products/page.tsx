@@ -1,5 +1,6 @@
 import ProductTabs from "@/components/our-products";
 function Products() {
-  return <ProductTabs />;
+    return<div><ProductTabs />;
+  </div>
 }
 export default Products;
