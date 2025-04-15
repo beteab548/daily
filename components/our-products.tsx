@@ -26,7 +26,6 @@ type ProductCategories =
 
 export default function ProductTabs() {
   const [activeTab, setActiveTab] = useState<ProductCategories>("Our Products");
-  const [likedItems, setLikedItems] = useState<Set<string>>(new Set());
 
   const products: Record<ProductCategories, Product[]> = {
     "Our Products": ourProduct,
@@ -37,14 +36,6 @@ export default function ProductTabs() {
     others: others,
   };
 
-  const toggleLike = (name: string) => {
-    setLikedItems((prev) => {
-      const newLikes = new Set(prev);
-      newLikes.has(name) ? newLikes.delete(name) : newLikes.add(name);
-      return newLikes;
-    });
-  };
-
   return (
     <div className="w-full max-w-5xl mx-auto p-4 mb-6 ">
       <div className="flex justify-center font-serif text-4xl m-8">
@@ -53,7 +44,7 @@ export default function ProductTabs() {
 
       {/* Scrollable Tabs */}
       <div className="w-full overflow-x-auto">
-        <div className="flex space-x-4 flex-nowrap w-full justify-center">  {/* Full-width container and centered content */}
+        <div className="flex space-x-4 flex-nowrap w-full justify-center">
           {Object.entries(products).map(([key, _]) => (
             <button
               key={key}
@@ -76,7 +67,6 @@ export default function ProductTabs() {
           <div
             key={product.id}
             className="relative w-[250px] sm:w-full p-2 text-center border rounded-lg shadow-md group overflow-hidden mx-auto"
-            onClick={() => toggleLike(product.name)}
           >
             <div className="relative w-full h-45 p-1">
               <Image
@@ -88,17 +78,6 @@ export default function ProductTabs() {
               />
             </div>
             <p className="mt-2 font-serif">{product.name}</p>
-
-            {/* Like (Heart) Icon */}
-            <span
-              className={`absolute top-2 right-2 text-2xl transition-opacity hover:cursor-pointer ${
-                likedItems.has(product.name)
-                  ? "opacity-100"
-                  : "opacity-0 group-hover:opacity-100"
-              }`}
-            >
-              {likedItems.has(product.name) ? "❤️" : "🤍"}
-            </span>
           </div>
         ))}
       </div>

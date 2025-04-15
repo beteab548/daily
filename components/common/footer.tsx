@@ -4,18 +4,36 @@ import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="w-full h-86  bg-[url('/white1.avif')]  mt-12 py-8 border-t border-gray-300">
+    <footer className="w-full h-86 bg-[url('/white1.avif')] mt-12 py-8 border-t border-gray-300">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4 text-center">
         {/* Column 1: About Us */}
         <div className="flex flex-col items-center justify-center">
           <h2 className="text-lg font-semibold mb-2">About Us</h2>
-          <p className="text-sm text-gray-600 max-w-xs">
+          <p className="text-sm text-gray-600 max-w-xs mb-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
             facilisi. Fusce vel sapien elit. In malesuada semper mi, nec
             pulvinar sem tincidunt at.
           </p>
-          <div>
-            <FaMapMarkerAlt/> 
+          <div className="text-sm text-gray-700">
+            <h3 className="font-semibold mb-2">Addresses</h3>
+            <ul className="space-y-2 w-full">
+              <li className="flex items-center justify-start">
+                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
+                <span>Bisrate Gebriel</span>
+              </li>
+              <li className="flex items-center justify-start">
+                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
+                <span>Bole</span>
+              </li>
+              <li className="flex items-center justify-start">
+                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
+                <span>Kazanchis</span>
+              </li>
+              <li className="flex items-center justify-start">
+                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
+                <span>semit</span>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -23,7 +41,7 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-center">
           <h2 className="text-lg font-semibold mb-2">Contact Us</h2>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li className="flex items-center justify-center">
+            <li className="flex  justify-center">
               <FaPhone className="mr-2" /> +251 934 567 890
             </li>
             <li className="flex items-center justify-center">

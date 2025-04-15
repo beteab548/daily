@@ -22,16 +22,16 @@ const imageData: ImageData[] = [
 
 export default function CategoryImages() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const scrollAmountRef = useRef(0); // <- persist scroll amount
+  const scrollAmountRef = useRef(0);
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
-    let animationFrameId: number;
     const scrollContainer = scrollRef.current;
+    let animationFrameId: number;
 
     const scroll = () => {
       if (scrollContainer && !hovering) {
-        scrollAmountRef.current += 1; // speed
+        scrollAmountRef.current += 1;
         const maxScroll = scrollContainer.scrollWidth / 2;
 
         if (scrollAmountRef.current >= maxScroll) {
@@ -47,9 +47,9 @@ export default function CategoryImages() {
     animationFrameId = requestAnimationFrame(scroll);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [hovering]); // only re-renders when hovering changes
+  }, [hovering]);
 
-  const fullList = [...imageData, ...imageData]; // Duplicate for loop
+  const fullList = [...imageData, ...imageData]; // Duplicate for seamless looping
 
   return (
     <div className="flex flex-col bg-gray-50/50 p-4 md:p-10 overflow-hidden mt-20">
@@ -59,14 +59,14 @@ export default function CategoryImages() {
       <div
         ref={scrollRef}
         className="w-full overflow-hidden whitespace-nowrap"
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
       >
         <div className="inline-flex">
           {fullList.map((item, index) => (
             <div
               key={index}
               className="relative w-[100px] sm:w-[120px] md:w-[151px] h-[100px] sm:h-[120px] md:h-[140px] rounded-full overflow-hidden mx-2 sm:mx-3 md:mx-4 group flex-shrink-0"
+              onMouseEnter={() => setHovering(true)}
+              onMouseLeave={() => setHovering(false)}
             >
               <Image
                 src={item.src}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { FaFacebook } from "react-icons/fa";
 function NavHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,6 +33,9 @@ function NavHeader() {
           </NavLink>
           <NavLink href="/products" currentPath={pathname}>
             Products
+          </NavLink>
+          <NavLink href="/gallery" currentPath={pathname}>
+            Gallery
           </NavLink>
           <NavLink href="/about-us" currentPath={pathname}>
             About Us
@@ -90,5 +94,4 @@ function NavLink({ href, currentPath, children }: Navlinks) {
     </Link>
   );
 }
-
 export default NavHeader;
