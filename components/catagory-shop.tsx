@@ -24,13 +24,16 @@ export default function CategoryImages() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollAmountRef = useRef(0);
   const [hovering, setHovering] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartX = useRef(0);
+  const scrollStartX = useRef(0);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     let animationFrameId: number;
 
     const scroll = () => {
-      if (scrollContainer && !hovering) {
+      if (scrollContainer && !hovering && !isDragging) {
         scrollAmountRef.current += 1;
         const maxScroll = scrollContainer.scrollWidth / 2;
 
@@ -47,26 +50,58 @@ export default function CategoryImages() {
     animationFrameId = requestAnimationFrame(scroll);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [hovering]);
+  }, [hovering, isDragging]);
 
-  const fullList = [...imageData, ...imageData]; // Duplicate for seamless looping
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    dragStartX.current = e.clientX;
+    scrollStartX.current = scrollRef.current.scrollLeft;
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!scrollRef.current || !isDragging) return;
+    const dx = e.clientX - dragStartX.current;
+    scrollRef.current.scrollLeft = scrollStartX.current - dx;
+    scrollAmountRef.current = scrollRef.current.scrollLeft;
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
+  const handleMouseLeave = () => {
+    if (isDragging) setIsDragging(false);
+    setHovering(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging]);
+
+  const fullList = [...imageData, ...imageData]; // For seamless scroll
 
   return (
     <div className="flex flex-col bg-gray-50/50 p-4 md:p-10 overflow-hidden mt-20">
       <div className="flex justify-center mt-6 md:mt-10 mb-4 md:mb-6">
-        <h1 className="font-serif text-2xl md:text-4xl text-gray-600 mb-8">Shop By Category</h1>
+        <h1 className="font-serif text-2xl md:text-4xl text-gray-600 mb-8">
+          Shop By Category
+        </h1>
       </div>
       <div
         ref={scrollRef}
-        className="w-full overflow-hidden whitespace-nowrap"
+        className="w-full overflow-hidden whitespace-nowrap cursor-grab active:cursor-grabbing"
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={handleMouseLeave}
+        onMouseDown={handleMouseDown}
       >
-        <div className="inline-flex">
+        <div className="inline-flex select-none">
           {fullList.map((item, index) => (
             <div
               key={index}
               className="relative w-[100px] sm:w-[120px] md:w-[151px] h-[100px] sm:h-[120px] md:h-[140px] rounded-full overflow-hidden mx-2 sm:mx-3 md:mx-4 group flex-shrink-0"
-              onMouseEnter={() => setHovering(true)}
-              onMouseLeave={() => setHovering(false)}
             >
               <Image
                 src={item.src}

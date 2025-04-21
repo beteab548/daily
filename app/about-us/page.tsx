@@ -1,5 +1,6 @@
 import Image from "next/image";
 import GoogleMapEmbed from "./googlemap";
+import CustomMap from "@/components/customMap";
 
 const AboutMiniMarket = () => {
   return (
@@ -38,14 +39,15 @@ const AboutMiniMarket = () => {
           <h1 className="text-blue-950 mb-4 text-xl font-semibold">
             Our Locations
           </h1>
-          <Image
+          {/* <Image
             src="/location map.png"
             width={600}
             height={400}
             unoptimized
             alt="Location Map"
             className="rounded-lg shadow-lg w-full h-auto"
-          />
+          /> */}
+          <CustomMap/>
         </div>
       </div>
     </section>

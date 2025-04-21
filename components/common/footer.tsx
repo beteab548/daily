@@ -1,10 +1,15 @@
+'use client'
 import Link from "next/link";
-import { FaFacebook, FaPhone, FaMapMarkerAlt, FaHome } from "react-icons/fa";
+import { FaFacebook, FaPhone, FaMapMarkerAlt, FaHome, FaArrowUp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="w-full h-86 bg-[url('/white1.avif')] mt-12 py-8 border-t border-gray-300">
+    <footer className="w-full h-auto bg-[url('/white1.avif')] mt-12 py-8 border-t border-gray-300">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4 text-center">
         {/* Column 1: About Us */}
         <div className="flex flex-col items-center justify-center">
@@ -84,6 +89,17 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+      </div>
+
+      {/* Back to Top Button */}
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={scrollToTop}
+          className="flex items-center gap-2 text-sm text-white bg-lime-700 hover:bg-lime-800 px-4 py-2 rounded-full shadow transition"
+        >
+          <FaArrowUp />
+          Back to Top
+        </button>
       </div>
 
       <p className="text-center text-xs text-gray-500 mt-6">
