@@ -1,5 +1,4 @@
 import Image from "next/image";
-import GoogleMapEmbed from "./googlemap";
 import CustomMap from "@/components/customMap";
 
 const AboutMiniMarket = () => {
