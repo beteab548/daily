@@ -1,15 +1,13 @@
+"use client"
 import Image from "next/image";
-import CustomMap from "@/components/customMap";
-
+import CustomMap from "@/components/customMap.jsx";
 const AboutMiniMarket = () => {
   return (
     <section className="flex flex-col items-center py-12 px-4">
       <h2 className="text-3xl font-semibold mb-10 text-gray-700">
         About Our Mini Market
       </h2>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-        {/* Row 1: Image */}
         <div>
           <Image
             src="/daily-mart-image.jpg"
