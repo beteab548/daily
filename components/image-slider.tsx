@@ -1,157 +1,204 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
-const images: string[] = [
+import { ChevronLeft, ChevronRight, Sparkles, Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+const images = [
   "/slider-image-2.jpg",
   "/slider2-.webp",
   "/slider3.webp",
 ];
-export default function ImageSlider() {
-  const [currentIndex, setCurrentIndex] = useState<number>(1);
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const timerRef = useRef<number | null>(null);
-  const timeoutRef = useRef<number | null>(null);
 
-  // Clone images for seamless lFooping
-  const extendedImages = [images[images.length - 1], ...images, images[0]];
+const captions = [
+  "Premium Quality Products",
+  "Fresh From Our Farms",
+  "Delivered To Your Doorstep"
+];
 
-  // Check for mobile viewport
+export default function CosmicImageSlider() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+  const [isHovered, setIsHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const timerRef = useRef<NodeJS.Timeout>();
+
+  // Star particles effect
+  const particles = Array(15).fill(0).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    delay: Math.random() * 5
+  }));
+
+  // Auto-rotate slides
   useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    if (!isHovered) {
+      timerRef.current = setInterval(() => {
+        setDirection("right");
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      }, 5000);
+    }
+    return () => clearInterval(timerRef.current);
+  }, [isHovered]);
 
-    checkIfMobile();
-    window.addEventListener("resize", checkIfMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkIfMobile);
-    };
-  }, []);
-
-  // Auto-slide and cleanup
-  useEffect(() => {
-    startAutoSlide();
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  // Handle transition end for seamless looping
-  useEffect(() => {
-    if (!sliderRef.current) return;
-
-    const handleTransitionEnd = () => {
-      if (currentIndex === 0) {
-        setCurrentIndex(extendedImages.length - 2);
-      } else if (currentIndex === extendedImages.length - 1) {
-        setCurrentIndex(1);
-      }
-      setIsAnimating(false);
-    };
-
-    const sliderElement = sliderRef.current;
-    sliderElement.addEventListener("transitionend", handleTransitionEnd);
-
-    return () => {
-      sliderElement.removeEventListener("transitionend", handleTransitionEnd);
-    };
-  }, [currentIndex]);
-
-  const startAutoSlide = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = window.setInterval(() => {
-      handleSlide(nextSlide);
-    }, 5000);
-  };
-
-  const handleSlide = (slideFunc: () => void) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    if (timerRef.current) clearInterval(timerRef.current);
-    slideFunc();
+  const goToSlide = (index: number, dir: "left" | "right") => {
+    setDirection(dir);
+    setCurrentIndex(index);
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex + 1;
-      if (newIndex >= extendedImages.length - 1) {
-        requestAnimationFrame(() => {
-          setCurrentIndex(1);
-        });
-      }
-      return newIndex;
-    });
+    setDirection("right");
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+    resetTimer();
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex - 1;
-      if (newIndex <= 0) {
-        requestAnimationFrame(() => {
-          setCurrentIndex(extendedImages.length - 2);
-        });
-      }
-      return newIndex;
-    });
+    setDirection("left");
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    resetTimer();
   };
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+
+  const resetTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setDirection("right");
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
   };
+
   return (
-    <div className="relative   sm:-mt-0 -mt-55 sm:w-full h-screen overflow-hidden pb-30  top-0">
-      {/* Image Slider - Responsive Height */}
-      <div className="relative w-full h-150  md:h-full flex items-center justify-center">
-        <div
-          ref={sliderRef}
-          className="flex w-full h-170 transition-transform duration-700 ease-in-out"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-            transition: isAnimating ? "transform 700ms ease-in-out" : "none",
-          }}
+    <div 
+      className="relative w-full h-screen overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated star background */}
+      <div className="absolute inset-0 overflow-hidden z-0">
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-white/80"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.2, 1, 0.2],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              delay: particle.delay,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main slider container */}
+      <div className="relative h-full w-full flex items-center justify-center">
+        <AnimatePresence custom={direction} initial={false}>
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            initial={{ opacity: 0, x: direction === "right" ? "100%" : "-100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction === "right" ? "-100%" : "100%" }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <Image
+              src={images[currentIndex]}
+              alt={`Slide ${currentIndex}`}
+              fill
+              className="object-cover"
+              onLoadingComplete={() => setIsLoading(false)}
+              priority
+            />
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Caption */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="absolute bottom-1/4 left-0 right-0 text-center z-10 px-4"
         >
-          {extendedImages.map((img, index) => (
-            <div
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-2xl">
+            {captions[currentIndex]}
+          </h2>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-bold flex items-center gap-2 mx-auto shadow-xl hover:shadow-2xl transition-all"
+          >
+            <Zap className="animate-pulse" /> SHOP NOW
+          </motion.button>
+        </motion.div>
+
+        {/* Navigation dots */}
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10">
+          {images.map((_, index) => (
+            <button
               key={index}
-              className="w-full h-full flex-shrink-0 relative z-2"
-            >
-              <img
-                src={img}
-                alt={`Slide ${index}`}
-                className="w-full  h-full object-contain"
-                loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.src = "fallback-image.jpg";
-                }}
-              />
-            </div>
+              onClick={() => goToSlide(index, index > currentIndex ? "right" : "left")}
+              className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? 'bg-amber-400 w-6' : 'bg-white/50'}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
 
-        {/* Navigation Buttons - Positioned Inside the Image Container */}
-        <div className="absolute inset-0 flex items-center justify-between px-4">
-          <button
-            onClick={() => handleSlide(prevSlide)}
-            disabled={isAnimating}
-            aria-label="Previous slide"
-            className="bg-amber-300 text-white p-2 md:p-3 rounded-full z-3"
-          >
-            <ChevronLeft size={isMobile ? 20 : 30} />
-          </button>
-          <button
-            onClick={() => handleSlide(nextSlide)}
-            disabled={isAnimating}
-            aria-label="Next slide"
-            className="bg-amber-300 text-white p-2 md:p-3 rounded-full z-10"
-          >
-            <ChevronRight size={isMobile ? 20 : 30} />
-          </button>
-        </div>
+        {/* Navigation arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full z-10 transition-all"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={32} />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full z-10 transition-all"
+          aria-label="Next slide"
+        >
+          <ChevronRight size={32} />
+        </button>
+
+        {/* Loading indicator */}
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-20">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full"
+            />
+          </div>
+        )}
       </div>
+
+      {/* Floating sparkles */}
+      <motion.div 
+        className="absolute top-1/4 right-1/4 text-amber-300"
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 180, 360],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      >
+        <Sparkles size={48} />
+      </motion.div>
     </div>
   );
 }

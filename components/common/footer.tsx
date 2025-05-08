@@ -1,7 +1,8 @@
 'use client'
 import Link from "next/link";
-import { FaFacebook, FaPhone, FaMapMarkerAlt, FaHome, FaArrowUp } from "react-icons/fa";
+import { FaFacebook, FaPhone, FaMapMarkerAlt, FaHome, FaArrowUp, FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -9,102 +10,140 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full h-auto bg-[url('/white1.avif')] mt-12 py-8 border-t border-gray-300">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4 text-center">
-        {/* Column 1: About Us */}
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-lg font-semibold mb-2">About Us</h2>
-          <p className="text-sm text-gray-600 max-w-xs mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            facilisi. Fusce vel sapien elit. In malesuada semper mi, nec
-            pulvinar sem tincidunt at.
-          </p>
-          <div className="text-sm text-gray-700">
-            <h3 className="font-semibold mb-2">Addresses</h3>
-            <ul className="space-y-2 w-full">
-              <li className="flex items-center justify-start">
-                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
-                <span>Bisrate Gebriel</span>
+    <footer className="w-full bg-gradient-to-b from-gray-50 to-emerald-50 pt-12 pb-6 border-t border-gray-200">
+      <div className="container mx-auto px-4">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
+          {/* About Us */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-emerald-700 flex items-center">
+              <span className="w-3 h-3 bg-emerald-500 rounded-full mr-2"></span>
+              Daily Mini Mart
+            </h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Your neighborhood destination for fresh groceries and household essentials. 
+              We're committed to quality, convenience, and community.
+            </p>
+            <div className="flex space-x-4 pt-2">
+              <a href="#" className="text-gray-500 hover:text-emerald-600 transition-colors">
+                <FaFacebook size={20} />
+              </a>
+              <a href="#" className="text-gray-500 hover:text-emerald-600 transition-colors">
+                <FaInstagram size={20} />
+              </a>
+              <a href="#" className="text-gray-500 hover:text-emerald-600 transition-colors">
+                <FaTwitter size={20} />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-4"
+          >
+            <h3 className="text-lg font-semibold text-gray-800">Quick Links</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/" className="text-gray-600 hover:text-emerald-600 transition-colors flex items-center">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2"></span>
+                  Home
+                </Link>
               </li>
-              <li className="flex items-center justify-start">
-                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
-                <span>Bole</span>
+              <li>
+                <Link href="/products" className="text-gray-600 hover:text-emerald-600 transition-colors flex items-center">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2"></span>
+                  Products
+                </Link>
               </li>
-              <li className="flex items-center justify-start">
-                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
-                <span>Kazanchis</span>
+              <li>
+                <Link href="/about-us" className="text-gray-600 hover:text-emerald-600 transition-colors flex items-center">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2"></span>
+                  About Us
+                </Link>
               </li>
-              <li className="flex items-center justify-start">
-                <FaMapMarkerAlt className="mr-2 min-w-[20px]" />
-                <span>semit</span>
+              <li>
+                <Link href="/contact" className="text-gray-600 hover:text-emerald-600 transition-colors flex items-center">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2"></span>
+                  Contact
+                </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
+
+          {/* Locations */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <h3 className="text-lg font-semibold text-gray-800">Our Locations</h3>
+            <ul className="space-y-3">
+              {['Bisrate Gebriel', 'Bole', 'Kazanchis', 'Semit'].map((location, index) => (
+                <li key={index} className="flex items-start">
+                  <FaMapMarkerAlt className="text-emerald-500 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-gray-600">{location}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="space-y-4"
+          >
+            <h3 className="text-lg font-semibold text-gray-800">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <FaPhone className="text-emerald-500 mt-0.5 mr-2 flex-shrink-0" />
+                <div>
+                  <p className="text-gray-600">+251 934 567 890</p>
+                  <p className="text-gray-600">+251 911 234 567</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <MdEmail className="text-emerald-500 mt-0.5 mr-2 flex-shrink-0" />
+                <span className="text-gray-600">dailyminimart@gmail.com</span>
+              </li>
+              <li className="flex items-start">
+                <FaHome className="text-emerald-500 mt-0.5 mr-2 flex-shrink-0" />
+                <span className="text-gray-600">Open Daily: 7AM - 10PM</span>
+              </li>
+            </ul>
+          </motion.div>
         </div>
 
-        {/* Column 2: Contact Info */}
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-lg font-semibold mb-2">Contact Us</h2>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li className="flex  justify-center">
-              <FaPhone className="mr-2" /> +251 934 567 890
-            </li>
-            <li className="flex items-center justify-center">
-              <MdEmail className="mr-2" /> dailyminimart@gamil.com
-            </li>
-            <li className="flex items-center justify-center">
-              <FaHome className="mr-2" /> Daily Mini Market
-            </li>
-          </ul>
-          <div className="flex mt-4 space-x-4">
-            <a
-              href="https://web.facebook.com/Dailyminimart0/?_rdc=1&_rdr#"
-              className="text-black hover:text-gray-600"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaFacebook size={24} />
-            </a>
-          </div>
-        </div>
+        {/* Divider */}
+        <div className="border-t border-gray-200 my-6"></div>
 
-        {/* Column 3: Explore */}
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-lg font-semibold mb-2">Explore</h2>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/" className="hover:text-lime-800">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/products" className="hover:text-lime-800">
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link href="/about-us" className="hover:text-lime-800">
-                About us
-              </Link>
-            </li>
-          </ul>
+        {/* Bottom Footer */}
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-gray-500 mb-4 md:mb-0">
+            &copy; {new Date().getFullYear()} Daily Mini Mart. All rights reserved.
+          </p>
+          
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={scrollToTop}
+            className="flex items-center gap-2 text-sm text-white bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-full shadow-md transition-all"
+          >
+            <FaArrowUp />
+            Back to Top
+          </motion.button>
         </div>
       </div>
-
-      {/* Back to Top Button */}
-      <div className="flex justify-center mt-6">
-        <button
-          onClick={scrollToTop}
-          className="flex items-center gap-2 text-sm text-white bg-lime-700 hover:bg-lime-800 px-4 py-2 rounded-full shadow transition"
-        >
-          <FaArrowUp />
-          Back to Top
-        </button>
-      </div>
-
-      <p className="text-center text-xs text-gray-500 mt-6">
-        &copy; 2025 Daily Mini Mart. All rights reserved.
-      </p>
     </footer>
   );
 };
