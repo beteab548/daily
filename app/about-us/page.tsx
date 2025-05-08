@@ -35,7 +35,7 @@ const AboutMiniMarket = () => {
             className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
           >
             <Image
-              src="/daily-mart-image.jpg"
+              src="/cards/IMG_7730.jpg"
               alt="Mini Market Interior"
               width={800}
               height={600}

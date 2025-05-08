@@ -20,7 +20,7 @@ export default function CosmicImageSlider() {
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const timerRef = useRef<NodeJS.Timeout>();
+  const timerRef = useRef<NodeJS.Timeout| null>(null);
 
   // Star particles effect
   const particles = Array(15).fill(0).map((_, i) => ({
@@ -39,7 +39,19 @@ export default function CosmicImageSlider() {
         setCurrentIndex((prev) => (prev + 1) % images.length);
       }, 5000);
     }
-    return () => clearInterval(timerRef.current);
+    return () => {
+      if (timerRef.current) {
+        if (timerRef.current) {
+          if (timerRef.current) {
+            if (timerRef.current) {
+              if (timerRef.current) {
+                clearInterval(timerRef.current as NodeJS.Timeout);
+              }
+            }
+          }
+        }
+      }
+    };
   }, [isHovered]);
 
   const goToSlide = (index: number, dir: "left" | "right") => {
@@ -60,7 +72,9 @@ export default function CosmicImageSlider() {
   };
 
   const resetTimer = () => {
-    clearInterval(timerRef.current);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
     timerRef.current = setInterval(() => {
       setDirection("right");
       setCurrentIndex((prev) => (prev + 1) % images.length);
