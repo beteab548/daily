@@ -18,7 +18,6 @@ function RootPage() {
       <OrderImages image="download-app" />
       <OrderImages image="market" />
       <CatagoryImages />
-  
       {/* <ReviewCarousel /> */}
     </div>
   );

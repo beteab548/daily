@@ -1,174 +1,250 @@
-'use client';
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
-const images = [
+'use client';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiX, FiChevronLeft, FiChevronRight, FiZoomIn } from 'react-icons/fi';
+import Image from 'next/image';
+
+const products = [
   {
+    id: 1,
     src: '/special-products/dukemiye-01.jpg',
-    label: 'Dukemiye Premium Oil',
-    description: '100% pure organic cooking oil'
+    label: 'Dukemiye Premium Food Oil',
+    description: '100% pure Ethiopian sesame oil for authentic flavors',
+    category: 'Pantry Essentials'
   },
   {
-    src: '/special-products/natura milk.jpg',
-    label: 'Natura Fresh Milk',
-    description: 'Farm-fresh pasteurized milk'
+    id: 2,
+    src: '/special-products/natura-milk.jpg',
+    label: 'Natura Farm Fresh Milk',
+    description: 'Pasteurized milk from grass-fed Ethiopian cows',
+    category: 'Dairy'
   },
   {
-    src: '/cards/IMG_7716.jpg',
-    label: 'Aqua Mineral Water',
-    description: '1L purified drinking water'
+    id: 3,
+    src: '/special-products/royal-tonic.jpg',
+    label: 'Royal Tonic Drink',
+    description: 'Herbal energy drink with natural ingredients',
+    category: 'Beverages'
   },
   {
-    src: '/cards/IMG_7713.jpg',
-    label: 'Royal Energy Tonic',
-    description: 'Herbal energy booster'
+    id: 4,
+    src: '/special-products/aqua-1L.jpg',
+    label: 'Aqua 1L Mineral Water',
+    description: 'Sourced from Ethiopian mountain springs',
+    category: 'Water'
   },
   {
-    src: '/special-products/astu enjera.png',
+    id: 5,
+    src: '/special-products/astu-enjera.png',
     label: 'Astu Traditional Enjera',
-    description: 'Authentic fermented flatbread'
+    description: 'Authentic teff enjera, ready to serve',
+    category: 'Bakery'
   },
   {
-    src: '/special-products/royal.jpg',
-    label: 'Royal Gourmet Spread',
-    description: 'Premium fruit preserves'
+    id: 6,
+    src: '/special-products/royal-coffee.jpg',
+    label: 'Royal Ethiopian Coffee',
+    description: 'Single-origin Yirgacheffe specialty coffee',
+    category: 'Coffee'
   },
 ];
 
 const Gallery = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const nextImage = () => {
-    setPhotoIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  // Filter products
+  const categories = ['All', ...new Set(products.map(p => p.category))];
+  const filteredProducts = activeFilter === 'All' 
+    ? products 
+    : products.filter(p => p.category === activeFilter);
+
+  // Lightbox controls
+  const handlePrev = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex(prev => (prev === 0 ? filteredProducts.length - 1 : prev - 1));
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
-  const prevImage = () => {
-    setPhotoIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  const handleNext = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex(prev => (prev === filteredProducts.length - 1 ? 0 : prev + 1));
+    setTimeout(() => setIsAnimating(false), 500);
   };
+
+  const openLightbox = (index: number) => {
+    setCurrentIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    document.body.style.overflow = 'auto';
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxOpen) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') handlePrev();
+        if (e.key === 'ArrowRight') handleNext();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, currentIndex]);
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white py-20 px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-7xl mx-auto"
-      >
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent mb-4">
-            Our Premium Brands
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our exclusive product line crafted with quality and care
-          </p>
-        </div>
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+      {/* Gallery Grid */}
+      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-green-400 to-green-900 opacity-10"></div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {images.map((img, index) => (
+      <div className="max-w-7xl mx-auto">
+        {/* Header with animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-4">
+            Gallary
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-blue-400 mx-auto rounded-full"></div>
+        </motion.div>
+</div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredProducts.map((product, index) => (
+          <motion.div
+            key={product.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+            className="relative group overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+            onClick={() => openLightbox(index)}
+          >
+            {/* Image with parallax effect */}
             <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="relative cursor-pointer group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all"
-              onClick={() => {
-                setPhotoIndex(index);
-                setIsOpen(true);
-              }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+              className="h-80 overflow-hidden relative"
             >
-              <div className="aspect-square relative">
-                <Image
-                  fill
-                  src={img.src}
-                  alt={img.label}
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <div>
-                    <h3 className="text-white text-xl font-bold">{img.label}</h3>
-                    <p className="text-gray-200 text-sm mt-1">{img.description}</p>
-                  </div>
-                </div>
+              <Image
+                src={product.src}
+                alt={product.label}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={index < 3}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <FiZoomIn className="text-white text-3xl opacity-80" />
               </div>
             </motion.div>
-          ))}
-        </div>
-      </motion.div>
 
-      {/* Modal */}
+            {/* Product info */}
+            <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+              <span className="text-emerald-300 text-xs font-medium">{product.category}</span>
+              <h3 className="text-xl font-bold text-white mt-1">{product.label}</h3>
+              <p className="text-emerald-200 text-sm mt-1 line-clamp-1">{product.description}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Lightbox - Now properly showing the image */}
       <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
+        {lightboxOpen && (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
           >
-            <motion.div 
-              className="relative max-w-5xl w-full mx-4"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25 }}
+            {/* Close button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 text-white hover:text-emerald-400 transition-colors z-10"
+              aria-label="Close lightbox"
             >
-              {/* Navigation Arrows */}
-              <button
-                onClick={prevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg z-10 transition-all"
-                aria-label="Previous"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              
-              <button
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg z-10 transition-all"
-                aria-label="Next"
-              >
-                <ChevronRight size={24} />
-              </button>
+              <FiX size={28} />
+            </button>
 
-              {/* Close Button */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="absolute -top-12 right-0 bg-white hover:bg-gray-100 text-gray-800 p-2 rounded-full shadow-lg transition-all"
-                aria-label="Close"
-              >
-                <X size={24} />
-              </button>
+            {/* Navigation arrows */}
+            <button
+              onClick={handlePrev}
+              className="absolute left-6 text-white hover:text-emerald-400 transition-colors z-10 p-2 bg-black/30 rounded-full"
+              aria-label="Previous image"
+            >
+              <FiChevronLeft size={32} />
+            </button>
+            <button
+              onClick={handleNext}
+              className="absolute right-6 text-white hover:text-emerald-400 transition-colors z-10 p-2 bg-black/30 rounded-full"
+              aria-label="Next image"
+            >
+              <FiChevronRight size={32} />
+            </button>
 
-              {/* Main Image */}
-              <div className="bg-white rounded-xl overflow-hidden shadow-2xl">
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={images[photoIndex].src}
-                    alt={images[photoIndex].label}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div className="p-6 bg-gradient-to-r from-emerald-50 to-amber-50">
-                  <h3 className="text-2xl font-bold text-gray-800">{images[photoIndex].label}</h3>
-                  <p className="text-gray-600 mt-2">{images[photoIndex].description}</p>
-                  <div className="flex items-center mt-4 space-x-2">
-                    {Array(5).fill(0).map((_, i) => (
-                      <span key={i} className="text-amber-400">
-                        ★
-                      </span>
-                    ))}
-                    <span className="text-sm text-gray-500 ml-2">Premium Product</span>
-                  </div>
-                </div>
-              </div>
+            {/* Main image container - Now properly sized */}
+            <motion.div
+              key={filteredProducts[currentIndex]?.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-4xl h-full max-h-[80vh]"
+            >
+              {/* The actual image - now properly displayed */}
+              <Image
+                src={filteredProducts[currentIndex]?.src || ''}
+                alt={filteredProducts[currentIndex]?.label || ''}
+                fill
+                className="object-contain"
+                priority
+              />
             </motion.div>
+
+            {/* Caption */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="absolute bottom-8 left-0 right-0 text-center text-white"
+            >
+              <h3 className="text-2xl font-bold">
+                {filteredProducts[currentIndex]?.label}
+              </h3>
+              <p className="text-gray-300 mt-2 max-w-md mx-auto">
+                {filteredProducts[currentIndex]?.description}
+              </p>
+            </motion.div>
+
+            {/* Thumbnail strip */}
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+              {filteredProducts.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${currentIndex === index ? 'bg-emerald-400 w-6' : 'bg-white/30'}`}
+                  aria-label={`View image ${index + 1}`}
+                />
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </section>
   );
 };
 

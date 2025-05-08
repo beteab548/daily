@@ -1,123 +1,155 @@
 "use client";
-
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
-interface ImageData {
+interface CategoryItem {
   src: string;
   label: string;
+  color: string;
 }
 
-const imageData: ImageData[] = [
-  { src: "/food-slide-show/fresh-fruits.jpg", label: "Fresh Fruits" },
-  { src: "/food-slide-show/organic-vegetables.jpg", label: "Organic Vegetables" },
-  { src: "/food-slide-show/dairy-products.jpg", label: "Dairy Products" },
-  { src: "/food-slide-show/baked-goods.jpg", label: "Baked Goods" },
-  { src: "/food-slide-show/fresh-meat.jpg", label: "Fresh Meat" },
-  { src: "/food-slide-show/sea-food.jpg", label: "Seafood" },
-  { src: "/food-slide-show/beaverage.jpg", label: "Beverages" },
-  { src: "/food-slide-show/snacks.jpeg", label: "Snacks" },
-  { src: "/food-slide-show/ethiopian-spices.jpg", label: "Spices & Seasonings" },
+const categories: CategoryItem[] = [
+  { src: "/food-slide-show/fresh-fruits.jpg", label: "Fresh Fruits", color: "bg-emerald-500" },
+  { src: "/food-slide-show/organic-vegetables.jpg", label: "Organic Vegetables", color: "bg-lime-500" },
+  { src: "/food-slide-show/dairy-products.jpg", label: "Dairy Products", color: "bg-blue-400" },
+  { src: "/food-slide-show/baked-goods.jpg", label: "Baked Goods", color: "bg-amber-400" },
+  { src: "/food-slide-show/fresh-meat.jpg", label: "Fresh Meat", color: "bg-red-400" },
+  { src: "/food-slide-show/sea-food.jpg", label: "Seafood", color: "bg-cyan-400" },
+  { src: "/food-slide-show/beaverage.jpg", label: "Beverages", color: "bg-purple-400" },
+  { src: "/food-slide-show/snacks.jpeg", label: "Snacks", color: "bg-yellow-400" },
+  { src: "/food-slide-show/ethiopian-spices.jpg", label: "Spices & Seasonings", color: "bg-orange-400" },
 ];
 
-export default function CategoryImages() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scrollAmountRef = useRef(0);
-  const [hovering, setHovering] = useState(false);
+export default function PremiumCategoryShowcase() {
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
   const scrollStartX = useRef(0);
+  const x = useMotionValue(0);
+  const rotateY = useTransform(x, [-200, 200], [-5, 5]);
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    let animationFrameId: number;
-
-    const scroll = () => {
-      if (scrollContainer && !hovering && !isDragging) {
-        scrollAmountRef.current += 1;
-        const maxScroll = scrollContainer.scrollWidth / 2;
-
-        if (scrollAmountRef.current >= maxScroll) {
-          scrollAmountRef.current = 0;
-        }
-
-        scrollContainer.scrollLeft = scrollAmountRef.current;
-      }
-
-      animationFrameId = requestAnimationFrame(scroll);
-    };
-
-    animationFrameId = requestAnimationFrame(scroll);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [hovering, isDragging]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollRef.current) return;
-    setIsDragging(true);
-    dragStartX.current = e.clientX;
-    scrollStartX.current = scrollRef.current.scrollLeft;
+  // 3D tilt effect
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = carouselRef.current?.getBoundingClientRect();
+    if (rect) {
+      const xVal = e.clientX - rect.left;
+      const centerX = rect.width / 2;
+      x.set((xVal - centerX) / 30);
+    }
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!scrollRef.current || !isDragging) return;
+  // Drag to scroll
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!carouselRef.current) return;
+    setIsDragging(true);
+    dragStartX.current = e.clientX;
+    scrollStartX.current = carouselRef.current.scrollLeft;
+  };
+
+  const handleMouseMoveDrag = (e: MouseEvent) => {
+    if (!isDragging || !carouselRef.current) return;
     const dx = e.clientX - dragStartX.current;
-    scrollRef.current.scrollLeft = scrollStartX.current - dx;
-    scrollAmountRef.current = scrollRef.current.scrollLeft;
+    carouselRef.current.scrollLeft = scrollStartX.current - dx;
   };
 
   const handleMouseUp = () => setIsDragging(false);
-  const handleMouseLeave = () => {
-    if (isDragging) setIsDragging(false);
-    setHovering(false);
-  };
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMoveDrag);
     window.addEventListener("mouseup", handleMouseUp);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMoveDrag);
       window.removeEventListener("mouseup", handleMouseUp);
     };
   }, [isDragging]);
 
-  const fullList = [...imageData, ...imageData]; // For seamless scroll
+  const scrollTo = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === 'left' ? -300 : 300;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <div className="flex flex-col bg-gray-50/50 p-4 md:p-10 overflow-hidden mt-20">
-      <div className="flex justify-center mt-6 md:mt-10 mb-4 md:mb-6">
-        <h1 className="font-serif text-2xl md:text-4xl text-gray-600 mb-8">
-          Shop By Category
+    <div className="relative py-16 px-4 md:px-8 bg-gradient-to-b from-gray-50 to-white">
+      {/* Header */}
+      <div className="relative z-10 text-center mb-12">
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+            Shop By Category
+          </span>
         </h1>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Explore our premium selection of fresh products
+        </p>
       </div>
-      <div
-        ref={scrollRef}
-        className="w-full overflow-hidden whitespace-nowrap cursor-grab active:cursor-grabbing"
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={handleMouseLeave}
-        onMouseDown={handleMouseDown}
-      >
-        <div className="inline-flex select-none">
-          {fullList.map((item, index) => (
-            <div
-              key={index}
-              className="relative w-[100px] sm:w-[120px] md:w-[151px] h-[100px] sm:h-[120px] md:h-[140px] rounded-full overflow-hidden mx-2 sm:mx-3 md:mx-4 group flex-shrink-0"
-            >
-              <Image
-                src={item.src}
-                alt={item.label}
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-80 transition-opacity duration-300">
-                <p className="text-white text-xs sm:text-sm font-semibold">
-                  {item.label}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+
+      {/* Carousel Container */}
+      <div className="relative">
+        {/* Navigation arrows */}
+        <button 
+          onClick={() => scrollTo('left')}
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
+        >
+          <ChevronLeft className="text-gray-800" />
+        </button>
+        
+        {/* Carousel */}
+        <motion.div
+          ref={carouselRef}
+          style={{ rotateY }}
+          onMouseMove={handleMouseMove}
+          onMouseDown={handleMouseDown}
+          className="w-full overflow-x-scroll snap-x snap-mandatory hide-scrollbar"
+        >
+          <div className="inline-flex space-x-6 px-8">
+            {categories.map((item, index) => (
+              <motion.div
+                key={item.label}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className={`relative w-64 h-64 rounded-2xl overflow-hidden flex-shrink-0 shadow-lg hover:shadow-xl transition-all snap-center ${item.color}`}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.label}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                  <div className="text-white">
+                    <h3 className="text-xl font-bold">{item.label}</h3>
+                    <button className="mt-2 px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
+                      Shop Now
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <button 
+          onClick={() => scrollTo('right')}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
+        >
+          <ChevronRight className="text-gray-800" />
+        </button>
       </div>
+
+      {/* Hide scrollbar styles */}
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }

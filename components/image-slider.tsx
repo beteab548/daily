@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Sparkles, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 const images = [
-  "/slider-image-2.jpg",
+  "/cards/IMG_7731.jpg",
   "/slider2-.webp",
   "/slider3.webp",
 ];
