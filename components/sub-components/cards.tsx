@@ -1,8 +1,8 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, ArrowRight, ShoppingCart } from "lucide-react";
 
 type CardData = {
@@ -40,6 +40,14 @@ const cardItems: CardData[] = [
 ];
 
 const CardGrid = () => {
+  // Preload images to prevent flickering
+  useEffect(() => {
+    cardItems.forEach(item => {
+      const img = new window.Image();
+      img.src = item.image;
+    });
+  }, []);
+
   return (
     <div className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/20 via-white to-white overflow-hidden">
       {/* Floating sparkles background */}
@@ -49,8 +57,8 @@ const CardGrid = () => {
             key={i}
             className="absolute text-amber-300"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : 0,
+              y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : 0,
               scale: Math.random() * 0.5 + 0.5,
               opacity: 0
             }}
@@ -76,6 +84,7 @@ const CardGrid = () => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent mb-4">
@@ -91,24 +100,32 @@ const CardGrid = () => {
           {cardItems.map((card, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50, rotateY: 15 }}
-              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.15,
+                type: "spring",
+                stiffness: 100,
+                damping: 10
+              }}
+              viewport={{ once: true, margin: "0px 0px -100px 0px" }}
               whileHover={{ 
                 y: -15,
                 scale: 1.03,
                 boxShadow: "0 25px 50px -12px rgba(245, 158, 11, 0.3)"
               }}
               className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-amber-100/50"
-              style={{ transformStyle: "preserve-3d" }}
             >
-              {/* 3D container effect */}
+              {/* Image container with optimized loading */}
               <div className="relative aspect-square overflow-hidden">
                 <Image
                   fill
                   src={card.image}
                   alt={card.title}
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  priority={index < 2} // Prioritize first two images
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {/* Glowing overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

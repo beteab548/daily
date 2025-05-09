@@ -2,6 +2,7 @@
 import { motion, useAnimation, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { ShoppingCart, Smartphone, Store, Zap, ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 function UltraOrderSection({ image }: { image: string }) {
@@ -129,6 +130,7 @@ function UltraOrderSection({ image }: { image: string }) {
             whileHover="hover"
             className="relative group"
           >
+            
             <div className="relative overflow-hidden rounded-3xl shadow-2xl group-hover:shadow-3xl transition-all duration-500">
               <Image
                 width={600}
@@ -164,31 +166,33 @@ function UltraOrderSection({ image }: { image: string }) {
               Immerse yourself in our physical space where every product tells a story. Our expert staff will guide you through an unforgettable shopping experience.
             </p>
             
-            <motion.div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <motion.button
-                variants={buttonVariants}
-                initial="rest"
-                whileHover="hover"
-                whileTap="tap"
-                onHoverStart={() => setActiveButton(1)}
-                onHoverEnd={() => setActiveButton(null)}
-                className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden"
-              >
-                <span>Get Directions</span>
-                <AnimatePresence>
-                  {activeButton === 1 && (
-                    <motion.span
-                      initial={{ x: -20, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: 20, opacity: 0 }}
-                      className="absolute right-6"
-                    >
-                      <ArrowRight />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.button>
+         <motion.div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <Link href={'/about-us'}>
+                <motion.button
+                  variants={buttonVariants}
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
+                  onHoverStart={() => setActiveButton(1)}
+                  onHoverEnd={() => setActiveButton(null)}
+                  className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden"
+                >
+                  Get Directions
+                  <AnimatePresence>
+                    {activeButton === 1 && (
+                      <motion.span
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: 20, opacity: 0 }}
+                        className="absolute right-6"
+                      >
+                        <ArrowRight />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </motion.button>
+              </Link>
 
               <motion.button
                 variants={buttonVariants}
@@ -284,7 +288,8 @@ function UltraOrderSection({ image }: { image: string }) {
                 height={400}
                 src="/order-image.jpg"
                 alt="Online Ordering"
-                className="w-full md:w-[600px] h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                unoptimized
+                className="w-full md:w-[600px] h-130 object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex items-end p-10">
                 <motion.div

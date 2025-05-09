@@ -44,7 +44,7 @@ export default function BusinessAboutUs() {
       <div className="py-20 bg-orange-300">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { value: "15+", label: "Years Experience" },
+            { value: "7+", label: "Years Experience" },
             { value: "500+", label: "Happy Clients" },
             { value: "24/7", label: "Customer Support" },
             { value: "100%", label: "Satisfaction Guarantee" }

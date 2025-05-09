@@ -1,18 +1,19 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Sparkles, Zap } from "lucide-react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 const images = [
+  "/cards/IMG_7703.jpg",
   "/cards/IMG_7731.jpg",
-  "/slider2-.webp",
-  "/slider3.webp",
+  "/cards/IMG_7701.jpg",
 ];
 
 const captions = [
-  "Premium Quality Products",
-  "Fresh From Our Farms",
-  "Delivered To Your Doorstep"
+  "Quality Products",
+  "Always Fresh and Organic",
+  "abundant Selection",
 ];
 
 export default function CosmicImageSlider() {
@@ -113,7 +114,7 @@ export default function CosmicImageSlider() {
       </div>
 
       {/* Main slider container */}
-      <div className="relative h-full w-full flex items-center justify-center">
+      <div className="relative h-150 w-full flex items-center justify-center">
         <AnimatePresence custom={direction} initial={false}>
           <motion.div
             key={currentIndex}
@@ -148,13 +149,15 @@ export default function CosmicImageSlider() {
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-2xl">
             {captions[currentIndex]}
           </h2>
+          <Link href="/products" >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-bold flex items-center gap-2 mx-auto shadow-xl hover:shadow-2xl transition-all"
           >
-            <Zap className="animate-pulse" /> SHOP NOW
+            <Zap className="animate-pulse" />Our Products
           </motion.button>
+            </Link>   
         </motion.div>
 
         {/* Navigation dots */}
