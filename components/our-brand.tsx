@@ -46,6 +46,30 @@ const products: Product[] = [
     category: 'Beverages',
     features: ['No artificial sweeteners', 'Herbal blend', '330ml can']
   },
+  {
+    id: 5,
+    src: '/special-products/Yogurt.png',
+    label: 'Natura Yogurt',
+    description: 'Natually fermented yogurt with live cultures',
+    category: 'Dairy',
+    features: ['Probiotic-rich', 'Low-fat', '500g tub']
+  },
+  {
+    id: 6,
+    src: '/special-products/butter.png',
+    label: 'Natura butter',
+    description: 'Rich and creamy butter made from fresh milk',
+    category: 'Dairy',
+    features: ['No artificial preservatives', 'Rich in vitamins', '200g pack']
+  },
+  {
+    id: 7,
+    src: '/special-products/natura creame.png',
+    label: 'Natura Cream',
+    description: 'Rich and creamy dairy product for cooking and baking',   
+    category: 'Dairy',
+    features: ['Rich in calcium', 'Versatile for recipes', '250g tub']
+  },
 ];
 
 const Gallery = () => {
@@ -57,9 +81,21 @@ const Gallery = () => {
 
   // Filter products
   const categories = ['All', ...new Set(products.map(p => p.category))];
-  const filteredProducts = activeFilter === 'All' 
-    ? products 
-    : products.filter(p => p.category === activeFilter);
+ const filteredProducts = products.filter((product) => {
+  if (activeFilter === 'All') {
+    if (product.category === 'Dairy') {
+      return product.label.includes('Milk') || product.label.includes('Yogurt');
+    }
+    return true; // Include all other categories
+  }
+
+  if (activeFilter === 'Dairy') {
+    return product.category === 'Dairy';
+  }
+
+  // Other filters
+  return product.category === activeFilter;
+});
 
   // Reset featuredProduct when filter changes
   useEffect(() => {
@@ -155,7 +191,7 @@ const Gallery = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">
-            Premium Product Showcase
+            Our Own Products Showcase
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Explore our curated selection of authentic Ethiopian products

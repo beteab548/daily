@@ -153,9 +153,9 @@ export default function CosmicImageSlider() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-bold flex items-center gap-2 mx-auto shadow-xl hover:shadow-2xl transition-all"
+            className="px-8 py-3 bg-gradient-to-r  from-amber-500 to-orange-600 text-white rounded-full font-bold flex items-center gap-2 mx-auto shadow-xl hover:shadow-2xl transition-all"
           >
-            <Zap className="animate-pulse" />Our Products
+            <Zap className="animate-pulse " />Our Products
           </motion.button>
             </Link>   
         </motion.div>

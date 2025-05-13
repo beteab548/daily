@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientLayoutWrapper from "@/components/common/client-layout-wrapper"; // 👈
 import 'leaflet/dist/leaflet.css';
+import PageTransitionSpinner from "@/components/common/page-transition-spinner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        <ClientLayoutWrapper>
+          <PageTransitionSpinner />
+          {children}
+          </ClientLayoutWrapper>
       </body>
     </html>
   );

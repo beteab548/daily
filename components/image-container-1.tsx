@@ -202,7 +202,7 @@ function CosmicShowcase() {
             </h2>
             
             <p className="text-gray-700 text-lg leading-relaxed mb-10">
-              At <span className="font-bold text-amber-600">Daily Mart</span>, we've redefined grocery shopping with our hand-picked selection of premium products. Our experts travel worldwide to bring you exceptional quality you won't find elsewhere.
+              At <span className="font-bold text-amber-600">Daily Mart</span>, we've redefined grocery shopping with our hand-picked selection of premium products. Our experts travel countrywide to bring you exceptional quality you won't find elsewhere.
             </p>
 
             {/* Interactive Feature Showcase */}
@@ -259,7 +259,7 @@ function CosmicShowcase() {
               <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
 
               {/* Content */}
-              <span className="z-10 relative">Shop Premium Selection</span>
+              <span className="z-10 relative">Premium Selection</span>
               <motion.div
                 animate={isHovered ? { x: [0, 5, -3, 5, 0] } : { x: 0 }}
                 transition={{ duration: 1.5, repeat: Infinity }}

@@ -102,7 +102,7 @@ export default function ProductTabs() {
               <div className="p-4">
                 <h3 className="font-medium text-lg text-gray-800 mb-1">{product.name}</h3>
                 <div className="flex justify-between items-center mt-3">
-                  <button className="text-sm px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors">
+                  <button className="text-sm px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-600 hover:bg-emerald-100 transition-colors">
                     Product
                   </button>
                   <span className="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600">

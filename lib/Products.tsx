@@ -61,11 +61,9 @@ export const vegetable = [
   { id: 16, image: "vegetables-image/cucumber.png", name: "Cucumber" },
 ];
 export const ourProduct = [
-  {
-    id: 1,
-    image: "special-products/aqua 1L.jpg",
-    name: "Aquadis water",
-  },
+    { id: 1, image: "special-products/natura milk.jpg", name: "Natura Milk" },
+
+  
   {
     id: 2,
     image: "special-products/dukemiye-01.jpg",
@@ -76,19 +74,31 @@ export const ourProduct = [
     image: "special-products/royal.jpg ",
     name: "Royal Tonic Drink",
   },
-  { id: 4, image: "special-products/natura milk.jpg", name: "Natura Milk" },
-  { id: 5, image: "special-products/astu enjera.png", name: "Astu Enjera" },
-  { id: 6, image: "special-products/enjera.png", name: " white teff Enjera" },
+   {
+    id: 4,
+    image: "special-products/Yogurt.png ",
+    name: "Natura Yogurt",
+  },
+  {
+    id: 5,
+    image: "special-products/aqua 1L.jpg",
+    name: "Aquadis water",
+  },
+    { id: 6, image: "special-products/astu enjera.png", name: "Astu Enjera" },
+
   {
     id: 7,
-    image: "special-products/natura milk.jpg",
-    name: "Natura yoghurt Milk",
+    image: "special-products/natura creame.png",
+    name: "Natura Cream",
   },
+ 
   {
     id: 8,
-    image: "special-products/royal.jpg ",
-    name: "Royal orange Tonic Drink",
+    image: "special-products/butter.png ",
+    name: "Natura Butter",
   },
+ 
+ 
 ];
 export const Beverages = [
   {

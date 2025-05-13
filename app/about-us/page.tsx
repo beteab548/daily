@@ -123,10 +123,6 @@ const AboutMiniMarket = () => {
             </div>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               
-              <button className="px-6 py-2 border border-gray-300 text-gray-700 rounded-full hover:bg-gray-50 transition-colors">
-                Store Hours
-              </button>
-     
             </div>
           </div>
         </motion.div>

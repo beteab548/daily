@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function BusinessAboutUs() {
   return (
@@ -33,18 +34,20 @@ export default function BusinessAboutUs() {
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
               We're not just a company - we're a movement dedicated to delivering unparalleled quality and service to our community.
             </p>
+            <Link href={"/about-us"} >
             <button className="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors">
               Our Story →
             </button>
+            </Link>
           </motion.div>
         </div>
       </div>
 
       {/* Stats section */}
-      <div className="py-10 bg-orange-300">
+      <div className="py-10 bg-amber-300">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { value: "7+", label: "Years Experience" },
+            { value: "5+", label: "Years Experience" },
             { value: "500+", label: "Happy Clients" },
             { value: "24/7", label: "Customer Support" },
             { value: "100%", label: "Satisfaction Guarantee" }

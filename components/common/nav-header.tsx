@@ -28,6 +28,7 @@ function NavHeader() {
               alt="Daily Logo"
               className="hover:scale-105 transition-transform"
               priority
+              unoptimized
             />
           </Link>
 
