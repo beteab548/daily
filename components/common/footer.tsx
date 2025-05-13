@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { FaFacebook, FaPhone, FaMapMarkerAlt, FaHome, FaArrowUp, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaPhone, FaMapMarkerAlt, FaHome, FaArrowUp, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
@@ -48,9 +48,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: <FaFacebook size={20} />, label: "Facebook", url: "#" },
-    { icon: <FaInstagram size={20} />, label: "Instagram", url: "#" },
-    { icon: <FaTwitter size={20} />, label: "Twitter", url: "#" },
-    { icon: <FaWhatsapp size={20} />, label: "WhatsApp", url: "#" }
+    { icon: <FaTiktok size={20} />, label: "Tiktok", url: "#" },
   ];
 
   const quickLinks = [
@@ -223,6 +221,10 @@ const Footer = () => {
             </div>
           </div>
           
+          <p className="text-transparent selection:text-black text-sm">
+  Made by Beteab Baynessagne
+</p>
+
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 5px 15px rgba(5, 150, 105, 0.3)" }}
             whileTap={{ scale: 0.95 }}
@@ -235,6 +237,7 @@ const Footer = () => {
           </motion.button>
         </motion.div>
       </div>
+      
     </footer>
   );
 };

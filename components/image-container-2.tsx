@@ -11,6 +11,7 @@ import {
   Truck,
 } from "lucide-react";
 import React from "react";
+import Link from "next/link";
 
 interface Feature {
   icon: React.ReactElement;
@@ -238,20 +239,21 @@ function CosmicShowcase2({
                 </motion.div>
               ))}
             </div>
-
-            <motion.button
+<Link href={"/gallery"}>  
+           <motion.button
               variants={buttonVariants}
               initial="initial"
               whileHover="hover"
               whileTap="tap"
               className={`relative overflow-hidden px-8 py-4  text-white rounded-md font-semibold inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600`}
-            >
+              >
               Explore Our Premium Collection
               <ArrowRight className="size-5" />
               <div
                 className={`absolute inset-0 bg-gradient-to-r ${buttonGradientHoverFrom} ${buttonGradientHoverTo} opacity-0 hover:opacity-20 transition-opacity duration-300`}
-              ></div>
+                ></div>
             </motion.button>
+                </Link>
           </div>
         </motion.div>
       </div>

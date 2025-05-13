@@ -6,7 +6,7 @@ export default function BusinessAboutUs() {
   return (
     <div className="relative bg-gray-900 overflow-hidden">
       {/* Full-width hero image */}
-      <div className="relative h-[80vh] min-h-[600px]">
+      <div className="relative h-[90vh] min-h-[600px]">
         <Image
           src="/cards/IMG_7703.jpg"
           alt="Our Business"
@@ -41,7 +41,7 @@ export default function BusinessAboutUs() {
       </div>
 
       {/* Stats section */}
-      <div className="py-20 bg-orange-300">
+      <div className="py-10 bg-orange-300">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { value: "7+", label: "Years Experience" },

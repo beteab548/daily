@@ -45,7 +45,7 @@ export default function ProductTabs() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-5xl font-bold font-serif bg-gradient-to-r from-green-600 to-emerald-400 bg-clip-text text-transparent"
+          className="text-4xl md:text-5xl font-bold font-serif bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent"
         >
           Fresh Market Selection
         </motion.h1>
@@ -61,9 +61,9 @@ export default function ProductTabs() {
             <button
               key={key}
               onClick={() => setActiveTab(key as ProductCategories)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap hover:cursor-pointer ${
                 activeTab === key
-                  ? "bg-white shadow-md text-emerald-600"
+                  ? "bg-white shadow-md text-orange-600"
                   : "text-gray-600 hover:text-gray-800"
               }`}
             >

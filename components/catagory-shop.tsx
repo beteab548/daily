@@ -123,7 +123,7 @@ export default function PremiumCategoryShowcase() {
                   <div className="text-white">
                     <h3 className="text-xl font-bold">{item.label}</h3>
                     <button className="mt-2 px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
-                      Shop Now
+                  catagory
                     </button>
                   </div>
                 </div>

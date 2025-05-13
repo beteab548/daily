@@ -7,8 +7,8 @@ const AboutMiniMarket = () => {
   return (
     <section className="relative py-16 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white">
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-emerald-400 to-blue-500 opacity-10"></div>
-      
+      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-amber-600 to-orange-600 opacity-10"></div>
+       
       <div className="max-w-7xl mx-auto">
         {/* Header with animation */}
         <motion.div
@@ -18,7 +18,7 @@ const AboutMiniMarket = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">
             Discover Our Mini Market
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-blue-400 mx-auto rounded-full"></div>
@@ -48,7 +48,7 @@ const AboutMiniMarket = () => {
               </p>
             </div>
           </motion.div>
-
+           
           {/* Text content */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -105,7 +105,6 @@ const AboutMiniMarket = () => {
             </div>
           </motion.div>
         </div>
-
         {/* Map section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -127,9 +126,11 @@ const AboutMiniMarket = () => {
               <button className="px-6 py-2 border border-gray-300 text-gray-700 rounded-full hover:bg-gray-50 transition-colors">
                 Store Hours
               </button>
+     
             </div>
           </div>
         </motion.div>
+  
       </div>
     </section>
   );

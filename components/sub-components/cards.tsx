@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, ShoppingCart } from "lucide-react";
 
 type CardData = {
@@ -40,7 +40,6 @@ const cardItems: CardData[] = [
 ];
 
 const CardGrid = () => {
-  // Preload images to prevent flickering
   useEffect(() => {
     cardItems.forEach(item => {
       const img = new window.Image();
@@ -50,7 +49,7 @@ const CardGrid = () => {
 
   return (
     <div className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/20 via-white to-white overflow-hidden">
-      {/* Floating sparkles background */}
+      {/* Sparkles animation */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -79,7 +78,6 @@ const CardGrid = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -95,7 +93,7 @@ const CardGrid = () => {
           </p>
         </motion.div>
 
-        {/* Cards grid */}
+        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {cardItems.map((card, index) => (
             <motion.div
@@ -112,26 +110,23 @@ const CardGrid = () => {
               viewport={{ once: true, margin: "0px 0px -100px 0px" }}
               whileHover={{ 
                 y: -15,
-                scale: 1.03,
-                boxShadow: "0 25px 50px -12px rgba(245, 158, 11, 0.3)"
+                scale: 1.03
               }}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-amber-100/50"
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-[0_25px_50px_-12px_rgba(245,158,11,0.3)] transition-all duration-500 border border-amber-100/50 will-change-transform"
             >
-              {/* Image container with optimized loading */}
               <div className="relative aspect-square overflow-hidden">
                 <Image
                   fill
                   src={card.image}
                   alt={card.title}
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  priority={index < 2} // Prioritize first two images
+                  priority={index < 2}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                {/* Glowing overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
-              {/* Floating emoji decoration */}
+              {/* Floating emoji */}
               <motion.div 
                 className="absolute top-4 right-4 text-3xl"
                 animate={{
@@ -147,7 +142,7 @@ const CardGrid = () => {
                 {index % 2 === 0 ? "🌱" : "✨"}
               </motion.div>
 
-              {/* Tag badge */}
+              {/* Tag */}
               {card.tag && (
                 <div className={`absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full ${
                   card.tag === "NEW" ? "bg-emerald-500 text-white" :
@@ -158,7 +153,6 @@ const CardGrid = () => {
                 </div>
               )}
 
-              {/* Content */}
               <div className="p-6 bg-gradient-to-b from-white to-amber-50/30">
                 <h3 className="text-xl font-bold text-gray-800 mb-2 flex items-center">
                   <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
@@ -176,7 +170,7 @@ const CardGrid = () => {
                     whileTap={{ scale: 0.95 }}
                     className="w-full py-3 px-6 bg-white text-amber-600 border border-amber-300 rounded-lg hover:border-amber-500 transition-all duration-300 font-medium flex items-center justify-center gap-2 group-hover:shadow-md"
                   >
-                    <span>Shop Now</span>
+                    <span>check Now</span>
                     <motion.span
                       animate={{
                         x: [0, 5, 0]
@@ -191,7 +185,7 @@ const CardGrid = () => {
                   </motion.button>
                 </Link>
 
-                {/* Floating cart icon on hover */}
+                {/* Floating cart icon */}
                 <motion.div 
                   className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   animate={{

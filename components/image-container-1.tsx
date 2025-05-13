@@ -253,16 +253,20 @@ function CosmicShowcase() {
                 boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.4)"
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3"
+              className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 z-10"
             >
-              <span>Shop Premium Selection</span>
+              {/* Hover Overlay - move it under text */}
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+
+              {/* Content */}
+              <span className="z-10 relative">Shop Premium Selection</span>
               <motion.div
                 animate={isHovered ? { x: [0, 5, -3, 5, 0] } : { x: 0 }}
                 transition={{ duration: 1.5, repeat: Infinity }}
+                className="z-10 relative"
               >
                 <Zap className="fill-white text-white group-hover:animate-pulse" />
               </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.button>
           </motion.div>
         </div>
