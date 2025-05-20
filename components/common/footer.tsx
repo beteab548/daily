@@ -55,9 +55,7 @@ const Footer = () => {
     { name: "Home", url: "/" },
     { name: "Products", url: "/products" },
     { name: "About Us", url: "/about-us" },
-    { name: "Contact", url: "/contact" },
-    { name: "FAQ", url: "/faq" },
-    { name: "Privacy Policy", url: "/privacy" }
+    { name: "Gallary", url: "/gallary" },
   ];
 
   const locations = [
