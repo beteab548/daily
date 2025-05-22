@@ -206,7 +206,8 @@ function CosmicShowcase() {
             </p>
 
             {/* Interactive Feature Showcase */}
-            <div className="grid grid-cols-2 gap-5 mb-10">
+            {/* Interactive Feature Showcase */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
               {features.map((feature, i) => (
                 <motion.div
                   key={i}
@@ -220,15 +221,15 @@ function CosmicShowcase() {
                     y: -5,
                     backgroundColor: i === 0 ? "rgba(52, 211, 153, 0.1)" : "rgba(251, 191, 36, 0.1)"
                   }}
-                  className={`p-5 rounded-xl border cursor-default transition-all ${
+                  className={`min-w-0 p-4 md:p-5 rounded-xl border cursor-default transition-all ${
                     activeFeature === i 
                       ? `bg-gradient-to-br ${feature.color} border-transparent shadow-md`
                       : "border-gray-200 bg-white"
                   }`}
                   onMouseEnter={() => setActiveFeature(i)}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-full ${
+                  <div className="flex items-center gap-3 md:gap-4">
+                    <div className={`p-2 md:p-3 rounded-full ${
                       activeFeature === i 
                         ? i === 0 ? "bg-emerald-500" : "bg-amber-500"
                         : "bg-gray-100"
@@ -237,9 +238,9 @@ function CosmicShowcase() {
                         className: `${activeFeature === i ? "text-white" : i === 0 ? "text-emerald-500" : "text-amber-500"}`
                       })}
                     </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800">{feature.title}</h4>
-                      <p className="text-gray-600 text-sm">{feature.text}</p>
+                    <div className="min-w-0">
+                      <h4 className="font-bold text-gray-800 text-base md:text-lg truncate">{feature.title}</h4>
+                      <p className="text-gray-600 text-xs md:text-sm">{feature.text}</p>
                     </div>
                   </div>
                 </motion.div>

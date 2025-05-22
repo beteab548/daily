@@ -246,44 +246,44 @@ function UltraOrderSection({ image }: { image: string }) {
                   Immerse yourself in our physical space where every product tells a story.
                 </p>
                 
-                <motion.div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <Link href={'/about-us'}>
-                    <motion.button
-                      variants={buttonVariants}
-                      initial="rest"
-                      whileHover="hover"
-                      whileTap="tap"
-                      onHoverStart={() => setActiveButton(1)}
-                      onHoverEnd={() => setActiveButton(null)}
-                      className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden"
-                    >
-                      Get Directions
-                      <AnimatePresence>
-                        {activeButton === 1 && (
-                          <motion.span
-                            initial={{ x: -20, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            exit={{ x: 20, opacity: 0 }}
-                            className="absolute right-6 -mr-5"
-                          >
-                            <ArrowRight />
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </motion.button>
-                  </Link>
+<motion.div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+  <Link href={'/about-us'} className="w-full sm:w-auto">
+    <motion.button
+      variants={buttonVariants}
+      initial="rest"
+      whileHover="hover"
+      whileTap="tap"
+      onHoverStart={() => setActiveButton(1)}
+      onHoverEnd={() => setActiveButton(null)}
+      className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden justify-center"
+    >
+      Get Directions
+      <AnimatePresence>
+        {activeButton === 1 && (
+          <motion.span
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: 20, opacity: 0 }}
+            className="absolute right-6 -mr-5"
+          >
+            <ArrowRight />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
+  </Link>
 
-                  <motion.button
-                    variants={buttonVariants}
-                    initial="rest"
-                    whileHover="hover"
-                    whileTap="tap"
-                    onClick={() => setShowStoreHours(true)}
-                    className="px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-xl font-bold flex items-center gap-3 hover:bg-gray-50 transition-colors"
-                  >
-                    <span>Store Hours</span>
-                  </motion.button>
-                </motion.div>
+  <motion.button
+    variants={buttonVariants}
+    initial="rest"
+    whileHover="hover"
+    whileTap="tap"
+    onClick={() => setShowStoreHours(true)}
+    className="w-full sm:w-auto px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-xl font-bold flex items-center gap-3 hover:bg-gray-50 transition-colors justify-center"
+  >
+    <span>Store Hours</span>
+  </motion.button>
+</motion.div>
               </motion.div>
             </motion.div>
           ) : (
@@ -303,56 +303,56 @@ function UltraOrderSection({ image }: { image: string }) {
                   Get premium products delivered to your door with our seamless digital experience.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <motion.button
-                    variants={buttonVariants}
-                    initial="rest"
-                    whileHover="hover"
-                    whileTap="tap"
-                    onHoverStart={() => setActiveButton(2)}
-                    onHoverEnd={() => setActiveButton(null)}
-                    className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden"
-                  >
-                    <span>Web Store</span>
-                    <AnimatePresence>
-                      {activeButton === 2 && (
-                        <motion.span
-                          initial={{ x: -20, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          exit={{ x: 20, opacity: 0 }}
-                          className="absolute right-6 -mr-4"
-                        >
-                          <Zap className="fill-white" />
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </motion.button>
+<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+  <motion.button
+    variants={buttonVariants}
+    initial="rest"
+    whileHover="hover"
+    whileTap="tap"
+    onHoverStart={() => setActiveButton(2)}
+    onHoverEnd={() => setActiveButton(null)}
+    className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden"
+  >
+    <span>Web Store</span>
+    <AnimatePresence>
+      {activeButton === 2 && (
+        <motion.span
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 20, opacity: 0 }}
+          className="absolute right-6 -mr-4"
+        >
+          <Zap className="fill-white" />
+        </motion.span>
+      )}
+    </AnimatePresence>
+  </motion.button>
 
-                  <motion.button
-                    variants={buttonVariants}
-                    initial="rest"
-                    whileHover="hover"
-                    whileTap="tap"
-                    onHoverStart={() => setActiveButton(3)}
-                    onHoverEnd={() => setActiveButton(null)}
-                    className="px-8 py-4 bg-gray-900 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden"
-                  >
-                    <Smartphone size={20} />
-                    <span>Mobile App</span>
-                    <AnimatePresence>
-                      {activeButton === 3 && (
-                        <motion.span
-                          initial={{ x: -20, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          exit={{ x: 20, opacity: 0 }}
-                          className="absolute right-6 -mr-4"
-                        >
-                          <ArrowRight />
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </motion.button>
-                </div>
+  <motion.button
+    variants={buttonVariants}
+    initial="rest"
+    whileHover="hover"
+    whileTap="tap"
+    onHoverStart={() => setActiveButton(3)}
+    onHoverEnd={() => setActiveButton(null)}
+    className="w-full sm:w-auto px-8 py-4 bg-gray-900 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden"
+  >
+    <Smartphone size={20} />
+    <span>Mobile App</span>
+    <AnimatePresence>
+      {activeButton === 3 && (
+        <motion.span
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 20, opacity: 0 }}
+          className="absolute right-6 -mr-4"
+        >
+          <ArrowRight />
+        </motion.span>
+      )}
+    </AnimatePresence>
+  </motion.button>
+</div>
               </motion.div>
 
               {/* Image with 3D hover */}
