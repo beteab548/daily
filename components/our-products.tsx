@@ -54,22 +54,26 @@ export default function ProductTabs() {
         </p>
       </div>
 
-      {/* Tabs */}
-      <div className="flex justify-center mb-10">
-        <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-inner">
-          {Object.entries(products).map(([key]) => (
-            <button
-              key={key}
-              onClick={() => setActiveTab(key as ProductCategories)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap hover:cursor-pointer ${
-                activeTab === key
-                  ? "bg-white shadow-md text-orange-600"
-                  : "text-gray-600 hover:text-gray-800"
-              }`}
-            >
-              {key}
-            </button>
-          ))}
+      {/* Tabs - Modified for mobile */}
+      <div className="mb-10 px-1">
+        <div className="relative">
+          <div className="overflow-x-auto pb-2 scrollbar-hide">
+            <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-inner min-w-max">
+              {Object.entries(products).map(([key]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key as ProductCategories)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap hover:cursor-pointer ${
+                    activeTab === key
+                      ? "bg-white shadow-md text-orange-600"
+                      : "text-gray-600 hover:text-gray-800"
+                  }`}
+                >
+                  {key}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

@@ -17,7 +17,7 @@ function NavHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50  backdrop-blur-sm shadow-sm">
+      <header className="sticky top-0 z-50 bg-white shadow-sm md:bg-white/80 md:backdrop-blur-sm">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
@@ -33,8 +33,8 @@ function NavHeader() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 ">
-            <div className="flex items-center space-x-6 ">
+          <nav className="hidden md:flex items-center space-x-8">
+            <div className="flex items-center space-x-6">
               <NavLink href="/" currentPath={pathname}>
                 Home
               </NavLink>
@@ -83,7 +83,7 @@ function NavHeader() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/50"
             onClick={() => setMenuOpen(false)}
           >
             <motion.div
