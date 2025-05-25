@@ -78,24 +78,24 @@ const Gallery = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [isAnimating, setIsAnimating] = useState(false);
   const [featuredProduct, setFeaturedProduct] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Filter products
   const categories = ['All', ...new Set(products.map(p => p.category))];
- const filteredProducts = products.filter((product) => {
-  if (activeFilter === 'All') {
-    if (product.category === 'Dairy') {
-      return product.label.includes('Milk') || product.label.includes('Yogurt');
+  const filteredProducts = products.filter((product) => {
+    if (activeFilter === 'All') {
+      if (product.category === 'Dairy') {
+        return product.label.includes('Milk') || product.label.includes('Yogurt');
+      }
+      return true;
     }
-    return true; // Include all other categories
-  }
 
-  if (activeFilter === 'Dairy') {
-    return product.category === 'Dairy';
-  }
+    if (activeFilter === 'Dairy') {
+      return product.category === 'Dairy';
+    }
 
-  // Other filters
-  return product.category === activeFilter;
-});
+    return product.category === activeFilter;
+  });
 
   // Reset featuredProduct when filter changes
   useEffect(() => {
@@ -107,7 +107,17 @@ const Gallery = () => {
     }
   }, [filteredProducts, featuredProduct]);
 
-  // Lightbox controls with useCallback for stable references
+  // Trigger animations on mount
+  useEffect(() => {
+    setIsMounted(true);
+    // Small scroll trigger to activate intersection observers
+    setTimeout(() => {
+      window.scrollBy(0, 1);
+      setTimeout(() => window.scrollBy(0, -1), 100);
+    }, 300);
+  }, []);
+
+  // Lightbox controls
   const handlePrev = useCallback(() => {
     if (isAnimating || filteredProducts.length === 0) return;
     setIsAnimating(true);
@@ -167,19 +177,6 @@ const Gallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen, handlePrev, handleNext, closeLightbox]);
 
-  // Focus trap for lightbox
-  useEffect(() => {
-    if (lightboxOpen) {
-      const focusableElements = Array.from(
-        document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-      ).filter(el => el.getAttribute('role') !== 'tooltip') as HTMLElement[];
-      
-      if (focusableElements.length > 0) {
-        focusableElements[0].focus();
-      }
-    }
-  }, [lightboxOpen]);
-
   return (
     <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -187,7 +184,7 @@ const Gallery = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px 0px 0px 0px" }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">
@@ -205,6 +202,7 @@ const Gallery = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
+          viewport={{ once: true, margin: "-50px 0px 0px 0px" }}
         >
           {categories.map(category => (
             <button
@@ -228,7 +226,7 @@ const Gallery = () => {
             <p className="text-gray-500">No products found in this category</p>
           </div>
         ) : (
-          /* Main Gallery Layout - Creative Split View */
+          /* Main Gallery Layout */
           <div className="flex flex-col lg:flex-row gap-8 mb-20">
             {/* Left Column - Thumbnails */}
             <div className="lg:w-2/5 flex flex-col gap-6">
@@ -238,7 +236,7 @@ const Gallery = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                   className={`relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer ${
                     featuredProduct === index ? 'ring-2 ring-orange-500' : ''
                   }`}
@@ -289,6 +287,7 @@ const Gallery = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px 0px 0px 0px" }}
             >
               <div className="h-[500px] relative">
                 {filteredProducts[featuredProduct]?.src ? (

@@ -14,7 +14,6 @@ function NavHeader() {
     { icon: <FaFacebook size={20} />, label: "Facebook", url: "#" },
     { icon: <FaTiktok size={20} />, label: "Instagram", url: "#" },
   ];
-
   return (
     <>
       <header className="sticky top-0 z-50 bg-white shadow-sm md:bg-white/80 md:backdrop-blur-sm">
@@ -196,5 +195,4 @@ function MobileNavLink({ href, currentPath, children, onClick }: MobileNavLinkPr
     </Link>
   );
 }
-
 export default NavHeader;

@@ -54,11 +54,31 @@ export default function ProductTabs() {
         </p>
       </div>
 
-      {/* Tabs - Modified for mobile */}
+      {/* Tabs - Modified for both mobile and desktop */}
       <div className="mb-10 px-1">
         <div className="relative">
-          <div className="overflow-x-auto pb-2 scrollbar-hide">
+          {/* Mobile: Horizontal scroll */}
+          <div className="lg:hidden overflow-x-auto pb-2 scrollbar-hide">
             <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-inner min-w-max">
+              {Object.entries(products).map(([key]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key as ProductCategories)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap hover:cursor-pointer ${
+                    activeTab === key
+                      ? "bg-white shadow-md text-orange-600"
+                      : "text-gray-600 hover:text-gray-800"
+                  }`}
+                >
+                  {key}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Desktop: Centered tabs */}
+          <div className="hidden lg:flex justify-center">
+            <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-inner">
               {Object.entries(products).map(([key]) => (
                 <button
                   key={key}
