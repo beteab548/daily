@@ -11,8 +11,8 @@ function NavHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const socialLinks = [
-    { icon: <FaFacebook size={20} />, label: "Facebook", url: "#" },
-    { icon: <FaTiktok size={20} />, label: "Instagram", url: "#" },
+    { icon: <FaFacebook size={20} />, label: "Facebook", url: "https://web.facebook.com/Dailyminimart0" },
+    { icon: <FaTiktok size={20} />, label: "Instagram", url: "https://www.tiktok.com/@daily.mini.mart" },
   ];
   return (
     <>
@@ -57,6 +57,7 @@ function NavHeader() {
                   whileHover={{ y: -2, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   href={social.url}
+                  target="_blank"
                   className="text-gray-500 hover:text-amber-500 transition-colors duration-200"
                   aria-label={social.label}
                 >

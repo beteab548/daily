@@ -81,7 +81,7 @@ export const ourProduct = [
   },
   {
     id: 5,
-    image: "special-products/aqua 1L.jpg",
+    image: "special-products/aqua.jpg",
     name: "Aquadis water",
   },
     { id: 6, image: "special-products/astu enjera.png", name: "Astu Enjera" },

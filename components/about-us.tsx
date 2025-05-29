@@ -44,7 +44,6 @@ export default function BusinessAboutUs() {
           </motion.div>
         </div>
       </div>
-
       {/* Stats section */}
       <div className="py-10 bg-amber-300">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
