@@ -62,7 +62,8 @@ const Footer = () => {
     { name: "Bisrate Gebriel", address: "Near St. Gabriel Church" },
     { name: "Bole", address: "Bole Medhanialem Area" },
     { name: "Kazanchis", address: "Opposite Commercial Bank" },
-    { name: "Semit", address: "Main Road, Semit Plaza" }
+    { name: "Semit", address: "Main Road, Semit Plaza" },
+    { name: "bulbula", address: "93 bole bulbula mazoriya" }
   ];
 
   const contactInfo = [
@@ -93,11 +94,11 @@ const Footer = () => {
             <div className="flex items-center">
               <span className="w-4 h-4 bg-emerald-500 rounded-full mr-3 animate-pulse"></span>
               <h3 className="text-2xl font-bold text-emerald-800 bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-400">
-                Daily Mini Mart
+                Daily Grocery Store
               </h3>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Your neighborhood destination for fresh groceries and household essentials. 
+              Your neighborhood destination for fresh groceries 
               We're committed to quality, convenience, and community.
             </p>
             <div className="flex space-x-4 pt-1">

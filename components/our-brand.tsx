@@ -25,7 +25,7 @@ const products: Product[] = [
   {
     id: 2,
     src: '/special-products/dukemiye-01.jpg',
-    label: 'Dukemiye Premium Food Oil',
+    label: 'Dukem Premium Food Oil',
     description: '100% pure Ethiopian sesame oil for authentic flavors',
     category: 'Pantry Essentials',
     features: ['Cold-pressed', 'Rich in antioxidants', 'No additives']
@@ -187,8 +187,8 @@ const Gallery = () => {
           viewport={{ once: true, margin: "-100px 0px 0px 0px" }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">
-            Our Own Products Showcase
+          <h2 className=" text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
+             Our Originals Products Showcase
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Explore our curated selection of authentic Ethiopian products

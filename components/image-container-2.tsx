@@ -205,7 +205,8 @@ function CosmicShowcase2({
           >
             <motion.h2
               variants={titleVariants}
-               className=" text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+              className=" text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent"
+            >
               Discover a New Era of Grocery Shopping
             </motion.h2>
             <motion.p
@@ -214,8 +215,8 @@ function CosmicShowcase2({
             >
               Embark on a journey of culinary excellence with our carefully
               curated selection. We bring you the finest ingredients and
-              artisanal products from around the country, ensuring an unparalleled
-              shopping experience.
+              artisanal products from around the country, ensuring an
+              unparalleled shopping experience.
             </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -239,19 +240,20 @@ function CosmicShowcase2({
                 </motion.div>
               ))}
             </div>
-           <motion.button
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-              className={`relative overflow-hidden px-8 py-4  text-white rounded-md font-semibold inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-500`}
+            <Link href={"/products"}>
+              <motion.button
+                variants={buttonVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+                className={`relative overflow-hidden px-8 py-4  text-white rounded-md font-semibold inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-500`}
               >
-              Explore Our Premium Collection
-            
-              <div
-                className={`absolute inset-0 bg-gradient-to-r ${buttonGradientHoverFrom} ${buttonGradientHoverTo} opacity-0 hover:opacity-20 transition-opacity duration-300`}
+                Explore Our Premium Collection
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r ${buttonGradientHoverFrom} ${buttonGradientHoverTo} opacity-0 hover:opacity-20 transition-opacity duration-300`}
                 ></div>
-            </motion.button>
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>
