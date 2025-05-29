@@ -1,8 +1,14 @@
-'use client';
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiChevronLeft, FiChevronRight, FiZoomIn, FiShoppingCart } from 'react-icons/fi';
-import Image from 'next/image';
+"use client";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FiX,
+  FiChevronLeft,
+  FiChevronRight,
+  FiZoomIn,
+  FiShoppingCart,
+} from "react-icons/fi";
+import Image from "next/image";
 
 type Product = {
   id: number;
@@ -16,82 +22,84 @@ type Product = {
 const products: Product[] = [
   {
     id: 1,
-    src: '/special-products/aqua-1L.jpg',
-    label: 'Aqua 1L Mineral Water',
-    description: 'Sourced from Ethiopian mountain springs',
-    category: 'Water',
-    features: ['Natural minerals', 'PH balanced', 'BPA-free bottle']
+    src: "/special-products/aqua-1L.jpg",
+    label: "Aqua 1L Mineral Water",
+    description: "Sourced from Ethiopian mountain springs",
+    category: "Water",
+    features: ["Natural minerals", "PH balanced", "BPA-free bottle"],
   },
   {
     id: 2,
-    src: '/special-products/dukemiye-01.jpg',
-    label: 'Dukem Premium Food Oil',
-    description: '100% pure Ethiopian sesame oil for authentic flavors',
-    category: 'Pantry Essentials',
-    features: ['Cold-pressed', 'Rich in antioxidants', 'No additives']
+    src: "/special-products/dukemiye-01.jpg",
+    label: "Dukem Premium Food Oil",
+    description: "100% pure Ethiopian sesame oil for authentic flavors",
+    category: "Pantry Essentials",
+    features: ["Cold-pressed", "Rich in antioxidants", "No additives"],
   },
   {
     id: 3,
-    src: '/special-products/natura-milk.jpg',
-    label: 'Natura Farm Fresh Milk',
-    description: 'Pasteurized milk from grass-fed Ethiopian cows',
-    category: 'Dairy',
-    features: ['Hormone-free', 'Vitamin D enriched', '1L bottle']
+    src: "/special-products/natura-milk.jpg",
+    label: "Natura Farm Fresh Milk",
+    description: "Pasteurized milk from grass-fed Ethiopian cows",
+    category: "Dairy",
+    features: ["Hormone-free", "Vitamin D enriched", "1L bottle"],
   },
   {
     id: 4,
-    src: '/special-products/royal-tonic.jpg',
-    label: 'Royal Tonic Drink',
-    description: 'Herbal energy drink with natural ingredients',
-    category: 'Beverages',
-    features: ['No artificial sweeteners', 'Herbal blend', '330ml can']
+    src: "/special-products/royal-tonic.jpg",
+    label: "Royal Tonic Drink",
+    description: "Herbal energy drink with natural ingredients",
+    category: "Beverages",
+    features: ["No artificial sweeteners", "Herbal blend", "330ml can"],
   },
   {
     id: 5,
-    src: '/special-products/Yogurt.png',
-    label: 'Natura Yogurt',
-    description: 'Natually fermented yogurt with live cultures',
-    category: 'Dairy',
-    features: ['Probiotic-rich', 'Low-fat', '500g tub']
+    src: "/special-products/Yogurt.png",
+    label: "Natura Yogurt",
+    description: "Natually fermented yogurt with live cultures",
+    category: "Dairy",
+    features: ["Probiotic-rich", "Low-fat", "500g tub"],
   },
   {
     id: 6,
-    src: '/special-products/butter.png',
-    label: 'Natura butter',
-    description: 'Rich and creamy butter made from fresh milk',
-    category: 'Dairy',
-    features: ['No artificial preservatives', 'Rich in vitamins', '200g pack']
+    src: "/special-products/butter.png",
+    label: "Natura butter",
+    description: "Rich and creamy butter made from fresh milk",
+    category: "Dairy",
+    features: ["No artificial preservatives", "Rich in vitamins", "200g pack"],
   },
   {
     id: 7,
-    src: '/special-products/natura creame.png',
-    label: 'Natura Cream',
-    description: 'Rich and creamy dairy product for cooking and baking',   
-    category: 'Dairy',
-    features: ['Rich in calcium', 'Versatile for recipes', '250g tub']
+    src: "/special-products/natura creame.png",
+    label: "Natura Cream",
+    description: "Rich and creamy dairy product for cooking and baking",
+    category: "Dairy",
+    features: ["Rich in calcium", "Versatile for recipes", "250g tub"],
   },
 ];
 
 const Gallery = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState("All");
   const [isAnimating, setIsAnimating] = useState(false);
   const [featuredProduct, setFeaturedProduct] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
   // Filter products
-  const categories = ['All', ...new Set(products.map(p => p.category))];
+  const categories = ["All", ...new Set(products.map((p) => p.category))];
   const filteredProducts = products.filter((product) => {
-    if (activeFilter === 'All') {
-      if (product.category === 'Dairy') {
-        return product.label.includes('Milk') || product.label.includes('Yogurt');
+    if (activeFilter === "All") {
+      if (product.category === "Dairy") {
+        return (
+          product.label.includes("Milk") || product.label.includes("Yogurt")
+        );
       }
       return true;
     }
 
-    if (activeFilter === 'Dairy') {
-      return product.category === 'Dairy';
+    if (activeFilter === "Dairy") {
+      return product.category === "Dairy";
     }
 
     return product.category === activeFilter;
@@ -121,7 +129,9 @@ const Gallery = () => {
   const handlePrev = useCallback(() => {
     if (isAnimating || filteredProducts.length === 0) return;
     setIsAnimating(true);
-    setCurrentIndex(prev => (prev === 0 ? filteredProducts.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? filteredProducts.length - 1 : prev - 1
+    );
     const timer = setTimeout(() => setIsAnimating(false), 500);
     return () => clearTimeout(timer);
   }, [filteredProducts.length, isAnimating]);
@@ -129,43 +139,51 @@ const Gallery = () => {
   const handleNext = useCallback(() => {
     if (isAnimating || filteredProducts.length === 0) return;
     setIsAnimating(true);
-    setCurrentIndex(prev => (prev === filteredProducts.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev === filteredProducts.length - 1 ? 0 : prev + 1
+    );
     const timer = setTimeout(() => setIsAnimating(false), 500);
     return () => clearTimeout(timer);
   }, [filteredProducts.length, isAnimating]);
 
-  const openLightbox = useCallback((index: number) => {
-    if (index >= 0 && index < filteredProducts.length) {
-      setCurrentIndex(index);
-      setLightboxOpen(true);
-      document.body.style.overflow = 'hidden';
-    }
-  }, [filteredProducts.length]);
+  const openLightbox = useCallback(
+    (index: number) => {
+      if (index >= 0 && index < filteredProducts.length) {
+        setCurrentIndex(index);
+        setLightboxOpen(true);
+        document.body.style.overflow = "hidden";
+      }
+    },
+    [filteredProducts.length]
+  );
 
   const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   }, []);
 
-  const selectFeatured = useCallback((index: number) => {
-    if (index >= 0 && index < filteredProducts.length) {
-      setFeaturedProduct(index);
-    }
-  }, [filteredProducts.length]);
+  const selectFeatured = useCallback(
+    (index: number) => {
+      if (index >= 0 && index < filteredProducts.length) {
+        setFeaturedProduct(index);
+      }
+    },
+    [filteredProducts.length]
+  );
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
-      
+
       switch (e.key) {
-        case 'Escape':
+        case "Escape":
           closeLightbox();
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           handlePrev();
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           handleNext();
           break;
         default:
@@ -173,8 +191,8 @@ const Gallery = () => {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightboxOpen, handlePrev, handleNext, closeLightbox]);
 
   return (
@@ -184,11 +202,11 @@ const Gallery = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: "-100px 0px 0px 0px" }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-50px 0px -50px 0px" }}
+          className="text-center mb-16 px-4"
         >
-          <h2 className=" text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6">
-             Our Originals Products Showcase
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6 leading-tight">
+            Our Originals Products Showcase
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Explore our curated selection of authentic Ethiopian products
@@ -197,21 +215,21 @@ const Gallery = () => {
         </motion.div>
 
         {/* Category filters */}
-        <motion.div 
+        <motion.div
           className="flex flex-wrap justify-center gap-3 mb-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
           viewport={{ once: true, margin: "-50px 0px 0px 0px" }}
         >
-          {categories.map(category => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveFilter(category)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeFilter === category 
-                  ? 'bg-orange-600 text-white shadow-md' 
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border hover:cursor-pointer'
+                activeFilter === category
+                  ? "bg-orange-600 text-white shadow-md"
+                  : "bg-white text-gray-700 hover:bg-gray-100 border hover:cursor-pointer"
               }`}
               aria-label={`Filter by ${category}`}
             >
@@ -238,13 +256,13 @@ const Gallery = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                   className={`relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer ${
-                    featuredProduct === index ? 'ring-2 ring-orange-500' : ''
+                    featuredProduct === index ? "ring-2 ring-orange-500" : ""
                   }`}
                   onClick={() => selectFeatured(index)}
                   role="button"
                   tabIndex={0}
                   aria-label={`Select ${product.label}`}
-                  onKeyDown={(e) => e.key === 'Enter' && selectFeatured(index)}
+                  onKeyDown={(e) => e.key === "Enter" && selectFeatured(index)}
                 >
                   <div className="flex">
                     <div className="w-1/3 h-32 relative">
@@ -255,16 +273,22 @@ const Gallery = () => {
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = 'none';
+                          (e.target as HTMLImageElement).style.display = "none";
                         }}
                       />
                     </div>
                     <div className="w-2/3 p-4 bg-white">
-                      <span className="text-xs text-emerald-600 font-medium">{product.category}</span>
-                      <h3 className="text-lg font-semibold text-gray-800 mt-1">{product.label}</h3>
-                      <p className="text-gray-600 text-sm mt-1 line-clamp-2">{product.description}</p>
+                      <span className="text-xs text-emerald-600 font-medium">
+                        {product.category}
+                      </span>
+                      <h3 className="text-lg font-semibold text-gray-800 mt-1">
+                        {product.label}
+                      </h3>
+                      <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                        {product.description}
+                      </p>
                       <div className="flex justify-between items-center mt-3">
-                        <button 
+                        <button
                           className="text-emerald-600 hover:text-emerald-800 transition-colors"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -282,7 +306,7 @@ const Gallery = () => {
             </div>
 
             {/* Right Column - Featured Product */}
-            <motion.div 
+            <motion.div
               className="lg:w-3/5 relative rounded-2xl overflow-hidden shadow-xl bg-white"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -298,7 +322,7 @@ const Gallery = () => {
                     className="object-cover"
                     priority={featuredProduct < 2}
                     onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
+                      (e.target as HTMLImageElement).style.display = "none";
                     }}
                   />
                 ) : (
@@ -318,7 +342,7 @@ const Gallery = () => {
                       {filteredProducts[featuredProduct]?.description}
                     </p>
                     <div className="mt-6 flex items-center gap-4">
-                      <button 
+                      <button
                         className="px-6 py-3 bg-orange-400 hover:bg-orange-500 text-white rounded-lg font-medium flex items-center gap-2 transition-colors"
                         onClick={() => openLightbox(featuredProduct)}
                         aria-label="Zoom in on product image"
@@ -333,14 +357,18 @@ const Gallery = () => {
 
               {/* Product features */}
               <div className="p-8">
-                <h4 className="text-lg font-semibold text-gray-800 mb-4">Key Features</h4>
+                <h4 className="text-lg font-semibold text-gray-800 mb-4">
+                  Key Features
+                </h4>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {filteredProducts[featuredProduct]?.features.map((feature, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="text-emerald-500 mr-2">•</span>
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
+                  {filteredProducts[featuredProduct]?.features.map(
+                    (feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <span className="text-emerald-500 mr-2">•</span>
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             </motion.div>
@@ -363,7 +391,7 @@ const Gallery = () => {
             <h2 id="lightbox-title" className="sr-only">
               Product image viewer
             </h2>
-            
+
             {/* Close button */}
             <button
               onClick={closeLightbox}
@@ -438,7 +466,9 @@ const Gallery = () => {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-3 h-3 rounded-full transition-all ${
-                      currentIndex === index ? 'bg-emerald-400 w-6' : 'bg-white/30'
+                      currentIndex === index
+                        ? "bg-emerald-400 w-6"
+                        : "bg-white/30"
                     }`}
                     aria-label={`View image ${index + 1}`}
                     disabled={isAnimating}

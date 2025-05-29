@@ -1,6 +1,14 @@
-'use client'
+"use client";
 import Link from "next/link";
-import { FaFacebook, FaPhone, FaMapMarkerAlt, FaHome, FaArrowUp, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaHome,
+  FaArrowUp,
+  FaTiktok,
+  FaWhatsapp,
+} from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
@@ -10,7 +18,7 @@ const Footer = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.1,
-    triggerOnce: true
+    triggerOnce: true,
   });
 
   useEffect(() => {
@@ -29,9 +37,9 @@ const Footer = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -41,14 +49,22 @@ const Footer = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const socialLinks = [
-    { icon: <FaFacebook size={20} />, label: "Facebook", url: "#" },
-    { icon: <FaTiktok size={20} />, label: "Tiktok", url: "#" },
+    {
+      icon: <FaFacebook size={20} />,
+      label: "Facebook",
+      url: "https://web.facebook.com/Dailyminimart0",
+    },
+    {
+      icon: <FaTiktok size={20} />,
+      label: "Tiktok",
+      url: "https://www.tiktok.com/@daily.mini.mart",
+    },
   ];
 
   const quickLinks = [
@@ -63,17 +79,23 @@ const Footer = () => {
     { name: "Bole", address: "Bole Medhanialem Area" },
     { name: "Kazanchis", address: "Opposite Commercial Bank" },
     { name: "Semit", address: "Main Road, Semit Plaza" },
-    { name: "bulbula", address: "93 bole bulbula mazoriya" }
+    { name: "bulbula", address: "93 bole bulbula mazoriya" },
   ];
 
   const contactInfo = [
     { icon: <FaPhone />, content: ["+251 934 567 890", "+251 911 234 567"] },
-    { icon: <MdEmail />, content: ["info@dailyminimart.com", "support@dailyminimart.com"] },
-    { icon: <FaHome />, content: ["Open Daily: 7AM - 10PM", "Holidays: 8AM - 9PM"] }
+    {
+      icon: <MdEmail />,
+      content: ["info@dailyminimart.com", "support@dailyminimart.com"],
+    },
+    {
+      icon: <FaHome />,
+      content: ["Open Daily: 7AM - 10PM", "Holidays: 7AM - 12PM"],
+    },
   ];
 
   return (
-    <footer 
+    <footer
       ref={ref}
       className="w-full bg-gradient-to-b from-gray-50 to-emerald-50 pt-16 pb-8 border-t border-gray-200"
       aria-label="Website footer"
@@ -87,10 +109,7 @@ const Footer = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12"
         >
           {/* About Us */}
-          <motion.div 
-            variants={itemVariants}
-            className="space-y-5"
-          >
+          <motion.div variants={itemVariants} className="space-y-5">
             <div className="flex items-center">
               <span className="w-4 h-4 bg-emerald-500 rounded-full mr-3 animate-pulse"></span>
               <h3 className="text-2xl font-bold text-emerald-800 bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-400">
@@ -98,8 +117,8 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Your neighborhood destination for fresh groceries 
-              We're committed to quality, convenience, and community.
+              Your neighborhood destination for fresh groceries We're committed
+              to quality, convenience, and community.
             </p>
             <div className="flex space-x-4 pt-1">
               {socialLinks.map((social, index) => (
@@ -108,6 +127,7 @@ const Footer = () => {
                   whileHover={{ y: -3, scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   href={social.url}
+                  target="_blank"
                   className="text-gray-500 hover:text-emerald-600 transition-colors"
                   aria-label={social.label}
                 >
@@ -118,16 +138,13 @@ const Footer = () => {
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div 
-            variants={itemVariants}
-            className="space-y-5"
-          >
+          <motion.div variants={itemVariants} className="space-y-5">
             <h3 className="text-xl font-semibold text-gray-800">Quick Links</h3>
             <ul className="grid grid-cols-2 gap-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <Link 
-                    href={link.url} 
+                  <Link
+                    href={link.url}
                     className="text-gray-600 hover:text-emerald-600 transition-colors flex items-center group"
                   >
                     <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2 group-hover:scale-125 transition-transform"></span>
@@ -139,15 +156,14 @@ const Footer = () => {
           </motion.div>
 
           {/* Locations */}
-          <motion.div 
-            variants={itemVariants}
-            className="space-y-5"
-          >
-            <h3 className="text-xl font-semibold text-gray-800">Our Locations</h3>
+          <motion.div variants={itemVariants} className="space-y-5">
+            <h3 className="text-xl font-semibold text-gray-800">
+              Our Locations
+            </h3>
             <ul className="space-y-4">
               {locations.map((location, index) => (
                 <li key={index} className="flex items-start">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ rotate: 360 }}
                     className="text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
                   >
@@ -163,15 +179,12 @@ const Footer = () => {
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div 
-            variants={itemVariants}
-            className="space-y-5"
-          >
+          <motion.div variants={itemVariants} className="space-y-5">
             <h3 className="text-xl font-semibold text-gray-800">Contact Us</h3>
             <ul className="space-y-4">
               {contactInfo.map((info, index) => (
                 <li key={index} className="flex items-start">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.2 }}
                     className="text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
                   >
@@ -191,7 +204,7 @@ const Footer = () => {
         </motion.div>
 
         {/* Divider */}
-        <motion.div 
+        <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8 }}
@@ -207,25 +220,35 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
             <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} Daily Mini Mart. All rights reserved.
+              &copy; {new Date().getFullYear()} Daily Mini Mart. All rights
+              reserved.
             </p>
             <div className="hidden md:block w-px h-4 bg-gray-300"></div>
             <div className="flex space-x-4">
-              <Link href="/privacy" className="text-sm text-gray-500 hover:text-emerald-600">
+              <Link
+                href="/privacy"
+                className="text-sm text-gray-500 hover:text-emerald-600"
+              >
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-sm text-gray-500 hover:text-emerald-600">
+              <Link
+                href="/terms"
+                className="text-sm text-gray-500 hover:text-emerald-600"
+              >
                 Terms of Service
               </Link>
             </div>
           </div>
-          
+
           <p className="text-transparent selection:text-black text-sm">
-  Made by Beteab Baynessagne
-</p>
+            Made by Beteab Baynessagne
+          </p>
 
           <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 5px 15px rgba(5, 150, 105, 0.3)" }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 5px 15px rgba(5, 150, 105, 0.3)",
+            }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToTop}
             className="flex items-center gap-2 text-sm text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-5 py-2.5 rounded-full shadow-lg transition-all"
@@ -236,7 +259,6 @@ const Footer = () => {
           </motion.button>
         </motion.div>
       </div>
-      
     </footer>
   );
 };
