@@ -7,7 +7,7 @@ import {
   FaHome,
   FaArrowUp,
   FaTiktok,
-  FaWhatsapp,
+  FaInstagram,
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { motion, useAnimation } from "framer-motion";
@@ -65,15 +65,18 @@ const Footer = () => {
       label: "Tiktok",
       url: "https://www.tiktok.com/@daily.mini.mart",
     },
+    {
+      icon: <FaInstagram size={20} />,
+      label: "Instagram",
+      url: "https://www.instagram.com/daily.mini_mart?igsh=NWtoeDl0Y2d6MnNi",
+    },
   ];
-
   const quickLinks = [
     { name: "Home", url: "/" },
     { name: "Products", url: "/products" },
     { name: "About Us", url: "/about-us" },
     { name: "Gallery", url: "/gallery" },
   ];
-
   const locations = [
     { name: "Bisrate Gebriel", address: "Near St. Gabriel Church" },
     { name: "Bole", address: "Bole Medhanialem Area" },
@@ -81,7 +84,6 @@ const Footer = () => {
     { name: "Semit", address: "Main Road, Semit Plaza" },
     { name: "bulbula", address: "93 bole bulbula mazoriya" },
   ];
-
   const contactInfo = [
     { icon: <FaPhone />, content: ["+251 934 567 890", "+251 911 234 567"] },
     {
@@ -93,7 +95,6 @@ const Footer = () => {
       content: ["Open Daily: 7AM - 10PM", "Holidays: 7AM - 12PM"],
     },
   ];
-
   return (
     <footer
       ref={ref}
@@ -136,7 +137,6 @@ const Footer = () => {
               ))}
             </div>
           </motion.div>
-
           {/* Quick Links */}
           <motion.div variants={itemVariants} className="space-y-5">
             <h3 className="text-xl font-semibold text-gray-800">Quick Links</h3>
@@ -154,7 +154,6 @@ const Footer = () => {
               ))}
             </ul>
           </motion.div>
-
           {/* Locations */}
           <motion.div variants={itemVariants} className="space-y-5">
             <h3 className="text-xl font-semibold text-gray-800">
@@ -177,7 +176,6 @@ const Footer = () => {
               ))}
             </ul>
           </motion.div>
-
           {/* Contact Info */}
           <motion.div variants={itemVariants} className="space-y-5">
             <h3 className="text-xl font-semibold text-gray-800">Contact Us</h3>

@@ -4,15 +4,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { FaFacebook, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 function NavHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const socialLinks = [
-    { icon: <FaFacebook size={20} />, label: "Facebook", url: "https://web.facebook.com/Dailyminimart0" },
-    { icon: <FaTiktok size={20} />, label: "Instagram", url: "https://www.tiktok.com/@daily.mini.mart" },
+    {
+      icon: <FaFacebook size={20} />,
+      label: "Facebook",
+      url: "https://web.facebook.com/Dailyminimart0",
+    },
+    {
+      icon: <FaTiktok size={20} />,
+      label: "Tiktok",
+      url: "https://www.tiktok.com/@daily.mini.mart",
+    },
+    {
+      icon: <FaInstagram size={20} />,
+      label: "Instagram",
+      url: "https://www.instagram.com/daily.mini_mart?igsh=NWtoeDl0Y2d6MnNi",
+    },
   ];
   return (
     <>
@@ -113,16 +126,32 @@ function NavHeader() {
                 </div>
 
                 <nav className="flex flex-col space-y-4 flex-grow">
-                  <MobileNavLink href="/" currentPath={pathname} onClick={() => setMenuOpen(false)}>
+                  <MobileNavLink
+                    href="/"
+                    currentPath={pathname}
+                    onClick={() => setMenuOpen(false)}
+                  >
                     Home
                   </MobileNavLink>
-                  <MobileNavLink href="/products" currentPath={pathname} onClick={() => setMenuOpen(false)}>
+                  <MobileNavLink
+                    href="/products"
+                    currentPath={pathname}
+                    onClick={() => setMenuOpen(false)}
+                  >
                     Products
                   </MobileNavLink>
-                  <MobileNavLink href="/gallery" currentPath={pathname} onClick={() => setMenuOpen(false)}>
+                  <MobileNavLink
+                    href="/gallery"
+                    currentPath={pathname}
+                    onClick={() => setMenuOpen(false)}
+                  >
                     Gallery
                   </MobileNavLink>
-                  <MobileNavLink href="/about-us" currentPath={pathname} onClick={() => setMenuOpen(false)}>
+                  <MobileNavLink
+                    href="/about-us"
+                    currentPath={pathname}
+                    onClick={() => setMenuOpen(false)}
+                  >
                     About Us
                   </MobileNavLink>
                 </nav>
@@ -180,7 +209,12 @@ interface MobileNavLinkProps extends NavLinkProps {
   onClick: () => void;
 }
 
-function MobileNavLink({ href, currentPath, children, onClick }: MobileNavLinkProps) {
+function MobileNavLink({
+  href,
+  currentPath,
+  children,
+  onClick,
+}: MobileNavLinkProps) {
   const isActive = currentPath === href;
   return (
     <Link
