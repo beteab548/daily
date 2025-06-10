@@ -22,15 +22,15 @@ type Product = {
 const products: Product[] = [
   {
     id: 1,
-    src: "/special-products/aqua-1L.jpg",
-    label: "Aqua 1L Mineral Water",
+    src: "/special-products/aqua.jpg",
+    label: "Aqua Mineral Water",
     description: "Sourced from Ethiopian mountain springs",
     category: "Water",
     features: ["Natural minerals", "PH balanced", "BPA-free bottle"],
   },
   {
     id: 2,
-    src: "/special-products/dukemiye-01.jpg",
+    src: "/special-products/dukemiye.jpg",
     label: "Dukem Premium Food Oil",
     description: "100% pure Ethiopian sesame oil for authentic flavors",
     category: "Pantry Essentials",
@@ -38,7 +38,7 @@ const products: Product[] = [
   },
   {
     id: 3,
-    src: "/special-products/natura-milk.jpg",
+    src: "/special-products/naturamilk.jpg",
     label: "Natura Farm Fresh Milk",
     description: "Pasteurized milk from grass-fed Ethiopian cows",
     category: "Dairy",
@@ -46,7 +46,7 @@ const products: Product[] = [
   },
   {
     id: 4,
-    src: "/special-products/royal-tonic.jpg",
+    src: "/special-products/royaltonic.jpg",
     label: "Royal Tonic Drink",
     description: "Herbal energy drink with natural ingredients",
     category: "Beverages",
@@ -54,6 +54,14 @@ const products: Product[] = [
   },
   {
     id: 5,
+    src: "/special-products/orangerc.png",
+    label: "Orange Royal Tonic Drink",
+    description: "Refreshing orange-flavored herbal energy drink",
+    category: "Beverages",
+    features: ["Natural orange extract", "Caffeine-free", "330ml can"],
+  },
+  {
+    id: 6,
     src: "/special-products/Yogurt.png",
     label: "Natura Yogurt",
     description: "Natually fermented yogurt with live cultures",
@@ -61,7 +69,7 @@ const products: Product[] = [
     features: ["Probiotic-rich", "Low-fat", "500g tub"],
   },
   {
-    id: 6,
+    id: 7,
     src: "/special-products/butter.png",
     label: "Natura butter",
     description: "Rich and creamy butter made from fresh milk",
@@ -69,8 +77,8 @@ const products: Product[] = [
     features: ["No artificial preservatives", "Rich in vitamins", "200g pack"],
   },
   {
-    id: 7,
-    src: "/special-products/natura creame.png",
+    id: 8,
+    src: "/special-products/naturacreame.png",
     label: "Natura Cream",
     description: "Rich and creamy dairy product for cooking and baking",
     category: "Dairy",
@@ -343,7 +351,7 @@ const Gallery = () => {
                     </p>
                     <div className="mt-6 flex items-center gap-4">
                       <button
-                        className="px-6 py-3 bg-orange-400 hover:bg-orange-500 text-white rounded-lg font-medium flex items-center gap-2 transition-colors"
+                        className="px-6 py-3 bg-orange-400 hover:cursor-pointer hover:bg-orange-500 text-white rounded-lg font-medium flex items-center gap-2 transition-colors"
                         onClick={() => openLightbox(featuredProduct)}
                         aria-label="Zoom in on product image"
                       >

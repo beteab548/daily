@@ -246,12 +246,10 @@ function CosmicShowcase2({
                 initial="initial"
                 whileHover="hover"
                 whileTap="tap"
-                className={`relative overflow-hidden px-8 py-4  text-white rounded-md font-semibold inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-500`}
+                className={`relative overflow-hidden px-8 py-4 hover:cursor-pointer  text-white rounded-md font-semibold inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-500`}
               >
                 Explore Our Premium Collection
-                <div
-                  className={`absolute inset-0 bg-gradient-to-r ${buttonGradientHoverFrom} ${buttonGradientHoverTo} opacity-0 hover:opacity-20 transition-opacity duration-300`}
-                ></div>
+                <ArrowRight className="size-5" />
               </motion.button>
             </Link>
           </div>

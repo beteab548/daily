@@ -1,9 +1,21 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useAnimation, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
-import { ShoppingCart, Sparkles, ArrowRight, Leaf, Award, Zap } from "lucide-react";
+import {
+  motion,
+  useAnimation,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
+import {
+  ShoppingCart,
+  Leaf,
+  Award,
+  Zap,
+} from "lucide-react";
 import React from "react";
+import Link from "next/link";
 
 function CosmicShowcase() {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,25 +39,25 @@ function CosmicShowcase() {
 
   // Premium features
   const features = [
-    { 
-      icon: <Leaf className="text-emerald-400" />, 
-      title: "Farm Fresh", 
+    {
+      icon: <Leaf className="text-emerald-400" />,
+      title: "Farm Fresh",
       text: "Harvested at peak ripeness",
-      color: "from-emerald-400/20 to-emerald-600/10"
+      color: "from-emerald-400/20 to-emerald-600/10",
     },
-    { 
-      icon: <Award className="text-amber-400" />, 
-      title: "Premium Quality", 
+    {
+      icon: <Award className="text-amber-400" />,
+      title: "Premium Quality",
       text: "Rigorously tested",
-      color: "from-amber-400/20 to-amber-600/10"
-    }
+      color: "from-amber-400/20 to-amber-600/10",
+    },
   ];
 
   // Auto-rotate features
   useEffect(() => {
     if (!isHovered) {
       const interval = setInterval(() => {
-        setActiveFeature(prev => (prev + 1) % features.length);
+        setActiveFeature((prev) => (prev + 1) % features.length);
       }, 3000);
       return () => clearInterval(interval);
     }
@@ -66,8 +78,8 @@ function CosmicShowcase() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   };
 
   const imageVariants = {
@@ -75,12 +87,12 @@ function CosmicShowcase() {
     visible: {
       x: 0,
       opacity: 1,
-      transition: { 
-        type: "spring", 
+      transition: {
+        type: "spring",
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   const textVariants = {
@@ -88,13 +100,13 @@ function CosmicShowcase() {
     visible: {
       x: 0,
       opacity: 1,
-      transition: { 
+      transition: {
         delay: 0.3,
         type: "spring",
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   return (
@@ -106,20 +118,20 @@ function CosmicShowcase() {
             key={i}
             className="absolute rounded-full bg-gradient-to-r from-amber-200/30 to-emerald-200/30"
             initial={{
-              x: Math.random() * 100 + '%',
-              y: Math.random() * 100 + '%',
-              width: Math.random() * 400 + 100 + 'px',
-              height: Math.random() * 400 + 100 + 'px',
-              opacity: 0
+              x: Math.random() * 100 + "%",
+              y: Math.random() * 100 + "%",
+              width: Math.random() * 400 + 100 + "px",
+              height: Math.random() * 400 + 100 + "px",
+              opacity: 0,
             }}
             animate={{
               opacity: [0, 0.2, 0],
-              scale: [1, 1.1, 1]
+              scale: [1, 1.1, 1],
             }}
             transition={{
               duration: Math.random() * 15 + 10,
               repeat: Infinity,
-              delay: Math.random() * 5
+              delay: Math.random() * 5,
             }}
           />
         ))}
@@ -133,7 +145,10 @@ function CosmicShowcase() {
         variants={containerVariants}
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => { setIsHovered(false); x.set(0) }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          x.set(0);
+        }}
         style={{ rotateY, scale }}
         className="mx-auto max-w-6xl relative z-10"
       >
@@ -143,7 +158,7 @@ function CosmicShowcase() {
             variants={imageVariants}
             className="w-full lg:w-1/2 relative h-[400px] lg:h-[500px] overflow-hidden"
           >
-            <motion.div 
+            <motion.div
               animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
               transition={{ duration: 0.5 }}
               className="absolute inset-0"
@@ -156,7 +171,7 @@ function CosmicShowcase() {
                 priority
               />
             </motion.div>
-            
+
             {/* Animated overlay */}
             <AnimatePresence>
               {isHovered && (
@@ -173,7 +188,9 @@ function CosmicShowcase() {
                     className="text-white"
                   >
                     <ShoppingCart size={40} className="mb-3" />
-                    <h3 className="text-2xl font-bold">Experience Excellence</h3>
+                    <h3 className="text-2xl font-bold">
+                      Experience Excellence
+                    </h3>
                     <p className="text-amber-100">Quality you can taste</p>
                   </motion.div>
                 </motion.div>
@@ -187,7 +204,7 @@ function CosmicShowcase() {
             className="w-full lg:w-1/2 p-10 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-amber-50 relative"
           >
             {/* Animated underline */}
-            <motion.div 
+            <motion.div
               animate={isHovered ? { width: "100%" } : { width: "30%" }}
               transition={{ duration: 0.5 }}
               className="absolute top-0 left-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500"
@@ -200,9 +217,14 @@ function CosmicShowcase() {
               <br />
               <span className="text-gray-900">Grocery Experience</span>
             </h2>
-            
+
             <p className="text-gray-700 text-lg leading-relaxed mb-10">
-              At <span className="font-bold text-amber-600">Daily Mart</span>, we've redefined grocery shopping with our hand-picked selection of premium products. Our experts travel countrywide to bring you exceptional quality you won't find elsewhere.
+              At <span className="font-bold text-amber-600">Daily Mart</span>,
+               Discover the ease of convenient shopping,
+              unbeatable prices, and warm Ethiopian hospitality. Whether you're
+              stocking up on everyday essentials or searching for something
+              special, we’re here to serve your family with quality, care, and a
+              smile.
             </p>
 
             {/* Interactive Feature Showcase */}
@@ -212,35 +234,52 @@ function CosmicShowcase() {
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={{ 
-                    opacity: 1, 
+                  animate={{
+                    opacity: 1,
                     y: 0,
-                    transition: { delay: 0.5 + i * 0.2 }
+                    transition: { delay: 0.5 + i * 0.2 },
                   }}
-                  whileHover={{ 
+                  whileHover={{
                     y: -5,
-                    backgroundColor: i === 0 ? "rgba(52, 211, 153, 0.1)" : "rgba(251, 191, 36, 0.1)"
+                    backgroundColor:
+                      i === 0
+                        ? "rgba(52, 211, 153, 0.1)"
+                        : "rgba(251, 191, 36, 0.1)",
                   }}
                   className={`min-w-0 p-4 md:p-5 rounded-xl border cursor-default transition-all ${
-                    activeFeature === i 
+                    activeFeature === i
                       ? `bg-gradient-to-br ${feature.color} border-transparent shadow-md`
                       : "border-gray-200 bg-white"
                   }`}
                   onMouseEnter={() => setActiveFeature(i)}
                 >
                   <div className="flex items-center gap-3 md:gap-4">
-                    <div className={`p-2 md:p-3 rounded-full ${
-                      activeFeature === i 
-                        ? i === 0 ? "bg-emerald-500" : "bg-amber-500"
-                        : "bg-gray-100"
-                    } transition-colors`}>
+                    <div
+                      className={`p-2 md:p-3 rounded-full ${
+                        activeFeature === i
+                          ? i === 0
+                            ? "bg-emerald-500"
+                            : "bg-amber-500"
+                          : "bg-gray-100"
+                      } transition-colors`}
+                    >
                       {React.cloneElement(feature.icon, {
-                        className: `${activeFeature === i ? "text-white" : i === 0 ? "text-emerald-500" : "text-amber-500"}`
+                        className: `${
+                          activeFeature === i
+                            ? "text-white"
+                            : i === 0
+                            ? "text-emerald-500"
+                            : "text-amber-500"
+                        }`,
                       })}
                     </div>
                     <div className="min-w-0">
-                      <h4 className="font-bold text-gray-800 text-base md:text-lg truncate">{feature.title}</h4>
-                      <p className="text-gray-600 text-xs md:text-sm">{feature.text}</p>
+                      <h4 className="font-bold text-gray-800 text-base md:text-lg truncate">
+                        {feature.title}
+                      </h4>
+                      <p className="text-gray-600 text-xs md:text-sm">
+                        {feature.text}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -248,13 +287,14 @@ function CosmicShowcase() {
             </div>
 
             {/* Ultra-Premium Button */}
+            <Link href={"/products"}  >
             <motion.button
-              whileHover={{ 
+              whileHover={{
                 scale: 1.03,
-                boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.4)"
+                boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.4)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 z-10"
+              className="group relative overflow-hidden px-8 py-4 hover:cursor-pointer bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 z-10"
             >
               {/* Hover Overlay - move it under text */}
               <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
@@ -265,10 +305,11 @@ function CosmicShowcase() {
                 animate={isHovered ? { x: [0, 5, -3, 5, 0] } : { x: 0 }}
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="z-10 relative"
-              >
+                >
                 <Zap className="fill-white text-white group-hover:animate-pulse" />
               </motion.div>
             </motion.button>
+                </Link>
           </motion.div>
         </div>
       </motion.div>
@@ -280,7 +321,7 @@ function CosmicShowcase() {
             <motion.div
               initial={{ y: 100, x: -50, opacity: 0, rotate: -30 }}
               animate={{ y: -50, x: -30, opacity: 1, rotate: 0 }}
-              transition={{ delay: 0.7, duration: 0.8, type: 'spring' }}
+              transition={{ delay: 0.7, duration: 0.8, type: "spring" }}
               className="absolute bottom-20 left-10 text-6xl z-0 pointer-events-none"
             >
               🍊
@@ -288,7 +329,7 @@ function CosmicShowcase() {
             <motion.div
               initial={{ y: 100, x: 50, opacity: 0, rotate: 30 }}
               animate={{ y: -30, x: 30, opacity: 1, rotate: 0 }}
-              transition={{ delay: 0.9, duration: 0.8, type: 'spring' }}
+              transition={{ delay: 0.9, duration: 0.8, type: "spring" }}
               className="absolute top-20 right-10 text-6xl z-0 pointer-events-none"
             >
               🥑

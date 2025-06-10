@@ -78,11 +78,12 @@ const Footer = () => {
     { name: "Gallery", url: "/gallery" },
   ];
   const locations = [
-    { name: "Bisrate Gebriel", address: "Near St. Gabriel Church" },
-    { name: "Bole", address: "Bole Medhanialem Area" },
-    { name: "Kazanchis", address: "Opposite Commercial Bank" },
-    { name: "Semit", address: "Main Road, Semit Plaza" },
-    { name: "bulbula", address: "93 bole bulbula mazoriya" },
+    { name: "Bisrate Gebriel", address: "Behind Lafto Mall" },
+    { name: "Bole", address: "Near Ramada Hotel" },
+    { name: "Kazanchis", address: "ECA Main Gate" },
+    { name: "Semit", address: "Near Viva Beverage Factory" },
+    { name: "bulbula", address: "Near Janboro Real state" },
+    { name: "Gerji Meberate Haile", address: "Coming Soon " },
   ];
   const contactInfo = [
     { icon: <FaPhone />, content: ["+251 934 567 890", "+251 911 234 567"] },

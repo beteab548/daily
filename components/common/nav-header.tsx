@@ -29,7 +29,7 @@ function NavHeader() {
   ];
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white shadow-sm md:bg-white/80 md:backdrop-blur-sm">
+      <header className="sticky top-0 z-1000 bg-white shadow-sm md:bg-white/80 md:backdrop-blur-sm">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">

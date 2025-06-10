@@ -365,7 +365,7 @@ const StoreHoursModal = () => (
                     whileTap="tap"
                     onHoverStart={() => setActiveButton(2)}
                     onHoverEnd={() => setActiveButton(null)}
-                    className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden"
+                    className="w-full sm:w-auto px-14 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden"
                   >
                     <span>Web Store</span>
                     <AnimatePresence>
