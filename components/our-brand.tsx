@@ -106,6 +106,7 @@ const Gallery = () => {
       return true;
     }
 
+    
     if (activeFilter === "Dairy") {
       return product.category === "Dairy";
     }
