@@ -94,10 +94,10 @@ const Gallery = () => {
   const [featuredProduct, setFeaturedProduct] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Filter products
   const categories = ["All", ...new Set(products.map((p) => p.category))];
   const filteredProducts = products.filter((product) => {
     if (activeFilter === "All") {
+      if (product.id === 5) return false;
       if (product.category === "Dairy") {
         return (
           product.label.includes("Milk") || product.label.includes("Yogurt")
@@ -110,10 +110,13 @@ const Gallery = () => {
       return product.category === "Dairy";
     }
 
+    if (activeFilter === "Beverages") {
+      return product.category === "Beverages";
+    }
+
     return product.category === activeFilter;
   });
 
-  // Reset featuredProduct when filter changes
   useEffect(() => {
     if (filteredProducts.length > 0) {
       const newIndex = Math.min(featuredProduct, filteredProducts.length - 1);
@@ -123,17 +126,14 @@ const Gallery = () => {
     }
   }, [filteredProducts, featuredProduct]);
 
-  // Trigger animations on mount
   useEffect(() => {
     setIsMounted(true);
-    // Small scroll trigger to activate intersection observers
     setTimeout(() => {
       window.scrollBy(0, 1);
       setTimeout(() => window.scrollBy(0, -1), 100);
     }, 300);
   }, []);
 
-  // Lightbox controls
   const handlePrev = useCallback(() => {
     if (isAnimating || filteredProducts.length === 0) return;
     setIsAnimating(true);
@@ -214,7 +214,7 @@ const Gallery = () => {
           className="text-center mb-16 px-4"
         >
           <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-6 leading-tight">
-           Products Made By us Showcase
+            Products Made By us Showcase
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Explore our curated selection of authentic Ethiopian products

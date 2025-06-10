@@ -6,7 +6,7 @@ export const meatProducts = [
   { id: 5, image: "meats-images/GOAT CHOPS.png", name: "Goat Chops" },
   { id: 6, image: "meats-images/beef tripe.png", name: "Beef Tripe" },
   { id: 7, image: "meats-images/veal chops.png", name: "Veal Chops" },
-  { id: 8, image: "meats-images/lamb-tripe.png", name: "Lamb Tripe" },
+  { id: 8, image: "meats-images/Lamb-tripe.png", name: "Lamb Tripe" },
   { id: 9, image: "meats-images/raw-liver.png", name: "Raw Liver" },
   { id: 10, image: "meats-images/beef-tongue.png", name: "Beef Tongue" },
   { id: 11, image: "meats-images/beef heart.png", name: "Beef Heart" },
@@ -45,24 +45,24 @@ export const vegetable = [
   { id: 7, image: "vegetables-image/fennel.png", name: "Fennel" },
   { id: 8, image: "vegetables-image/tomato.jpg", name: "Red Tomato" },
   { id: 9, image: "vegetables-image/RedOnion.jpg", name: "Red Onion" },
-  { id: 10, image: "vegetables-image/potato.jpg", name: "Potato" },
+  { id: 10, image: "vegetables-image/Potato.jpg", name: "Potato" },
   {
     id: 11,
     image: "vegetables-image/greenchili.jpg",
     name: "Green Chili Pepper",
   },
   { id: 12, image: "vegetables-image/mushroom.png", name: "Mushroom" },
-  { id: 13, image: "vegetables-image/garlic.jpg", name: "garlic" },
+  { id: 13, image: "vegetables-image/Garlic.jpg", name: "garlic" },
   { id: 14, image: "vegetables-image/Ginger.jpg", name: "Ginger" },
   { id: 15, image: "vegetables-image/sweet-potato.png", name: "Sweet Potato" },
   { id: 16, image: "vegetables-image/eggplant.png", name: "Egg plant" },
 ];
 export const ourProduct = [
-  { id: 1, image: "special-products/natura milk.jpg", name: "Natura Milk" },
+  { id: 1, image: "special-products/naturamilk.jpg", name: "Natura Milk" },
 
   {
     id: 3,
-    image: "special-products/royal.jpg ",
+    image: "special-products/royaltonic.jpg ",
     name: "Royal Tonic Drink",
   },
   {
@@ -150,7 +150,7 @@ export const others = [
   },
   {
     id: 3,
-    image: "others/Crunchy.png",
+    image: "others/crunchy.png",
     name: "Crunchy peanut butter",
   },
   {
