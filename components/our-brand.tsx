@@ -54,7 +54,7 @@ const products: Product[] = [
   },
   {
     id: 5,
-    src: "/special-products/orangerc.png",
+    src: "/special-products/orangeRoyalTonic.jpg",
     label: "Orange Royal Tonic Drink",
     description: "Refreshing orange-flavored herbal energy drink",
     category: "Beverages",
@@ -205,7 +205,7 @@ const Gallery = () => {
   }, [lightboxOpen, handlePrev, handleNext, closeLightbox]);
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-20  px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -392,7 +392,7 @@ const Gallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+            className="fixed inset-0 z-2000 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
             role="dialog"
             aria-modal="true"
             aria-labelledby="lightbox-title"
@@ -404,7 +404,7 @@ const Gallery = () => {
             {/* Close button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white hover:text-emerald-400 transition-colors z-10"
+              className="absolute top-6 hover:cursor-pointer right-6 text-white hover:text-emerald-400 transition-colors"
               aria-label="Close lightbox"
             >
               <FiX size={28} />
