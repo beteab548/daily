@@ -11,15 +11,51 @@ interface CategoryItem {
 }
 
 const categories: CategoryItem[] = [
-  { src: "/food-slide-show/fresh-fruits.jpg", label: "Fresh Fruits", color: "bg-emerald-500" },
-  { src: "/food-slide-show/organic-vegetables.jpg", label: "Organic Vegetables", color: "bg-lime-500" },
-  { src: "/food-slide-show/dairy-products.jpg", label: "Dairy Products", color: "bg-blue-400" },
-  { src: "/food-slide-show/baked-goods.jpg", label: "Baked Goods", color: "bg-amber-400" },
-  { src: "/food-slide-show/fresh-meat.jpg", label: "Fresh Meat", color: "bg-red-400" },
-  { src: "/food-slide-show/sea-food.jpg", label: "Seafood", color: "bg-cyan-400" },
-  { src: "/food-slide-show/beaverage.jpg", label: "Beverages", color: "bg-purple-400" },
-  { src: "/food-slide-show/snacks.jpeg", label: "Snacks", color: "bg-yellow-400" },
-  { src: "/food-slide-show/ethiopian-spices.jpg", label: "Spices & Seasonings", color: "bg-orange-400" },
+  {
+    src: "/food-slide-show/fresh-fruits.jpg",
+    label: "Fresh Fruits",
+    color: "bg-emerald-500",
+  },
+  {
+    src: "/food-slide-show/organic-vegetables.jpg",
+    label: "Organic Vegetables",
+    color: "bg-lime-500",
+  },
+  {
+    src: "/food-slide-show/dairy-products.jpg",
+    label: "Dairy Products",
+    color: "bg-blue-400",
+  },
+  {
+    src: "/food-slide-show/baked-goods.jpg",
+    label: "Baked Goods",
+    color: "bg-amber-400",
+  },
+  {
+    src: "/food-slide-show/fresh-meat.jpg",
+    label: "Fresh Meat",
+    color: "bg-red-400",
+  },
+  {
+    src: "/food-slide-show/sea-food.jpg",
+    label: "Seafood",
+    color: "bg-cyan-400",
+  },
+  {
+    src: "/food-slide-show/beaverage.jpg",
+    label: "Beverages",
+    color: "bg-purple-400",
+  },
+  {
+    src: "/food-slide-show/snacks.jpeg",
+    label: "Snacks",
+    color: "bg-yellow-400",
+  },
+  {
+    src: "/food-slide-show/ethiopian-spices.jpg",
+    label: "Spices & Seasonings",
+    color: "bg-orange-400",
+  },
 ];
 
 export default function PremiumCategoryShowcase() {
@@ -31,10 +67,10 @@ export default function PremiumCategoryShowcase() {
     const handleResize = () => {
       setItemCount(window.innerWidth < 768 ? 3 : 4);
     };
-    
+
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const maxStartIndex = Math.max(0, categories.length - itemCount);
@@ -49,26 +85,28 @@ export default function PremiumCategoryShowcase() {
     setStartIndex(index);
   };
 
-  const scrollTo = (dir: 'left' | 'right') => {
+  const scrollTo = (dir: "left" | "right") => {
     setDirection(dir);
-    setStartIndex(prev => dir === 'left' ? Math.max(0, prev - 1) : Math.min(maxStartIndex, prev + 1));
+    setStartIndex((prev) =>
+      dir === "left" ? Math.max(0, prev - 1) : Math.min(maxStartIndex, prev + 1)
+    );
   };
 
   const totalDots = Math.max(1, categories.length - itemCount + 1);
 
   const variants = {
     enter: (direction: string) => ({
-      x: direction === "right" ? '100%' : '-100%',
-      opacity: 0
+      x: direction === "right" ? "100%" : "-100%",
+      opacity: 0,
     }),
     center: {
-      x: '0%',
-      opacity: 1
+      x: "0%",
+      opacity: 1,
     },
     exit: (direction: string) => ({
-      x: direction === "right" ? '-100%' : '100%',
-      opacity: 0
-    })
+      x: direction === "right" ? "-100%" : "100%",
+      opacity: 0,
+    }),
   };
 
   return (
@@ -89,16 +127,19 @@ export default function PremiumCategoryShowcase() {
       <div className="relative">
         {/* Navigation arrows */}
         <button
-          onClick={() => scrollTo('left')}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
+          onClick={() => scrollTo("left")}
+          className={`absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg transition-colors z-10 
+    ${
+      startIndex === 0 ? "cursor-not-allowed opacity-50" : "hover:bg-gray-100 hover:cursor-pointer"
+    }`}
           disabled={startIndex === 0}
         >
           <ChevronLeft className="text-gray-800" />
         </button>
 
         {/* Carousel */}
-        <div className="w-full flex justify-center overflow-hidden">
-          <div className="relative h-64 w-full max-w-6xl mx-auto">
+        <div className="w-full flex justify-center md:-ml-28 ">
+          <div className="relative h-66 w-full max-w-10xl mx-auto overflow-hidden ">
             <AnimatePresence custom={direction} initial={false}>
               {getVisibleItems().map((item, index) => (
                 <motion.div
@@ -108,13 +149,19 @@ export default function PremiumCategoryShowcase() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ type: "tween", ease: "easeInOut", duration: 0.5 }}
+                  transition={{
+                    type: "tween",
+                    ease: "easeInOut",
+                    duration: 0.5,
+                  }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`absolute w-64 h-64 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all ${item.color}`}
+                  className={`absolute w-54 h-54 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all ${item.color}`}
                   style={{
-                    left: `calc(50% + ${(index - (itemCount - 1) / 2) * 280}px)`,
-                    transform: 'translateX(-50%)'
+                    left: `calc(50% + ${
+                      (index - (itemCount - 1) / 2) * 280
+                    }px)`,
+                    transform: "translateX(-50%)",
                   }}
                 >
                   <Image
@@ -139,8 +186,13 @@ export default function PremiumCategoryShowcase() {
         </div>
 
         <button
-          onClick={() => scrollTo('right')}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
+          onClick={() => scrollTo("right")}
+          className={`absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg transition-colors z-10 
+    ${
+      startIndex >= maxStartIndex
+        ? "cursor-not-allowed opacity-50 "
+        : "hover:bg-gray-100 hover:cursor-pointer"
+    }`}
           disabled={startIndex >= maxStartIndex}
         >
           <ChevronRight className="text-gray-800" />
@@ -153,7 +205,9 @@ export default function PremiumCategoryShowcase() {
           <button
             key={index}
             onClick={() => handleDotClick(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${startIndex === index ? 'bg-orange-500' : 'bg-gray-300'}`}
+            className={`w-3 h-3 rounded-full transition-colors hover:cursor-pointer ${
+              startIndex === index ? "bg-orange-500" : "bg-gray-300"
+            }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

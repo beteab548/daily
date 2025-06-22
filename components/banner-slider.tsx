@@ -167,14 +167,14 @@ export default function CosmicImageSlider() {
         </motion.div>
 
         {/* Navigation dots */}
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10">
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10 ">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() =>
                 goToSlide(index, index > currentIndex ? "right" : "left")
               }
-              className={`w-3 h-3 rounded-full transition-all ${
+              className={`w-3 h-3 rounded-full transition-all hover:cursor-pointer ${
                 index === currentIndex ? "bg-amber-400 w-6" : "bg-white/50"
               }`}
               aria-label={`Go to slide ${index + 1}`}
@@ -212,7 +212,7 @@ export default function CosmicImageSlider() {
 
       {/* Floating sparkles */}
       <motion.div
-        className="absolute top-1/4 right-1/4 text-amber-300 hover:cursor-pointer"
+        className="absolute top-1/4 right-1/4 text-amber-300 "
         animate={{
           y: [0, -20, 0],
           rotate: [0, 180, 360],
