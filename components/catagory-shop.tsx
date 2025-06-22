@@ -1,6 +1,6 @@
 "use client";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
@@ -23,53 +23,52 @@ const categories: CategoryItem[] = [
 ];
 
 export default function PremiumCategoryShowcase() {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const dragStartX = useRef(0);
-  const scrollStartX = useRef(0);
-  const x = useMotionValue(0);
-  const rotateY = useTransform(x, [-200, 200], [-5, 5]);
-
-  // 3D tilt effect
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = carouselRef.current?.getBoundingClientRect();
-    if (rect) {
-      const xVal = e.clientX - rect.left;
-      const centerX = rect.width / 2;
-      x.set((xVal - centerX) / 30);
-    }
-  };
-
-  // Drag to scroll
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!carouselRef.current) return;
-    setIsDragging(true);
-    dragStartX.current = e.clientX;
-    scrollStartX.current = carouselRef.current.scrollLeft;
-  };
-
-  const handleMouseMoveDrag = (e: MouseEvent) => {
-    if (!isDragging || !carouselRef.current) return;
-    const dx = e.clientX - dragStartX.current;
-    carouselRef.current.scrollLeft = scrollStartX.current - dx;
-  };
-
-  const handleMouseUp = () => setIsDragging(false);
+  const [startIndex, setStartIndex] = useState(0);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+  const [itemCount, setItemCount] = useState(4);
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMoveDrag);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMoveDrag);
-      window.removeEventListener("mouseup", handleMouseUp);
+    const handleResize = () => {
+      setItemCount(window.innerWidth < 768 ? 3 : 4);
     };
-  }, [isDragging]);
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  const scrollTo = (direction: 'left' | 'right') => {
-    if (carouselRef.current) {
-      const scrollAmount = direction === 'left' ? -300 : 300;
-      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+  const maxStartIndex = Math.max(0, categories.length - itemCount);
+
+  const getVisibleItems = () => {
+    const start = Math.max(0, Math.min(startIndex, maxStartIndex));
+    return categories.slice(start, start + itemCount);
+  };
+
+  const handleDotClick = (index: number) => {
+    setDirection(index > startIndex ? "right" : "left");
+    setStartIndex(index);
+  };
+
+  const scrollTo = (dir: 'left' | 'right') => {
+    setDirection(dir);
+    setStartIndex(prev => dir === 'left' ? Math.max(0, prev - 1) : Math.min(maxStartIndex, prev + 1));
+  };
+
+  const totalDots = Math.max(1, categories.length - itemCount + 1);
+
+  const variants = {
+    enter: (direction: string) => ({
+      x: direction === "right" ? '100%' : '-100%',
+      opacity: 0
+    }),
+    center: {
+      x: '0%',
+      opacity: 1
+    },
+    exit: (direction: string) => ({
+      x: direction === "right" ? '-100%' : '100%',
+      opacity: 0
+    })
   };
 
   return (
@@ -89,67 +88,76 @@ export default function PremiumCategoryShowcase() {
       {/* Carousel Container */}
       <div className="relative">
         {/* Navigation arrows */}
-        <button 
+        <button
           onClick={() => scrollTo('left')}
           className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
+          disabled={startIndex === 0}
         >
           <ChevronLeft className="text-gray-800" />
         </button>
-        
-        {/* Carousel */}
-        <motion.div
-          ref={carouselRef}
-          style={{ rotateY }}
-          onMouseMove={handleMouseMove}
-          onMouseDown={handleMouseDown}
-          className="w-full overflow-x-scroll snap-x snap-mandatory hide-scrollbar"
-        >
-          <div className="inline-flex space-x-6 px-8">
-            {categories.map((item, index) => (
-              <motion.div
-                key={item.label}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className={`relative w-64 h-64 rounded-2xl overflow-hidden flex-shrink-0 shadow-lg hover:shadow-xl transition-all snap-center ${item.color}`}
-              >
-                <Image
-                  src={item.src}
-                  alt={item.label}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                  <div className="text-white">
-                    <h3 className="text-xl font-bold">{item.label}</h3>
-                    <button className="mt-2 px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
-                  catagory
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
-        <button 
+        {/* Carousel */}
+        <div className="w-full flex justify-center overflow-hidden">
+          <div className="relative h-64 w-full max-w-6xl mx-auto">
+            <AnimatePresence custom={direction} initial={false}>
+              {getVisibleItems().map((item, index) => (
+                <motion.div
+                  key={`${item.label}-${startIndex}`}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ type: "tween", ease: "easeInOut", duration: 0.5 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`absolute w-64 h-64 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all ${item.color}`}
+                  style={{
+                    left: `calc(50% + ${(index - (itemCount - 1) / 2) * 280}px)`,
+                    transform: 'translateX(-50%)'
+                  }}
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.label}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                    <div className="text-white">
+                      <h3 className="text-xl font-bold">{item.label}</h3>
+                      <button className="mt-2 px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
+                        Shop Now
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <button
           onClick={() => scrollTo('right')}
           className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
+          disabled={startIndex >= maxStartIndex}
         >
           <ChevronRight className="text-gray-800" />
         </button>
       </div>
 
-      {/* Hide scrollbar styles */}
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+      {/* Dots navigation */}
+      <div className="flex justify-center mt-8 space-x-2">
+        {Array.from({ length: totalDots }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => handleDotClick(index)}
+            className={`w-3 h-3 rounded-full transition-colors ${startIndex === index ? 'bg-orange-500' : 'bg-gray-300'}`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

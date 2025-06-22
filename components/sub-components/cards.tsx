@@ -1,15 +1,16 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type CardData = {
   image: string;
   title: string;
   description: string;
   tag?: string;
+  section: string;
 };
 
 const cardItems: CardData[] = [
@@ -18,24 +19,28 @@ const cardItems: CardData[] = [
     title: "Tropical Fruit Bliss",
     description: "Sun-ripened exotic fruits bursting with flavor",
     tag: "SEASONAL",
+    section: "fruit",
   },
   {
     image: "/cards/image1.jpg",
     title: "Organic Veggie Harvest",
     description: "Farm-fresh vegetables packed with nutrients",
     tag: "LOCAL",
+    section: "veggie",
   },
   {
     image: "/cards/photo_2022-10-05_18-26-10.jpg",
     title: "Leafy Green Symphony",
     description: "Crisp, vibrant greens for your healthy lifestyle",
     tag: "NEW",
+    section: "fruit",
   },
   {
     image: "/cards/photo_2021-10-27_10-04-43.jpg",
     title: "Gourmet Produce Selection",
     description: "Hand-selected premium ingredients for chefs",
     tag: "PREMIUM",
+    section: "veggie",
   },
 ];
 
@@ -46,6 +51,10 @@ const CardGrid = () => {
       img.src = item.image;
     });
   }, []);
+  const router = useRouter();
+  function hanldeClick(title: string): void {
+    router.push(`/products#${title}`);
+  }
 
   return (
     <div className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/20 via-white to-white overflow-hidden">
@@ -175,34 +184,32 @@ const CardGrid = () => {
                   {card.description}
                 </p>
 
-                <Link href="/products" passHref>
-                  <motion.button
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "rgb(245, 158, 11)",
-                      color: "white",
+                <motion.button
+                  onClick={() => hanldeClick(card.section)}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "rgb(245, 158, 11)",
+                    color: "white",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full py-3 px-6 bg-white text-amber-600 border hover:cursor-pointer border-amber-300 rounded-lg hover:border-amber-500 transition-all duration-300 font-medium flex items-center justify-center gap-2 group-hover:shadow-md"
+                >
+                  <span>check Now</span>
+                  <motion.span
+                    animate={{
+                      x: [0, 5, 0],
                     }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full py-3 px-6 bg-white text-amber-600 border border-amber-300 rounded-lg hover:border-amber-500 transition-all duration-300 font-medium flex items-center justify-center gap-2 group-hover:shadow-md"
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                    }}
                   >
-                    <span>check Now</span>
-                    <motion.span
-                      animate={{
-                        x: [0, 5, 0],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                      }}
-                    >
-                      <ArrowRight
-                        size={16}
-                        className="group-hover:translate-x-1 transition-transform"
-                      />
-                    </motion.span>
-                  </motion.button>
-                </Link>
-
+                    <ArrowRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </motion.span>
+                </motion.button>
                 {/* Floating cart icon */}
                 <motion.div
                   className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"

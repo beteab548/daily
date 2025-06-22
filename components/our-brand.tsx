@@ -106,7 +106,6 @@ const Gallery = () => {
       return true;
     }
 
-    
     if (activeFilter === "Dairy") {
       return product.category === "Dairy";
     }
@@ -134,6 +133,14 @@ const Gallery = () => {
       setTimeout(() => window.scrollBy(0, -1), 100);
     }, 300);
   }, []);
+  useEffect(() => {
+    if (lightboxOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [lightboxOpen]);
 
   const handlePrev = useCallback(() => {
     if (isAnimating || filteredProducts.length === 0) return;
@@ -363,7 +370,6 @@ const Gallery = () => {
                   </div>
                 </div>
               </div>
-
               {/* Product features */}
               <div className="p-8">
                 <h4 className="text-lg font-semibold text-gray-800 mb-4">
@@ -384,7 +390,6 @@ const Gallery = () => {
           </div>
         )}
       </div>
-
       {/* Lightbox */}
       <AnimatePresence>
         {lightboxOpen && filteredProducts.length > 0 && (
@@ -400,7 +405,6 @@ const Gallery = () => {
             <h2 id="lightbox-title" className="sr-only">
               Product image viewer
             </h2>
-
             {/* Close button */}
             <button
               onClick={closeLightbox}
@@ -409,7 +413,6 @@ const Gallery = () => {
             >
               <FiX size={28} />
             </button>
-
             {/* Navigation arrows */}
             <button
               onClick={handlePrev}

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -10,6 +10,7 @@ import {
   Beverages,
   others,
 } from "@/lib/Products";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface Product {
   id: number;
@@ -28,6 +29,9 @@ type ProductCategories =
 export default function ProductTabs() {
   const [activeTab, setActiveTab] = useState<ProductCategories>("Our Products");
 
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const products: Record<ProductCategories, Product[]> = {
     "Our Products": ourProduct,
     Vegetable: vegetable,
@@ -37,11 +41,37 @@ export default function ProductTabs() {
     others: others,
   };
 
+  // Handle tab switching based on URL hash
+  useEffect(() => {
+    const hash = window.location.hash?.replace("#", "");
+
+    if (hash) {
+      let tabToActivate: ProductCategories | null = null;
+
+      if (hash === "fruit") tabToActivate = "Fruits";
+      else if (hash === "veggie") tabToActivate = "Vegetable";
+      else if (hash === "meat") tabToActivate = "Meat";
+      else if (hash === "beverages") tabToActivate = "Beverages";
+      else if (hash === "others") tabToActivate = "others";
+      else if (hash === "our-products") tabToActivate = "Our Products";
+
+      if (tabToActivate) {
+        setActiveTab(tabToActivate);
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 300);
+      }
+    }
+  }, [pathname, searchParams]);
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-12">
       {/* Header */}
       <div className="text-center mb-12">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -50,21 +80,22 @@ export default function ProductTabs() {
           Fresh Market Selection
         </motion.h1>
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-          Discover our premium quality products, carefully selected for your health and satisfaction
+          Discover our premium quality products, carefully selected for your
+          health and satisfaction
         </p>
       </div>
 
-      {/* Tabs - Modified for both mobile and desktop */}
+      {/* Tabs */}
       <div className="mb-10 px-1">
         <div className="relative">
-          {/* Mobile: Horizontal scroll */}
+          {/* Mobile */}
           <div className="lg:hidden overflow-x-auto pb-2 scrollbar-hide">
             <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-inner min-w-max">
               {Object.entries(products).map(([key]) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key as ProductCategories)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap hover:cursor-pointer ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                     activeTab === key
                       ? "bg-white shadow-md text-orange-600"
                       : "text-gray-600 hover:text-gray-800"
@@ -75,10 +106,10 @@ export default function ProductTabs() {
               ))}
             </div>
           </div>
-          
-          {/* Desktop: Centered tabs */}
+
+          {/* Desktop */}
           <div className="hidden lg:flex justify-center">
-            <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-inner">
+            <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-inner ">
               {Object.entries(products).map(([key]) => (
                 <button
                   key={key}
@@ -97,8 +128,18 @@ export default function ProductTabs() {
         </div>
       </div>
 
+      {/* Anchor for scroll target */}
+      {activeTab === "Fruits" && <div id="fruit" className="sr-only" />}
+      {activeTab === "Vegetable" && <div id="veggie" className="sr-only" />}
+      {activeTab === "Meat" && <div id="meat" className="sr-only" />}
+      {activeTab === "Beverages" && <div id="beverages" className="sr-only" />}
+      {activeTab === "others" && <div id="others" className="sr-only" />}
+      {activeTab === "Our Products" && (
+        <div id="our-products" className="sr-only" />
+      )}
+
       {/* Product Grid */}
-      <motion.div 
+      <motion.div
         layout
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
       >
@@ -122,15 +163,17 @@ export default function ProductTabs() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
-              
+
               <div className="p-4">
-                <h3 className="font-medium text-lg text-gray-800 mb-1">{product.name}</h3>
+                <h3 className="font-medium text-lg text-gray-800 mb-1">
+                  {product.name}
+                </h3>
                 <div className="flex justify-between items-center mt-3">
                   <button className="text-sm px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-600 hover:bg-emerald-100 transition-colors">
                     Product
                   </button>
                   <span className="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600">
-                    #{product.id.toString().padStart(3, '0')}
+                    #{product.id.toString().padStart(3, "0")}
                   </span>
                 </div>
               </div>

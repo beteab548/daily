@@ -83,7 +83,7 @@ const Footer = () => {
     { name: "Kazanchis", address: "ECA Main Gate" },
     { name: "Semit", address: "Near Viva Beverage Factory" },
     { name: "bulbula", address: "Near Janboro Real state" },
-    { name: "Gerji Meberate Haile", address: "Coming Soon " },
+    { name: "Gerji MeberatHaile", address: "Coming Soon " },
   ];
   const contactInfo = [
     { icon: <FaPhone />, content: ["+251 934 567 890", "+251 911 234 567"] },
@@ -219,10 +219,10 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
             <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} Daily Mini Mart. All rights
+              &copy; {new Date().getFullYear()} Daily Grocery Store. All rights
               reserved.
             </p>
-            <div className="hidden md:block w-px h-4 bg-gray-300"></div>
+            
             <div className="flex space-x-4">
               <Link
                 href="/privacy"
@@ -250,7 +250,7 @@ const Footer = () => {
             }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-sm text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-5 py-2.5 rounded-full shadow-lg transition-all"
+            className="flex items-center gap-2 text-sm text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-5 py-2.5 rounded-full shadow-lg transition-all hover:cursor-pointer"
             aria-label="Scroll to top"
           >
             <FaArrowUp />

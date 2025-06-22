@@ -17,6 +17,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function UltraOrderSection({ image }: { image: string }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,6 +27,7 @@ function UltraOrderSection({ image }: { image: string }) {
   const controls = useAnimation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
+  const router = useRouter();
   // Reduced rotation range and adjusted scale
   const rotateY = useTransform(x, [-50, 50], [-3, 3]);
   const scale = useTransform(x, [-50, 0, 50], [1.01, 1, 1.01]);
@@ -39,6 +41,10 @@ function UltraOrderSection({ image }: { image: string }) {
     // More constrained movement with smoother response
     const constrainedX = Math.min(Math.max((xVal - centerX) / 25, -50), 50);
     x.set(constrainedX);
+  };
+
+  const handleNavigation = () => {
+    router.push("/about-us#map");
   };
 
   useEffect(() => {
@@ -90,107 +96,120 @@ function UltraOrderSection({ image }: { image: string }) {
     hover: { scale: 1.05 },
     tap: { scale: 0.98 },
   };
-const StoreHoursModal = () => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
-    onClick={() => setShowStoreHours(false)}
-  >
-    
+  const StoreHoursModal = () => (
     <motion.div
-      className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 relative overflow-hidden"
-      onClick={(e) => e.stopPropagation()}
-      initial={{ scale: 0.95 }}
-      animate={{ scale: 1 }}
-      transition={{ type: "spring", damping: 20, stiffness: 300 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
+      onClick={() => setShowStoreHours(false)}
     >
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400" />
-      <div className="absolute -top-10 -right-10 text-amber-200/30">
-        <Store size={120} />
-      </div>
-
-      <div className="relative z-10">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <Store className="text-amber-500" size={24} />
-          Our Store Hours
-        </h3>
-
-        <div className="space-y-4">
-          {/* Summit and Bole locations */}
-          <motion.div
-            className="flex flex-col py-3 px-4 bg-gray-50 rounded-lg border-l-4 border-amber-500"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              transition: { delay: 0.1 },
-            }}
-            whileHover={{
-              backgroundColor: "rgba(251, 191, 36, 0.1)",
-            }}
-          >
-            <span className="font-bold text-gray-800">Summit & Bole Locations</span>
-            <div className="flex justify-between mt-2">
-              <span className="font-medium text-gray-700">Monday - Sunday</span>
-              <span className="font-semibold text-amber-600">7:00 AM - 10:00 PM</span>
-            </div>
-          </motion.div>
-
-          {/* Other locations */}
-          <motion.div
-            className="flex flex-col py-3 px-4 bg-gray-50 rounded-lg"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              transition: { delay: 0.2 },
-            }}
-            whileHover={{
-              backgroundColor: "rgba(251, 191, 36, 0.1)",
-              borderLeft: "4px solid #f59e0b",
-            }}
-          >
-            <span className="font-bold text-gray-800">All Other Locations</span>
-            <div className="flex justify-between mt-2">
-              <span className="font-medium text-gray-700">Monday - Sunday</span>
-              <span className="font-semibold text-amber-600">7:00 AM - 9:00 PM</span>
-            </div>
-          </motion.div>
-
-          {/* Holiday hours */}
-          <motion.div
-            className="flex justify-between items-center py-3 px-4 bg-gray-50 rounded-lg"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              transition: { delay: 0.3 },
-            }}
-            whileHover={{
-              backgroundColor: "rgba(251, 191, 36, 0.1)",
-              borderLeft: "4px solid #f59e0b",
-            }}
-          >
-            <span className="font-medium text-gray-700">Holidays</span>
-            <span className="font-semibold text-amber-600">7:00 AM - 12:00 PM</span>
-          </motion.div>
+      <motion.div
+        className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 relative overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+        initial={{ scale: 0.95 }}
+        animate={{ scale: 1 }}
+        transition={{ type: "spring", damping: 20, stiffness: 300 }}
+      >
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400" />
+        <div className="absolute -top-10 -right-10 text-amber-200/30">
+          <Store size={120} />
         </div>
 
-        <motion.button
-          onClick={() => setShowStoreHours(false)}
-          className="mt-8 w-full py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          Close
-        </motion.button>
-      </div>
+        <div className="relative z-10">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2 hover:cursor-pointer">
+            <Store className="text-amber-500" size={24} />
+            Our Store Hours
+          </h3>
+
+          <div className="space-y-4">
+            {/* Summit and Bole locations */}
+            <motion.div
+              className="flex flex-col py-3 px-4 bg-gray-50 rounded-lg border-l-4 border-amber-500"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { delay: 0.1 },
+              }}
+              whileHover={{
+                backgroundColor: "rgba(251, 191, 36, 0.1)",
+              }}
+            >
+              <span className="font-bold text-gray-800">
+                Summit & Bole Locations
+              </span>
+              <div className="flex justify-between mt-2">
+                <span className="font-medium text-gray-700">
+                  Monday - Sunday
+                </span>
+                <span className="font-semibold text-amber-600">
+                  7:00 AM - 10:00 PM
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Other locations */}
+            <motion.div
+              className="flex flex-col py-3 px-4 bg-gray-50 rounded-lg"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { delay: 0.2 },
+              }}
+              whileHover={{
+                backgroundColor: "rgba(251, 191, 36, 0.1)",
+                borderLeft: "4px solid #f59e0b",
+              }}
+            >
+              <span className="font-bold text-gray-800">
+                All Other Locations
+              </span>
+              <div className="flex justify-between mt-2">
+                <span className="font-medium text-gray-700">
+                  Monday - Sunday
+                </span>
+                <span className="font-semibold text-amber-600">
+                  7:00 AM - 9:00 PM
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Holiday hours */}
+            <motion.div
+              className="flex justify-between items-center py-3 px-4 bg-gray-50 rounded-lg"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { delay: 0.3 },
+              }}
+              whileHover={{
+                backgroundColor: "rgba(251, 191, 36, 0.1)",
+                borderLeft: "4px solid #f59e0b",
+              }}
+            >
+              <span className="font-medium text-gray-700">Holidays</span>
+              <span className="font-semibold text-amber-600">
+                7:00 AM - 12:00 PM
+              </span>
+            </motion.div>
+          </div>
+
+          <motion.button
+            onClick={() => setShowStoreHours(false)}
+            className="mt-8 w-full py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors hover:cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Close
+          </motion.button>
+        </div>
+      </motion.div>
     </motion.div>
-  </motion.div>
-);
+  );
 
   return (
     <div className="overflow-hidden">
@@ -297,31 +316,30 @@ const StoreHoursModal = () => (
                 </p>
 
                 <motion.div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Link href={"/about-us"} className="w-full sm:w-auto">
-                    <motion.button
-                      variants={buttonVariants}
-                      initial="rest"
-                      whileHover="hover"
-                      whileTap="tap"
-                      onHoverStart={() => setActiveButton(1)}
-                      onHoverEnd={() => setActiveButton(null)}
-                      className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden justify-center"
-                    >
-                      Get Directions
-                      <AnimatePresence>
-                        {activeButton === 1 && (
-                          <motion.span
-                            initial={{ x: -20, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            exit={{ x: 20, opacity: 0 }}
-                            className="absolute right-6 -mr-5"
-                          >
-                            <ArrowRight />
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </motion.button>
-                  </Link>
+                  <motion.button
+                    variants={buttonVariants}
+                    initial="rest"
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={handleNavigation}
+                    onHoverStart={() => setActiveButton(1)}
+                    onHoverEnd={() => setActiveButton(null)}
+                    className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center gap-3 relative overflow-hidden justify-center hover:cursor-pointer"
+                  >
+                    Get Directions
+                    <AnimatePresence>
+                      {activeButton === 1 && (
+                        <motion.span
+                          initial={{ x: -20, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: 20, opacity: 0 }}
+                          className="absolute right-6 -mr-5"
+                        >
+                          <ArrowRight />
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </motion.button>
 
                   <motion.button
                     variants={buttonVariants}
@@ -329,7 +347,7 @@ const StoreHoursModal = () => (
                     whileHover="hover"
                     whileTap="tap"
                     onClick={() => setShowStoreHours(true)}
-                    className="w-full sm:w-auto px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-xl font-bold flex items-center gap-3 hover:bg-gray-50 transition-colors justify-center"
+                    className="w-full sm:w-auto px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-xl font-bold flex items-center gap-3 hover:bg-gray-50 transition-colors justify-center hover:cursor-pointer"
                   >
                     <span>Store Hours</span>
                   </motion.button>
@@ -365,7 +383,7 @@ const StoreHoursModal = () => (
                     whileTap="tap"
                     onHoverStart={() => setActiveButton(2)}
                     onHoverEnd={() => setActiveButton(null)}
-                    className="w-full sm:w-auto px-14 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden"
+                    className="w-full sm:w-auto px-14 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden hover:cursor-pointer"
                   >
                     <span>Web Store</span>
                     <AnimatePresence>
@@ -389,7 +407,7 @@ const StoreHoursModal = () => (
                     whileTap="tap"
                     onHoverStart={() => setActiveButton(3)}
                     onHoverEnd={() => setActiveButton(null)}
-                    className="w-full sm:w-auto px-8 py-4 bg-gray-900 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden"
+                    className="w-full sm:w-auto px-8 py-4 bg-gray-900 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden hover:cursor-pointer"
                   >
                     <Smartphone size={20} />
                     <span>Mobile App</span>

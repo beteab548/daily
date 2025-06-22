@@ -21,16 +21,18 @@ export default function CosmicImageSlider() {
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const timerRef = useRef<NodeJS.Timeout| null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Star particles effect
-  const particles = Array(15).fill(0).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
-    delay: Math.random() * 5
-  }));
+  const particles = Array(15)
+    .fill(0)
+    .map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      delay: Math.random() * 5,
+    }));
 
   // Auto-rotate slides
   useEffect(() => {
@@ -83,7 +85,7 @@ export default function CosmicImageSlider() {
   };
 
   return (
-    <div 
+    <div
       className="relative w-full h-screen overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -119,7 +121,10 @@ export default function CosmicImageSlider() {
           <motion.div
             key={currentIndex}
             custom={direction}
-            initial={{ opacity: 0, x: direction === "right" ? "100%" : "-100%" }}
+            initial={{
+              opacity: 0,
+              x: direction === "right" ? "100%" : "-100%",
+            }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: direction === "right" ? "-100%" : "100%" }}
             transition={{ duration: 1, ease: "easeInOut" }}
@@ -133,7 +138,7 @@ export default function CosmicImageSlider() {
               onLoadingComplete={() => setIsLoading(false)}
               priority
             />
-            
+
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
           </motion.div>
@@ -149,15 +154,16 @@ export default function CosmicImageSlider() {
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-2xl">
             {captions[currentIndex]}
           </h2>
-          <Link href="/products" >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-gradient-to-r  from-amber-500 to-orange-600 text-white rounded-full font-bold flex items-center gap-2 mx-auto shadow-xl hover:shadow-2xl transition-all"
-          >
-            <Zap className="animate-pulse " />Our Products
-          </motion.button>
-            </Link>   
+          <Link href="/products">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-gradient-to-r  hover:cursor-pointer from-amber-500 to-orange-600 text-white rounded-full font-bold flex items-center gap-2 mx-auto shadow-xl hover:shadow-2xl transition-all"
+            >
+              <Zap className="animate-pulse " />
+              Our Products
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Navigation dots */}
@@ -165,8 +171,12 @@ export default function CosmicImageSlider() {
           {images.map((_, index) => (
             <button
               key={index}
-              onClick={() => goToSlide(index, index > currentIndex ? "right" : "left")}
-              className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? 'bg-amber-400 w-6' : 'bg-white/50'}`}
+              onClick={() =>
+                goToSlide(index, index > currentIndex ? "right" : "left")
+              }
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentIndex ? "bg-amber-400 w-6" : "bg-white/50"
+              }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
@@ -175,14 +185,14 @@ export default function CosmicImageSlider() {
         {/* Navigation arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full z-10 transition-all"
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full z-10 transition-all hover:cursor-pointer"
           aria-label="Previous slide"
         >
           <ChevronLeft size={32} />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full z-10 transition-all"
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full z-10 transition-all hover:cursor-pointer"
           aria-label="Next slide"
         >
           <ChevronRight size={32} />
@@ -201,17 +211,17 @@ export default function CosmicImageSlider() {
       </div>
 
       {/* Floating sparkles */}
-      <motion.div 
-        className="absolute top-1/4 right-1/4 text-amber-300"
+      <motion.div
+        className="absolute top-1/4 right-1/4 text-amber-300 hover:cursor-pointer"
         animate={{
           y: [0, -20, 0],
           rotate: [0, 180, 360],
-          scale: [1, 1.2, 1]
+          scale: [1, 1.2, 1],
         }}
         transition={{
           duration: 5,
           repeat: Infinity,
-          repeatType: "reverse"
+          repeatType: "reverse",
         }}
       >
         <Sparkles size={48} />

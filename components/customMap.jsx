@@ -27,7 +27,7 @@ const CustomMap = () => {
   return (
     <MapContainer
       center={center}
-      zoom={13}
+      zoom={12}
       scrollWheelZoom={true}
       style={{ height: "400px", width: "100%" }}
     >

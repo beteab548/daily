@@ -37,7 +37,7 @@ export default function BusinessAboutUs() {
               service mean for our community
             </p>
             <Link href={"/about-us"}>
-              <button className="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors">
+              <button className="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors hover:cursor-pointer">
                 Our Story →
               </button>
             </Link>
