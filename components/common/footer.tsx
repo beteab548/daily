@@ -238,11 +238,9 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-
           <p className="text-transparent selection:text-black text-sm">
             Made by Beteab Baynessagne
           </p>
-
           <motion.button
             whileHover={{
               scale: 1.05,
