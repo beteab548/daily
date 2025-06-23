@@ -29,7 +29,8 @@ function NavHeader() {
   ];
   return (
     <>
-      <header className="sticky top-0 z-[1000] bg-white/100 backdrop-blur-sm shadow-sm">
+      <header className="sticky top-0 z-[1000] bg-white md:bg-white/100 md:backdrop-blur-sm shadow-sm">
+        {" "}
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
@@ -89,7 +90,6 @@ function NavHeader() {
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
         {/* Mobile Sidebar */}
         {menuOpen && (
           <motion.div

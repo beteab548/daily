@@ -62,17 +62,19 @@ export default function PremiumCategoryShowcase() {
   const [startIndex, setStartIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [itemCount, setItemCount] = useState(4);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setItemCount(window.innerWidth < 768 ? 3 : 4);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setItemCount(mobile ? 1 : 4);
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   const maxStartIndex = Math.max(0, categories.length - itemCount);
 
   const getVisibleItems = () => {
@@ -128,18 +130,21 @@ export default function PremiumCategoryShowcase() {
         {/* Navigation arrows */}
         <button
           onClick={() => scrollTo("left")}
-          className={`absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg transition-colors z-10 
-    ${
-      startIndex === 0 ? "cursor-not-allowed opacity-50" : "hover:bg-gray-100 hover:cursor-pointer"
-    }`}
+          className={`absolute left-4 top-1/2 -translate-y-1/2  bg-white rounded-full shadow-lg transition-colors z-10 
+             ${isMobile ? " bg-white opacity-60 p-2" : "bg-white p-3"} 
+            ${
+              startIndex === 0
+                ? "cursor-not-allowed opacity-50"
+                : "hover:bg-gray-100 hover:cursor-pointer"
+            }`}
           disabled={startIndex === 0}
         >
           <ChevronLeft className="text-gray-800" />
         </button>
 
         {/* Carousel */}
-        <div className="w-full flex justify-center md:-ml-28 ">
-          <div className="relative h-66 w-full max-w-10xl mx-auto overflow-hidden ">
+        <div className="w-full flex justify-center md:-ml-28">
+          <div className="relative h-66 w-full max-w-10xl mx-auto overflow-hidden">
             <AnimatePresence custom={direction} initial={false}>
               {getVisibleItems().map((item, index) => (
                 <motion.div
@@ -154,14 +159,13 @@ export default function PremiumCategoryShowcase() {
                     ease: "easeInOut",
                     duration: 0.5,
                   }}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: isMobile ? 1 : 1.05 }}
                   whileTap={{ scale: 0.98 }}
                   className={`absolute w-54 h-54 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all ${item.color}`}
                   style={{
-                    left: `calc(50% + ${
-                      (index - (itemCount - 1) / 2) * 280
+                    left: `${isMobile ? "calc(15% +" : "calc(50% +"} ${
+                      (index - (itemCount - 1) / 2) * (isMobile ? 0 : 280)
                     }px)`,
-                    transform: "translateX(-50%)",
                   }}
                 >
                   <Image
@@ -184,13 +188,13 @@ export default function PremiumCategoryShowcase() {
             </AnimatePresence>
           </div>
         </div>
-
         <button
           onClick={() => scrollTo("right")}
-          className={`absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg transition-colors z-10 
+          className={`absolute right-4 top-1/2 -translate-y-1/2 rounded-full shadow-lg transition-colors z-10  
+             ${isMobile ? " bg-white opacity-60 p-2" : "bg-white p-3"} 
     ${
       startIndex >= maxStartIndex
-        ? "cursor-not-allowed opacity-50 "
+        ? "cursor-not-allowed opacity-20"
         : "hover:bg-gray-100 hover:cursor-pointer"
     }`}
           disabled={startIndex >= maxStartIndex}
