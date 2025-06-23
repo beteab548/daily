@@ -116,7 +116,7 @@ export default function CosmicImageSlider() {
       </div>
 
       {/* Main slider container */}
-      <div className="relative h-150 w-full flex items-center justify-center">
+      <div className="relative h-140 w-full flex items-center justify-center">
         <AnimatePresence custom={direction} initial={false}>
           <motion.div
             key={currentIndex}
