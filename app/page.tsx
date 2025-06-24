@@ -5,12 +5,12 @@ import ImageContainers2 from "@/components/image-container-2";
 import ImageSlider from "@/components/banner-slider";
 import OrderImages from "@/components/order";
 import Gallery from "@/components/our-brand";
-import Card from "@/components/sub-components/cards";
+import Card from "@/components/cards";
 
 
 function RootPage() {
   return (
-    <div className="">
+    <div >
       <ImageSlider />
       <Card/>                       
       <ImageContainers />
@@ -20,7 +20,6 @@ function RootPage() {
       <OrderImages image="download-app" />
       <OrderImages image="market" />
       <CatagoryImages />
-      {/* <ReviewCarousel /> */}
     </div>
   );
 }

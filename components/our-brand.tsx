@@ -9,7 +9,6 @@ import {
   FiShoppingCart,
 } from "react-icons/fi";
 import Image from "next/image";
-
 type Product = {
   id: number;
   src: string;
@@ -18,7 +17,6 @@ type Product = {
   category: string;
   features: string[];
 };
-
 const products: Product[] = [
   {
     id: 1,

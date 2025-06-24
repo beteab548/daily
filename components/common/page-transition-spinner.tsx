@@ -2,13 +2,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { BarLoader } from 'react-spinners';
 
 export default function PageTransitionSpinner() {
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
