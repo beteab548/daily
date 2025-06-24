@@ -222,7 +222,7 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} Daily Grocery Store. All rights
               reserved.
             </p>
-            
+
             <div className="flex space-x-4">
               <Link
                 href="/privacy"
@@ -238,9 +238,6 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <p className="text-transparent selection:text-black text-sm">
-            Made by Beteab Baynessagne
-          </p>
           <motion.button
             whileHover={{
               scale: 1.05,
@@ -256,8 +253,10 @@ const Footer = () => {
           </motion.button>
         </motion.div>
       </div>
+      <p className="text-transparent selection:text-black text-sm">
+        MadebyBeteabBaynessagne
+      </p>
     </footer>
   );
 };
-
 export default Footer;
